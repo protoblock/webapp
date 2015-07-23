@@ -29,3 +29,8 @@ synchronized browsing across multiple devices and browsers.
 ### Updating API URL
 
 To update the API URL for a deployment, edit the getApiUrl() function in src/api/apiUtils.js
+
+### Attribution
+
+This project was built on top of the [Kriasoft React Starter Kit](https://raw.githubusercontent.com/kriasoft/react-starter-kit)
+The MIT License © Konstantin Tarkus ([@koistya](https://twitter.com/koistya))

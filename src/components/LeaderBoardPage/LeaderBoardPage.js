@@ -66,7 +66,7 @@ class LeaderBoardPage extends React.Component{
             <thead>
               <tr>
                 <th>Fantasy Name</th>
-                <th>FantactBits</th>
+                <th>FantasyBits</th>
                 <th>Move</th>
               </tr>
             </thead>
