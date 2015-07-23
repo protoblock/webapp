@@ -1,0 +1,6 @@
+{
+  "name": "LeaderBoardFilterContainer",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./LeaderBoardFilterContainer.js"
+}

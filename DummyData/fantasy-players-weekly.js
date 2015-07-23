@@ -1,0 +1,22 @@
+export const players = [
+{name: 'FantasyGuru', id:1, score: '11000', move: '-'},
+{name: 'BlueBug', id:2, score: '9720', move: '+1'},
+{name: 'Packers', id:3, score: '9321', move: '-1'},
+{name: 'NoName66', id:4, score: '9120', move: '+1'},
+{name: 'FantasyMaster', id:5, score: '8712', move: '-1'},
+{name: 'HSFFH', id:6, score: '8125', move: '-'},
+{name: 'JetsFan', id:7, score: '7234', move: '-'},
+{name: 'MikeClayNFL', id:8, score: '6999', move: '-'},
+{name: 'FFPC', id:9, score: '6782', move: '-'},
+{name: 'KrusherVonKrush', id:10, score: '6423', move: '-'},
+{name: 'NotSoGuru', id:11, score: '5539', move: '+1'},
+{name: 'Basher', id:12, score: '5321', move: '-1'},
+{name: 'BearsMan', id:13, score: '4958', move: '+1'},
+{name: 'FFMeister', id:14, score: '4876', move: '+1'},
+{name: 'Zing', id:15, score: '4712', move: '-2'},
+{name: 'ZZFF', id:16, score: '4125', move: '-'},
+{name: 'TheFan', id:17, score: '3934', move: '+2'},
+{name: 'SomePlayer', id:18, score: '3899', move: '+1'},
+{name: 'FFBits', id:19, score: '3482', move: '-2'},
+{name: 'SuckerVonSuck', id:20, score: '1423', move: '-'}
+];
