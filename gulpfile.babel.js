@@ -24,7 +24,7 @@ const src = Object.create(null);
 let watch = false;
 let browserSync;
 
-gulp.task('deploy', 'bundle'], () => {
+gulp.task('deploy', ['bundle'], () => {
   return gulp.src('./build/**/*')
     .pipe(ghPages({
       branch: 'demo'
