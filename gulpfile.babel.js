@@ -15,6 +15,7 @@ import mkdirp from 'mkdirp';
 import runSequence from 'run-sequence';
 import webpack from 'webpack';
 import minimist from 'minimist';
+import ghPages from 'gulp-gh-pages';
 
 const $ = gulpLoadPlugins();
 const argv = minimist(process.argv.slice(2));
@@ -23,6 +24,12 @@ const src = Object.create(null);
 let watch = false;
 let browserSync;
 
+gulp.task('deploy', 'bundle'], () => {
+  return gulp.src('./build/**/*')
+    .pipe(ghPages({
+      branch: 'demo'
+    }));
+});
 // The default task
 gulp.task('default', ['sync']);
 
