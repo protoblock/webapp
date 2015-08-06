@@ -1,29 +1,15 @@
-/*! React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
+import request from "superagent";
 
-import { Router } from 'express';
-import db from '../core/Database';
+const apiURL = "http://192.168.2.172:4545";
 
-const router = new Router();
+let queryUtils = {
 
-router.get('/', async (req, res, next) => {
-  try {
-    let path = req.query.path;
-
-    if (!path) {
-      res.status(400).send({error: `The 'path' query parameter cannot be empty.`});
+    get(path, cb){
+      request
+        .get(apiURL + path)
+        .set('Accept', 'application/json')
+        .end(cb);
     }
+}
 
-    let page = await db.getPage(path);
-
-    if (page) {
-      res.status(200).send(page);
-    } else {
-      res.status(404).send({error: `The page '${path}' is not found.`});
-    }
-  } catch (err) {
-    next(err);
-  }
-});
-
-export default router;
-
+export default queryUtils;

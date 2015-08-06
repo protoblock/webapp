@@ -1,7 +1,6 @@
 /*! React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
 
 import invariant from 'react/lib/invariant';
-import AppActions from '../actions/AppActions';
 
 function handleClick(event) {
 
@@ -23,7 +22,6 @@ function handleClick(event) {
   var path = el.pathname + el.search + (el.hash || '');
 
   event.preventDefault();
-  AppActions.navigateTo(path);
 }
 
 export default { handleClick };

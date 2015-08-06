@@ -1,34 +1,26 @@
-import http from 'superagent';
-import Dispatcher from '../core/Dispatcher';
-import ActionTypes from '../constants/ActionTypes';
-import apiUtils from '../api/apiUtils';
+import alt from '../alt';
+import api from '../api/query';
 
-function apiRequest(path){
-  let request = http.get(apiUtils.getApiUrl() + "/" + encodeURI(path));
-  if (typeof window != 'undefined' && window.document){
-    request = request.withCredentials()
+class LeaderBoardActions {
+  updateLeaders(leaders) {
+    this.dispatch(leaders);
   }
-  return request.accept('application/json');
-};
 
-export default {
+  updateLeadersFailed(error) {
+    this.dispatch(error);
+  }
 
-  loadLeaders(cb) {
-    Dispatcher.dispatch({
-      type: ActionTypes.GET_LEADERS
-    });
+  getLeaders() {
+    this.dispatch();
 
-    apiRequest("fantasy/leaders")
-    .end((err, res) => {
-      Dispatcher.dispatch({
-        type: ActionTypes.RECEIVE_LEADERS,
-        err,
-        leaders: res ? res.body : null
-      });
-      if (cb) {
-        cb();
+    api.get('/fantasy/leaders', (err, res) => {
+      if (err){
+        this.actions.updateLeadersFailed([err]);
+      } else {
+        this.actions.updateLeaders(res.body)
       }
     });
   }
-
 }
+
+module.exports = alt.createActions(LeaderBoardActions);

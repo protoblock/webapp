@@ -2,21 +2,15 @@
 
 import React, { PropTypes } from 'react';
 import styles from './App.less';
-import withContext from '../../decorators/withContext';
 import withStyles from '../../decorators/withStyles';
-import AppActions from '../../actions/AppActions';
-import AppStore from '../../stores/AppStore';
+import withContext from '../../decorators/withContext';
 import Header from '../Header';
-import ContentPage from '../ContentPage';
-import ContactPage from '../ContactPage';
-import LoginPage from '../LoginPage';
-import RegisterPage from '../RegisterPage';
-import NotFoundPage from '../NotFoundPage';
 import Footer from '../Footer';
 import LeaderBoardPage from '../LeaderBoardPage';
-import bootstrap from'../../../node_modules/bootstrap/dist/css/bootstrap.css';
+import FantasyNamePage from '../FantasyNamePage';
+//import NotFoundPage from '../NotFoundPage';
 
-const pages = { ContentPage, ContactPage, LoginPage, RegisterPage, NotFoundPage };
+import bootstrap from'../../../node_modules/bootstrap/dist/css/bootstrap.css';
 
 @withContext
 @withStyles(styles)
@@ -28,44 +22,19 @@ class App {
     path: PropTypes.string.isRequired
   };
 
-  componentDidMount() {
-    window.addEventListener('popstate', this.handlePopState);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('popstate', this.handlePopState);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return this.props.path !== nextProps.path;
-  }
-
   render() {
     let component;
 
-    switch (this.props.path) {
+    switch (true) {
 
-      case '/':
+      case /\/$/.test(this.props.path):
         component = <LeaderBoardPage />;
         break;
-      case '/about':
-      case '/privacy':
-        let page = AppStore.getPage(this.props.path);
-        component = React.createElement(pages[page.component], page);
-        break;
 
-      case '/contact':
-        component = <ContactPage />;
+      case /\/fantasy\/players\/[0-9]+\/result\/[0-9]+$/.test(this.props.path):
+        component = <FantasyNamePage path={this.props.path}/>;
         break;
-
-      case '/login':
-        component = <LoginPage />;
-        break;
-
-      case '/register':
-        component = <RegisterPage />;
-        break;
-    }
+  };
 
     return component ? (
       <div className="wrapper">
@@ -73,11 +42,7 @@ class App {
         {component}
         <Footer />
       </div>
-    ) : <NotFoundPage />;
-  }
-
-  handlePopState(event) {
-    AppActions.navigateTo(window.location.pathname, {replace: !!event.state});
+    ) : <LeaderBoardPage />;
   }
 
 }

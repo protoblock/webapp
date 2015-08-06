@@ -1,67 +1,30 @@
-import EventEmitter from 'eventemitter3';
-import Dispatcher from '../core/Dispatcher';
-import ActionTypes from '../constants/ActionTypes';
-const CHANGE_EVENT = 'change';
+import alt from '../alt';
+import LeaderBoardActions from '../actions/LeaderBoardActions';
 
-let leaders;
+class LeaderBoardStore {
+  constructor() {
+    this.leaders = [];
+    this.errorMessage = null;
 
-var LeaderBoardStore = Object.assign({}, EventEmitter.prototype, {
-    /**
-     * Get a list of Leaders
-     *
-     * @returns {Array} Array of player objects
-     */
-    getLeaders() {
-
-      return leaders ? leaders : [];
-    },
-
-    /**
-     * Emit change event
-     *
-     * @returns {Boolean} Indication we've emmitted
-     */
-    emitChange() {
-      return this.emit(CHANGE_EVENT);
-    },
-
-    /**
-     * Register new event listener
-     *
-     * @param {function} callback Callback function
-     */
-    onChange(callback) {
-      this.on(CHANGE_EVENT, callback);
-    },
-
-    /**
-     * Remove event listener
-     *
-     * @param {function} callback Callback function
-     */
-     off(callback) {
-       this.removeListener(CHANGE_EVENT, callback);
-     }
-});
-
-LeaderBoardStore.dispatchToken = Dispatcher.register((action) => {
-
-  switch (action.type) {
-
-    case ActionTypes.GET_LEADERS:
-      LeaderBoardStore.emitChange();
-      break;
-
-    case ActionTypes.RECEIVE_LEADERS:
-      if (!action.err) {
-        leaders = action.leaders;
-      }
-      LeaderBoardStore.emitChange();
-      break;
-
-    default:
+    this.bindListeners({
+      handleUpdateLeaders: LeaderBoardActions.updateLeaders,
+      handleGetLeaders: LeaderBoardActions.getLeaders,
+      handleLeadersFailed: LeaderBoardActions.updateLeadersFailed
+    });
   }
 
-});
+  handleUpdateLeaders(leaders) {
+    this.leaders = leaders;
+    this.errorMessage = null;
+  }
 
-export default LeaderBoardStore;
+  handleGetLeaders() {
+    this.locations = [];
+  }
+
+  handleLeadersFailed(errorMessage) {
+    this.errorMessage = errorMessage;
+  }
+}
+
+module.exports = alt.createStore(LeaderBoardStore, 'LeaderBoardStore');

@@ -1,72 +1,60 @@
-/*! React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
-
 import 'babel/polyfill';
-import _ from 'lodash';
-import fs from 'fs';
-import path from 'path';
 import express from 'express';
+import alt from './alt.js';
+import Iso from 'iso';
+import path from 'path';
 import React from 'react';
-import './core/Dispatcher';
-import './stores/AppStore';
-import db from './core/Database';
-import App from './components/App';
+import Router from 'react-router';
+import routes from './routes.jsx';
 
-const server = express();
+let server = express();
+server.set('view engine', 'jade')
+server.set('views', path.join(__dirname, 'templates'));
 
-server.set('port', (process.env.PORT || 5000));
 server.use(express.static(path.join(__dirname, 'public')));
 
-//
-// Register API middleware
-// -----------------------------------------------------------------------------
-server.use('/api/query', require('./api/query'));
-
-//
-// Register server-side rendering middleware
-// -----------------------------------------------------------------------------
-
-// The top-level React component + HTML template for it
-const templateFile = path.join(__dirname, 'templates/index.html');
-const template = _.template(fs.readFileSync(templateFile, 'utf8'));
-
-server.get('*', async (req, res, next) => {
-  try {
-    // TODO: Temporary fix #159
-    if (['/', '/about', '/privacy'].indexOf(req.path) !== -1) {
-      await db.getPage(req.path);
-    }
-    let notFound = false;
-    let css = [];
-    let data = {description: ''};
-    let app = (<App
-      path={req.path}
-      context={{
-        onInsertCss: value => css.push(value),
-        onSetTitle: value => data.title = value,
-        onSetMeta: (key, value) => data[key] = value,
-        onPageNotFound: () => notFound = true
-      }} />);
-
-    data.body = React.renderToString(app);
-    data.css = css.join('');
-    let html = template(data);
-    if (notFound) {
-      res.status(404);
-    }
-    res.send(html);
-  } catch (err) {
-    next(err);
-  }
+server.get("*", (req, res, next) => {
+  next();
 });
 
-//
-// Launch the server
-// -----------------------------------------------------------------------------
+server.get("fantasy/players/:fnid/result/:week", (req, res, next) => {
 
-server.listen(server.get('port'), () => {
-  if (process.send) {
-    process.send('online');
-  } else {
-    console.log('The server is running at http://localhost:' + server.get('port'));
-  }
 });
+
+server.use((req, res) => {
+  alt.bootstrap(JSON.stringify(res.locals.data || {}));
+
+  let iso = new Iso();
+
+  let notFound = false;
+  let css = [];
+  let data = {description: ''};
+
+  let context={
+    onInsertCss: value => css.push(value),
+    onSetTitle: value => data.title = value,
+    onSetMeta: (key, value) => data[key] = value,
+    onPageNotFound: () => notFound = true
+  };
+
+  Router.run(routes, req.url, (Handler) => {
+    let content = React.renderToStaticMarkup(
+      <Handler
+        context={context}
+        path={req.path}/>
+    );
+
+    iso.add(content, alt.flush());
+    let joinedCss = css.join('');
+    res.render('layout', {
+      css: joinedCss,
+      html: iso.render()
+    });
+  });
+});
+
+server.listen(5000, function() {
+  console.log('Listening on localhost:5000');
+});
+
+export default server;

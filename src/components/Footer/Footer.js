@@ -4,7 +4,6 @@ import React, { PropTypes } from 'react';
 import styles from './Footer.less';
 import withViewport from '../../decorators/withViewport';
 import withStyles from '../../decorators/withStyles';
-import Link from '../../utils/Link';
 import ProjectionTicker from '../ProjectionTicker';
 
 @withViewport
