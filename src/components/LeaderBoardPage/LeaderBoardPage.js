@@ -4,7 +4,9 @@ import React, { PropTypes } from 'react';
 import styles from './LeaderBoardPage.less';
 import withStyles from '../../decorators/withStyles';
 import LeaderBoardFilterContainer from '../LeaderBoardFilterContainer';
+import FilterTable from '../FilterTable';
 //import {players} from '../../../DummyData/fantasy-players-weekly.js';
+import 'griddle-react';
 import LeaderBoardStore from '../../stores/LeaderBoardStore';
 
 function getLeadersState(){
@@ -27,6 +29,7 @@ class LeaderBoardPage extends React.Component{
   };
 
   getTeamRows() {
+    return <FilterTable/>;
     if (this.state.players.length > 0){
       return this.state.players.map((player) => {
         return (
