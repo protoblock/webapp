@@ -19,10 +19,10 @@ class Navigation {
     return (
       <div className={classNames(this.props.className, 'Navigation')} role="navigation">
         <Navbar brand='Paper Football' inverse toggleNavKey={0}>
-          <Nav>
-            <NavItem eventKey={0} href='/'>Home</NavItem>
-            <NavItem eventKey={1} href='/download'>Download</NavItem>
-            <NavItem eventKey={2} href='/about' onClick={Link.handleClick}>About</NavItem>
+          <Nav right eventKey={0}>
+            <NavItem eventKey={1} href='/'>Home</NavItem>
+            <NavItem eventKey={2} href='/download'>Download</NavItem>
+            <NavItem eventKey={3} href='/about' onClick={Link.handleClick}>About</NavItem>
           </Nav>
         </Navbar>
       </div>
