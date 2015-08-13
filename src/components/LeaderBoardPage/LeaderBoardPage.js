@@ -44,13 +44,12 @@ class LeaderBoardPage extends React.Component{
 
   getTeamRows() {
     if (this.state.leaders.length > 0){
-      return this.state.leaders.map((player) => {
-        let destination = "/fantasy/players/" + player.id + "/result/" + this.currentWeek;
+      return this.state.leaders.map((fantasyName) => {
+        let destination = "/fantasy/players/" + fantasyName.id + "/result/" + this.currentWeek;
         return (
           <tr>
-            <td><a href={destination} onclick={Link.handleClick}>{player.name}</a></td>
-            <td>{player.score}</td>
-            <td>{player.move}</td>
+            <td><a href={destination} onclick={Link.handleClick}>{fantasyName.name}</a></td>
+            <td>{fantasyName.score}</td>
           </tr>
         );
       });
@@ -58,7 +57,7 @@ class LeaderBoardPage extends React.Component{
     } else {
       return (
         <tr>
-          <td colSpan="3">
+          <td colSpan="2">
             Error loading leaders: {this.state.errorMessage}
           </td>
         </tr>
@@ -81,7 +80,6 @@ class LeaderBoardPage extends React.Component{
             <tr>
               <th>Fantasy Name</th>
               <th>FantasyBits</th>
-              <th>Move</th>
             </tr>
           </thead>
           <tbody>
