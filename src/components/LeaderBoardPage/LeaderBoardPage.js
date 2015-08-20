@@ -93,7 +93,7 @@ class LeaderBoardPage extends React.Component{
   }
 
   render() {
-    let title = 'Paper Football';
+    let title = 'Trading Football';
     this.context.onSetTitle(title);
     let table = this.buildTable();
 
