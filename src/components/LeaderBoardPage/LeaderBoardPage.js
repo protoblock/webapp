@@ -48,8 +48,8 @@ class LeaderBoardPage extends React.Component{
         let destination = "/fantasy/players/" + player.name + "/awards";
         return (
           <tr>
-            <td><a href={destination} onclick={Link.handleClick}>{fantasyName.name}</a></td>
-            <td>{fantasyName.score}</td>
+            <td><a href={destination} onclick={Link.handleClick}>{player.name}</a></td>
+            <td>{player.score}</td>
           </tr>
         );
       });
