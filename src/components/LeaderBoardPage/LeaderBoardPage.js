@@ -79,7 +79,7 @@ class LeaderBoardPage extends React.Component{
         <Table>
           <thead>
             <tr>
-              <td>Rank</td>
+              <th>Rank</th>
               <th>Fantasy Name</th>
               <th>FantasyBits</th>
             </tr>
@@ -100,7 +100,7 @@ class LeaderBoardPage extends React.Component{
     return (
       <div className="LeaderBoardPage">
         <div className="LeaderBoardPage-container">
-          <h1>Leader Board</h1>
+          <h1>leaderboard</h1>
           <LeaderBoardFilterContainer/>
           {table}
         </div>
