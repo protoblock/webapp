@@ -22,19 +22,22 @@ Iso.bootstrap(function (state, _, container) {
 
   alt.bootstrap(state);
   let path = decodeURI(window.location.pathname);
+  let query = decodeURI(window.location.search).slice(1, window.location.search.length)
+
   let props = {
     context: {
       onSetTitle: value => document.title = value,
       onSetMeta
     },
-    path: path
+    path: path,
+    query: query
   };
 
   Router.run(routes, Router.HistoryLocation, (Handler) => {
     let node = React.createElement(Handler, props);
     React.render(node, container, () => {
       let css = document.getElementById('css');
-      //css.parentNode.removeChild(css);
+      css.parentNode.removeChild(css);
     });
   });
 });

@@ -6,10 +6,12 @@ import path from 'path';
 import React from 'react';
 import Router from 'react-router';
 import routes from './routes.jsx';
+import URL from 'url';
 
 let server = express();
-server.set('view engine', 'jade')
-server.set('views', path.join(__dirname, 'templates'));
+server.set('view engine', 'jade');
+let templateDir = path.join(__dirname, 'templates');
+server.set('views', templateDir);
 
 server.use(express.static(path.join(__dirname, 'public')));
 
@@ -17,9 +19,9 @@ server.get("*", (req, res, next) => {
   next();
 });
 
-server.get("fantasy/players/:fnid/result/:week", (req, res, next) => {
+/*server.get("fantasy/players/:fnid/result/:week", (req, res, next) => {
 
-});
+});*/
 
 server.use((req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
@@ -36,12 +38,13 @@ server.use((req, res) => {
     onSetMeta: (key, value) => data[key] = value,
     onPageNotFound: () => notFound = true
   };
-
   Router.run(routes, req.url, (Handler) => {
     let content = React.renderToStaticMarkup(
       <Handler
         context={context}
-        path={req.path}/>
+        path={req.path}
+        query={req.url.split('?')[1]}
+        templatePath={templateDir + '/' + req.path}/>
     );
 
     iso.add(content, alt.flush());

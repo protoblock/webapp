@@ -24,14 +24,13 @@ class App {
 
   render() {
     let component;
-
     switch (true) {
 
       case /\/$/.test(this.props.path):
-        component = <LeaderBoardPage />;
+        component = <LeaderBoardPage query={this.props.query}/>;
         break;
 
-      case /\/fantasy\/players\/[0-9]+\/result\/[0-9]+$/.test(this.props.path):
+      case /\/fantasy\/players\/[A-Za-z0-9]+\/awards$/.test(this.props.path):
         component = <FantasyNamePage path={this.props.path}/>;
         break;
   };
