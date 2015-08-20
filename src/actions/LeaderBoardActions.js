@@ -10,10 +10,11 @@ class LeaderBoardActions {
     this.dispatch(error);
   }
 
-  getLeaders() {
+  getLeaders(query) {
     this.dispatch();
-
-    api.get('/fantasy/leaders', (err, res) => {
+    console.log('bob bob');
+    console.log(query);
+    api.get('/fantasy/leaders?' + query, (err, res) => {
       if (err){
         this.actions.updateLeadersFailed([err]);
       } else {

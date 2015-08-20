@@ -30,7 +30,7 @@ class LeaderBoardPage extends React.Component{
   componentDidMount() {
     LeaderBoardStore.listen(this.onChange);
 
-    LeaderBoardActions.getLeaders();
+    LeaderBoardActions.getLeaders(this.props.query);
   }
 
   componentWillUnmount() {
@@ -44,8 +44,8 @@ class LeaderBoardPage extends React.Component{
 
   getTeamRows() {
     if (this.state.leaders.length > 0){
-      return this.state.leaders.map((fantasyName) => {
-        let destination = "/fantasy/players/" + fantasyName.id + "/result/" + this.currentWeek;
+      return this.state.leaders.map((player) => {
+        let destination = "/fantasy/players/" + player.name + "/awards";
         return (
           <tr>
             <td><a href={destination} onclick={Link.handleClick}>{fantasyName.name}</a></td>
