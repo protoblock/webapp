@@ -44,12 +44,13 @@ class LeaderBoardPage extends React.Component{
 
   getTeamRows() {
     if (this.state.leaders.length > 0){
-      return this.state.leaders.map((player) => {
-        let destination = "/fantasy/players/" + player.name + "/awards";
+      return this.state.leaders.map((fantasyName, index) => {
+        let destination = "/fantasy/players/" + fantasyName.name + "/awards";
         return (
           <tr>
-            <td><a href={destination} onclick={Link.handleClick}>{player.name}</a></td>
-            <td>{player.score}</td>
+            <td>{++index}</td>
+            <td><a href={destination} onclick={Link.handleClick}>{fantasyName.name}</a></td>
+            <td>{fantasyName.score}</td>
           </tr>
         );
       });
@@ -78,6 +79,7 @@ class LeaderBoardPage extends React.Component{
         <Table>
           <thead>
             <tr>
+              <td>Rank</td>
               <th>Fantasy Name</th>
               <th>FantasyBits</th>
             </tr>
