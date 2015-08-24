@@ -1,6 +1,7 @@
 /*! React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
 
 import React, { PropTypes } from 'react';
+import bootstrap from'../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import styles from './App.less';
 import withStyles from '../../decorators/withStyles';
 import withContext from '../../decorators/withContext';
@@ -10,7 +11,7 @@ import LeaderBoardPage from '../LeaderBoardPage';
 import FantasyNamePage from '../FantasyNamePage';
 //import NotFoundPage from '../NotFoundPage';
 
-import bootstrap from'../../../node_modules/bootstrap/dist/css/bootstrap.css';
+
 
 @withContext
 @withStyles(styles)
@@ -39,7 +40,7 @@ class App {
       <div className="wrapper">
         <Header />
         {component}
-        
+
       </div>
     ) : <LeaderBoardPage />;
   }
