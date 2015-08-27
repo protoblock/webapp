@@ -22,6 +22,13 @@ class FantasyNamePage extends React.Component{
   componentDidMount() {
     FantasyNameStore.listen(this.onChange);
     FantasyNameActions.getPlayer(this.props.path);
+    if (window) {
+      let socket = io.connect("http://localhost:4545");
+      socket.on('change', function() {
+        console.log("changing");
+        this.getPlayer(this.props.path)
+      });
+    }
   }
 
   componentWillUnmount() {

@@ -29,7 +29,13 @@ class LeaderBoardPage extends React.Component{
 
   componentDidMount() {
     LeaderBoardStore.listen(this.onChange);
-
+    if (window) {
+      let socket = io.connect("http://localhost:4545");
+      socket.on('change', function() {
+        console.log("changing");
+        LeaderBoardActions.getLeaders(window.location.search)
+      });
+    }
     LeaderBoardActions.getLeaders(this.props.query);
   }
 
