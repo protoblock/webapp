@@ -4,7 +4,6 @@ import React, { PropTypes } from 'react';
 import styles from './DownloadPage.less';
 import withStyles from '../../decorators/withStyles';
 import UAParser from 'ua-parser-js';
-import {NavItemLink} from 'react-router-bootstrap';
 import Link from '../../utils/Link';
 
 @withStyles(styles)
@@ -46,7 +45,7 @@ class DownloadPage extends React.Component{
         ],
         'disk': '25mb',
         'link': 'https://cdn.trading.football/downloads/Trading-Football.dmg',
-        'fileName' : 'Trading-Football.dmg'
+        'fileName': 'Trading-Football.dmg'
       },
       {
         'name': 'Windows',
@@ -56,8 +55,8 @@ class DownloadPage extends React.Component{
           {number: '10', architecture: 'amd64'}
         ],
         'disk': '26.4mb',
-        'link': 'https://cdn.trading.football/downloads/Trading-Football.msi',
-        'fileName' : 'Trading-Football.msi'
+        'link': 'https://cdn.trading.football/downloads/Trading-Footballx64.msi',
+        'fileName': 'Trading-Footballx64.msi'
       }
     ];
     let header = '', body = [];
@@ -77,14 +76,20 @@ class DownloadPage extends React.Component{
 
         <h5>Other Operating Systems:</h5>
       </div>);
+    } else{
+      header = (
+        <div>
+          <h3>This device is not supported</h3>
+          <h5>Supported Operating Systems:</h5>
+        </div>
+      );
     }
     requirements
       .filter((req) => req !== supported)
-      .forEach((req) => body.push(
-        <div>
+      .forEach((req) => body.push(<div>
           <h4>{req.name}   <a href={req.link}>{req.fileName}</a></h4>
-          <p>Version: { req.name + ' '+ req.versions
-            .reduce((a,c) => (a.number || a) +
+          <p>Version: {req.name + ' '+ req.versions
+            .reduce((a, c) => (a.number || a) +
               ', ' +
               c.number)
               .trim(', ') +
@@ -92,7 +97,7 @@ class DownloadPage extends React.Component{
         </div>
       ));
 
-      return <div>{header}{body}</div>;
+    return <div>{header}{body}</div>;
   }
 
   render() {
