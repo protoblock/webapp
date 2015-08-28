@@ -12,7 +12,7 @@ class Header {
     return (
       <div>
         <Navigation />
-        <CurrentPeriod season={"2015"} game={"Week 6"}/>
+        {/*}<CurrentPeriod season={"2015"} game={"Week 6"}/>*/}
       </div>
     );
 

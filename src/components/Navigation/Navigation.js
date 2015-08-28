@@ -18,7 +18,7 @@ class Navigation {
   render() {
     return (
       <div className={classNames(this.props.className, 'Navigation')} role="navigation">
-        <Navbar brand='Trading Football' inverse toggleNavKey={0}>
+        <Navbar brand='Trading Football' fixedTop={true} inverse toggleNavKey={0}>
           <Nav right eventKey={0}>
             <NavItem eventKey={1} href='/'>Home</NavItem>
             <NavItem eventKey={2} href='/downloads'>Download</NavItem>

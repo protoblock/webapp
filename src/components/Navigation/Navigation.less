@@ -1,9 +1,25 @@
 /* React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
+@import '../variables.less';
 
 .Navigation {
   &>.navbar {
     border-radius: 0px;
+    margin-bottom:0px;
+    &>.container{
+      max-width:@max-content-width;
+    }
   }
+
+  &>.navbar-inverse{
+    background-image: linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+    background-image: -o-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+    background-image: -moz-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+    background-image: -webkit-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+    background-image: -ms-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+    background-image: -webkit-gradient( linear, right bottom, right top, color-stop(0, #011c47), color-stop(0.66, rgb(27, 54, 97)) );
+    border: #011c47 solid 1px;
+  }
+
   &-link {
     display: inline-block;
     padding: 3px 8px;

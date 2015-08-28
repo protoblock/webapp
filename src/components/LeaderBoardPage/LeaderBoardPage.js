@@ -7,9 +7,10 @@ import LeaderBoardFilterContainer from '../LeaderBoardFilterContainer';
 //import {leaders} from '../../../DummyData/fantasy-leaders-weekly.js';
 import LeaderBoardStore from '../../stores/LeaderBoardStore';
 import LeaderBoardActions from '../../actions/LeaderBoardActions';
-import Spinner from '../Spinner'
+import Spinner from '../Spinner';
+import Logo from '../Logo';
 
-import {Table} from 'react-bootstrap';
+import {Table, Grid, Col, Row} from 'react-bootstrap';
 import {NavItemLink} from 'react-router-bootstrap';
 import Link from '../../utils/Link';
 
@@ -21,6 +22,7 @@ class LeaderBoardPage extends React.Component{
     this.state = LeaderBoardStore.getState();
     this.onChange = this.onChange.bind(this);
     this.currentWeek = 6;
+    this.currentSeason = 2015;
   }
 
   static contextTypes = {
@@ -33,7 +35,7 @@ class LeaderBoardPage extends React.Component{
       let socket = io.connect("http://localhost:4545");
       socket.on('change', function() {
         console.log("changing");
-        LeaderBoardActions.getLeaders(window.location.search)
+        LeaderBoardActions.getLeaders(window.location.search);
       });
     }
     LeaderBoardActions.getLeaders(this.props.query);
@@ -106,9 +108,21 @@ class LeaderBoardPage extends React.Component{
     return (
       <div className="LeaderBoardPage">
         <div className="LeaderBoardPage-container">
-          <h1>leaderboard</h1>
-          <LeaderBoardFilterContainer/>
-          {table}
+          <Grid>
+            <Row>
+              <Col xs={12} md={6} mdPush={6}>
+                <Logo />
+              </Col>
+              <Col className="text-center" xs={12} md={6} mdPull={6}>
+                <div className="LeaderBoardPage-container-heading">
+                  <h1>leaderboard</h1>
+                  <h2>{this.currentSeason} | Week {this.currentWeek}</h2>
+                  {/*<LeaderBoardFilterContainer/>*/}
+                </div>
+              </Col>
+            </Row>
+          </Grid>
+                    {table}
         </div>
       </div>
     );
