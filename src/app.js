@@ -22,7 +22,7 @@ Iso.bootstrap(function (state, _, container) {
 
   alt.bootstrap(state);
   let path = decodeURI(window.location.pathname);
-  let query = decodeURI(window.location.search).slice(1, window.location.search.length)
+  let query = decodeURI(window.location.search);
 
   let props = {
     context: {

@@ -43,7 +43,7 @@ server.use((req, res) => {
       <Handler
         context={context}
         path={req.path}
-        query={req.url.split('?')[1]}
+        query={"?" + req.url.split('?')[1]}
         templatePath={templateDir + '/' + req.path}/>
     );
 
