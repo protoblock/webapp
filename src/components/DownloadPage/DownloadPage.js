@@ -36,7 +36,7 @@ class DownloadPage extends React.Component{
   getOSContent(){
     let ua = this.getUserAgent() || {name: false};
     var requirements = [ // put in config file
-      {
+    /*  {
         'name': 'Mac OS',
         'versions': [
           { number: '10.8' },
@@ -46,7 +46,7 @@ class DownloadPage extends React.Component{
         'disk': '25mb',
         'link': 'https://cdn.trading.football/downloads/Trading-Football.dmg',
         'fileName': 'Trading-Football.dmg'
-      },
+      },*/
       {
         'name': 'Windows',
         'versions': [
@@ -74,7 +74,7 @@ class DownloadPage extends React.Component{
         <h3>{supported.name}   <a href={supported.link}>{supported.fileName}</a></h3>
         <p>Version: {ua.os.name + ' ' + ua.os.version} | Hard Disk: {supported.disk}</p>
 
-        <h5>Other Operating Systems:</h5>
+        {supported.length > 1 ? <h5>Other Operating Systems:</h5> : ''}
       </div>);
     } else{
       header = (
