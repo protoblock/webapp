@@ -9,6 +9,7 @@ import Header from '../Header';
 import Footer from '../Footer';
 import LeaderBoardPage from '../LeaderBoardPage';
 import FantasyNamePage from '../FantasyNamePage';
+import DownloadPage from '../DownloadPage';
 //import NotFoundPage from '../NotFoundPage';
 
 
@@ -25,10 +26,14 @@ class App {
 
   render() {
     let component;
+    // Controls the routing
     switch (true) {
-
       case /\/$/.test(this.props.path):
         component = <LeaderBoardPage query={this.props.query}/>;
+        break;
+
+      case /\/downloads/.test(this.props.path):
+        component = <DownloadPage />;
         break;
 
       case /\/fantasy\/players\/[A-Za-z0-9]+\/awards$/.test(this.props.path):

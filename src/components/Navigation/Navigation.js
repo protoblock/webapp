@@ -21,7 +21,7 @@ class Navigation {
         <Navbar brand='Trading Football' inverse toggleNavKey={0}>
           <Nav right eventKey={0}>
             <NavItem eventKey={1} href='/'>Home</NavItem>
-            <NavItem eventKey={2} href='/download'>Download</NavItem>
+            <NavItem eventKey={2} href='/downloads'>Download</NavItem>
             <NavItem eventKey={3} href='/about' onClick={Link.handleClick}>About</NavItem>
           </Nav>
         </Navbar>

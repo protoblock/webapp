@@ -3,6 +3,7 @@ import React from 'react';
 import App from './components/App';
 import LeaderBoardPage from './components/LeaderBoardPage';
 import FantasyNamePage from './components/FantasyNamePage';
+import DownloadPage from './components/DownloadPage';
 //import ContentPage from './components/ContentPage';
 
 let Route = Router.Route;
@@ -13,8 +14,8 @@ let routes = (
     <DefaultRoute handler={LeaderBoardPage} />
 
     <Route handler={FantasyNamePage} path="fantasy/players/:fantasyName/awards"/>
-    {/*<Route handler={ContentPage} path="About"/>
-    <Route handler={ContentPage} path="Downloads"/>*/}
+    <Route handler={DownloadPage} path="downloads"/>
+    {/*<Route handler={ContentPage} path="About"/>*/}
   </Route>
 );
 
