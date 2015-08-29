@@ -22,7 +22,8 @@ class Navigation {
           <Nav right eventKey={0}>
             <NavItem eventKey={1} href='/'>Home</NavItem>
             <NavItem eventKey={2} href='/downloads'>Download</NavItem>
-            <NavItem eventKey={3} href='/about' onClick={Link.handleClick}>About</NavItem>
+            <NavItem eventKey={3} href='/faq'>FAQ</NavItem>
+            <NavItem eventKey={4} href='/about' onClick={Link.handleClick}>About</NavItem>
           </Nav>
         </Navbar>
       </div>

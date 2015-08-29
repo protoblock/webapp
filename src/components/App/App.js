@@ -10,6 +10,11 @@ import Footer from '../Footer';
 import LeaderBoardPage from '../LeaderBoardPage';
 import FantasyNamePage from '../FantasyNamePage';
 import DownloadPage from '../DownloadPage';
+import FaqPage from '../FaqPage';
+
+import AboutPage from '../AboutPage';
+//import about from '../../content/about.jsx';
+
 //import NotFoundPage from '../NotFoundPage';
 
 
@@ -38,6 +43,12 @@ class App {
 
       case /\/fantasy\/players\/[A-Za-z0-9]+\/awards$/.test(this.props.path):
         component = <FantasyNamePage path={this.props.path}/>;
+        break;
+      case /\/(about)/.test(this.props.path):
+        component = <AboutPage />;
+        break;
+      case /\/faq/.test(this.props.path):
+        component = <FaqPage /> ;
         break;
   };
 

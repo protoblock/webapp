@@ -4,7 +4,8 @@ import App from './components/App';
 import LeaderBoardPage from './components/LeaderBoardPage';
 import FantasyNamePage from './components/FantasyNamePage';
 import DownloadPage from './components/DownloadPage';
-//import ContentPage from './components/ContentPage';
+import AboutPage from './components/AboutPage';
+import FaqPage from './components/FaqPage';
 
 let Route = Router.Route;
 let DefaultRoute = Router.DefaultRoute;
@@ -15,7 +16,8 @@ let routes = (
 
     <Route handler={FantasyNamePage} path="fantasy/players/:fantasyName/awards"/>
     <Route handler={DownloadPage} path="downloads"/>
-    {/*<Route handler={ContentPage} path="About"/>*/}
+    <Route handler={AboutPage} path="about"/>
+    <Route handler={FaqPage} path="faq" />
   </Route>
 );
 
