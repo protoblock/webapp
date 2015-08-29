@@ -11,7 +11,7 @@ import LeaderBoardPage from '../LeaderBoardPage';
 import FantasyNamePage from '../FantasyNamePage';
 import DownloadPage from '../DownloadPage';
 import FaqPage from '../FaqPage';
-
+import RulesPage from '../RulesPage';
 import AboutPage from '../AboutPage';
 //import about from '../../content/about.jsx';
 
@@ -50,6 +50,10 @@ class App {
       case /\/faq/.test(this.props.path):
         component = <FaqPage /> ;
         break;
+      case /\/rules/.test(this.props.path):
+        component = <RulesPage /> ;
+        break;
+
   };
 
     return component ? (

@@ -6,6 +6,7 @@ import FantasyNamePage from './components/FantasyNamePage';
 import DownloadPage from './components/DownloadPage';
 import AboutPage from './components/AboutPage';
 import FaqPage from './components/FaqPage';
+import RulesPage from './components/RulesPage';
 
 let Route = Router.Route;
 let DefaultRoute = Router.DefaultRoute;
@@ -18,6 +19,7 @@ let routes = (
     <Route handler={DownloadPage} path="downloads"/>
     <Route handler={AboutPage} path="about"/>
     <Route handler={FaqPage} path="faq" />
+    <Route handler={RulesPage} path="rules" />
   </Route>
 );
 

@@ -23,7 +23,7 @@ class AboutPage extends React.Component{
   }
 
   render() {
-    let title = 'FAQ';
+    let title = 'About';
     this.context.onSetTitle(title);
     return (
       <div className="AboutPage">
