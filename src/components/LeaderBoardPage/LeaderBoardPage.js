@@ -21,8 +21,8 @@ class LeaderBoardPage extends React.Component{
     super(props);
     this.state = LeaderBoardStore.getState();
     this.onChange = this.onChange.bind(this);
-    this.currentWeek = 6;
-    this.currentSeason = 2015;
+    this.currentWeek = 3;
+    this.currentSeason = '2015 Pre-Season';
   }
 
   static contextTypes = {
