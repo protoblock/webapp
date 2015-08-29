@@ -115,7 +115,7 @@ class LeaderBoardPage extends React.Component{
               </Col>
               <Col className="text-center" xs={12} md={6} mdPull={6}>
                 <div className="LeaderBoardPage-container-heading">
-                  <h1>leaderboard</h1>
+                  <h1>Leaderboard</h1>
                   <h2>{this.currentSeason} | Week {this.currentWeek}</h2>
                   {/*<LeaderBoardFilterContainer/>*/}
                 </div>

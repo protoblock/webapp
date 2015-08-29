@@ -106,7 +106,7 @@ class DownloadPage extends React.Component{
     return (
       <div className="DownloadPage">
         <div className="DownloadPage-container">
-          <h1>download</h1>
+          <h1>Download</h1>
           {this.getOSContent()}
         </div>
       </div>

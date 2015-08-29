@@ -36,7 +36,7 @@ class RulesPage extends React.Component{
           <h5>How FantasyBits Are Created:</h5>
           <p>FantasyBits (FBs) are generated for each real fantasy point earned by an NFL player during the season. These points are generated using Trading Football’s PPR scoring system, based on statistics provided by <a href='http://www.fantasydata.com' target='_blank'>fantasydata.com</a></p>
 
-          <h5>Scoring System (PPPR Format):</h5>
+          <h5>Scoring System (PPR Format):</h5>
           <Table>
             <tbody>
               <tr>
@@ -120,7 +120,7 @@ class RulesPage extends React.Component{
           </Table>
 
           <h5>Example:</h5>
-          <p>Users make projections for Peyton Manning''s week 1 game</p>
+          <p>Users make projections for Peyton Manning's week 1 game</p>
           <Table>
             <tbody>
               <tr>
