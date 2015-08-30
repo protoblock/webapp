@@ -21,9 +21,9 @@ class FantasyNameActions {
         this.actions.updatePlayerFailed([err]);
       } else {
         this.actions.updatePlayer({
-          players: res.body,
-          fantasyName: res.body[0].FantasyTeam,
-          balance: res.body[0].FantasyBits
+          players: res.body.data,
+          fantasyName: res.body.data[0].FANTASYNAME,
+          balance: res.body.balance
         });
       }
     });
