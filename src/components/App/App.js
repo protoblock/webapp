@@ -60,7 +60,7 @@ class App {
       <div className="wrapper">
         <Header />
         {component}
-        {/*<Footer />*/}
+        <Footer />
       </div>
     ) : <LeaderBoardPage />;
   }

@@ -3,14 +3,20 @@
 @import '../variables.less';
 
 .Footer {
-  background: #333;
+  background-image: linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+  background-image: -o-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+  background-image: -moz-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+  background-image: -webkit-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+  background-image: -ms-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+  background-image: -webkit-gradient( linear, right bottom, right top, color-stop(0, #011c47), color-stop(0.66, rgb(27, 54, 97)) );
+  border: #011c47 solid 1px;
   color: #fff;
   position:fixed;
   bottom: 0px;
   width: 100%;
   &-container {
     margin: 0 auto;
-    padding: 20px 15px;
+    padding: 14px 15px;
     max-width: @max-content-width;
     text-align: center;
   }
