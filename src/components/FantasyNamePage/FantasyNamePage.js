@@ -46,11 +46,11 @@ class FantasyNamePage extends React.Component{
         console.log(player);
         return (
           <tr>
-            <td>{player.Week}</td>
-            <td>{player.Name}</td>
-            <td>{player.Result}</td>
-            <td>{player.Projection}</td>
-            <td>{player.Reward}</td>
+            <td>{player.WEEK}</td>
+            <td>{player.FIRSTNAME + " " + player.LASTNAME}</td>
+            <td>{player.RESULT}</td>
+            <td>{player.PROJECTION}</td>
+            <td>{player.AWARD}</td>
           </tr>
         );
       });
