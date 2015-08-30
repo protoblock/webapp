@@ -67,7 +67,8 @@ class LeaderBoardPage extends React.Component{
       return (
         <tr>
           <td colSpan="2">
-            Error loading leaders: {this.state.errorMessage}
+            {/*Error loading leaders: {this.state.errorMessage}*/}
+            Coming Soon!
           </td>
         </tr>
       )
