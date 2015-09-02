@@ -7,7 +7,9 @@ import React from 'react';
 import Router from 'react-router';
 import routes from './routes.jsx';
 import URL from 'url';
-
+import http from 'http';
+import https from 'https';
+import fs from 'fs';
 let server = express();
 server.set('view engine', 'jade');
 let templateDir = path.join(__dirname, 'templates');
@@ -16,12 +18,22 @@ server.set('views', templateDir);
 server.use(express.static(path.join(__dirname, 'public')));
 
 server.get("*", (req, res, next) => {
-  next();
+  if (req.protocol == 'http'){
+    // redirect all http to https
+    res.redirect('https://app.trading.football' + req.url);
+  }else {
+    next();
+  }
 });
 
 /*server.get("fantasy/players/:fnid/result/:week", (req, res, next) => {
 
 });*/
+
+let credentials = {
+  pfx: fs.readFileSync('../ssl/satoshi_pfx.pfx'),
+  passphrase: '5tgb^YHN7ujm'
+};
 
 server.use((req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
@@ -56,8 +68,17 @@ server.use((req, res) => {
   });
 });
 
-server.listen(5000, function() {
+//let redirectServer = express.createServer();
+//redirectServer.get('*', (req, res)=>res.redirect('https://app.trading.football' + req.url))
+
+//http.createServer(redirectServer).listen(5080);
+let httpServer = http.createServer(server).listen(5000);
+
+let httpsServer = https.createServer(credentials, server);
+httpsServer.listen(5443, ()=>console.log('Listening on localhost:5443'));
+/*server.listen(5000, function() {
   console.log('Listening on localhost:5000');
 });
 
-export default server;
+export default server;*/
+export default { httpsServer: httpsServer, httpServer: httpServer};
