@@ -33,6 +33,7 @@ class LeaderBoardPage extends React.Component{
     LeaderBoardStore.listen(this.onChange);
     if (window) {
       let socket = io.connect("https://api.trading.football:4545", {secure: true});
+      //let socket = io.connect("https://localhost:4545", {secure: true});
       socket.on('change', function() {
         console.log("changing");
         LeaderBoardActions.getLeaders(window.location.search);
@@ -57,8 +58,8 @@ class LeaderBoardPage extends React.Component{
         return (
           <tr>
             <td>{++index}</td>
-            <td><a href={destination} onclick={Link.handleClick}>{fantasyName.name}</a></td>
-            <td>{fantasyName.score}</td>
+            <td><a href={encodeURI(destination)} onclick={Link.handleClick}>{fantasyName.name}</a></td>
+            <td>{fantasyName.score || 0}</td>
           </tr>
         );
       });

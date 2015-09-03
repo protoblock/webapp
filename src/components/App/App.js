@@ -41,7 +41,7 @@ class App {
         component = <DownloadPage />;
         break;
 
-      case /\/fantasy\/players\/[A-Za-z0-9]+\/awards$/.test(this.props.path):
+      case /\/fantasy\/players\/.+\/awards$/.test(this.props.path):
         component = <FantasyNamePage path={this.props.path}/>;
         break;
       case /\/(about)/.test(this.props.path):

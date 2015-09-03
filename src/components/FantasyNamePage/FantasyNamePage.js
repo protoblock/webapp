@@ -24,6 +24,7 @@ class FantasyNamePage extends React.Component{
     FantasyNameActions.getPlayer(this.props.path);
     if (window) {
       let socket = io.connect("https://api.trading.football:4545", {secure: true});
+      //let socket = io.connect("https://localhost:4545", {secure: true});
       socket.on('change', function() {
         console.log("changing");
         this.getPlayer(this.props.path)
@@ -40,17 +41,15 @@ class FantasyNamePage extends React.Component{
   }
 
   getRows() {
-    if (this.state.players.length > 0){
-      console.log(this.state.players);
+    if (this.state.players.length > 0 && typeof this.state.players[0].WEEK !== "undefined"){
       return this.state.players.map((player) => {
-        console.log(player);
         return (
           <tr>
             <td>{player.WEEK}</td>
             <td>{player.FIRSTNAME + " " + player.LASTNAME}</td>
-            <td>{player.RESULT}</td>
-            <td>{player.PROJECTION}</td>
-            <td>{player.AWARD}</td>
+            <td>{player.RESULT || 0}</td>
+            <td>{player.PROJECTION || 0}</td>
+            <td>{player.AWARD || 0}</td>
           </tr>
         );
       });
@@ -59,7 +58,8 @@ class FantasyNamePage extends React.Component{
       return (
         <tr>
           <td colSpan="5">
-            Error loading balance info: {this.state.errorMessage}
+            {/*Error loading balance info: {this.state.errorMessage}*/}
+            No results yet, check back later!
           </td>
         </tr>
       );
