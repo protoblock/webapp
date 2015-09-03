@@ -23,7 +23,7 @@ class FantasyNameActions {
         this.actions.updatePlayer({
           players: res.body.data,
           fantasyName: res.body.data[0].FANTASYNAME,
-          balance: res.body.balance
+          balance: res.body.balance || 0
         });
       }
     });

@@ -21,7 +21,7 @@ server.use(express.static(path.join(__dirname, 'public')));
 server.get('*', (req, res, next) => {
   if (req.protocol === 'http'){
     // redirect all http to https
-    res.redirect('https://app.trading.football' + req.url);
+    res.redirect('https://' + req.hostname + req.url);
   }else {
     next();
   }
@@ -35,6 +35,11 @@ let credentials = {
   pfx: fs.readFileSync('../ssl/satoshi_pfx.pfx'),
   passphrase: '5tgb^YHN7ujm'
 };
+
+// let devCredentials = {
+//   key: fs.readFileSync('../ssl/server.key'),
+//   cert: fs.readFileSync('../ssl/server.crt')
+// };
 
 server.use((req, res) => {
   alt.bootstrap(JSON.stringify(res.locals.data || {}));
@@ -78,6 +83,7 @@ server.use((req, res) => {
 //http.createServer(redirectServer).listen(5080);
 let httpServer = http.createServer(server).listen(5000);
 
+// let httpsServer = https.createServer(devCredentials, server);
 let httpsServer = https.createServer(credentials, server);
 httpsServer.listen(5443, ()=>console.log('Listening on localhost:5443'));
 /*server.listen(5000, function() {
