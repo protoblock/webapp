@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react';
 import styles from './Projection.less';
 import withStyles from '../../decorators/withStyles';
-import Link from '../../utils/Link';
+//import Link from '../../utils/Link';
 import {OverlayTrigger, Popover} from 'react-bootstrap';
 
 @withStyles(styles)

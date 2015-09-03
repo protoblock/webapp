@@ -1,6 +1,6 @@
 /*! React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import styles from './Logo.less';
 import withStyles from '../../decorators/withStyles';
 

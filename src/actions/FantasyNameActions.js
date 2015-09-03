@@ -10,11 +10,11 @@ class FantasyNameActions {
     this.dispatch(error);
   }
 
-  getPlayer(path, id, week) {
+  getPlayer(path/*, id, week*/) {
     this.dispatch();
-    let players = [];
-    let name = "";
-    let balance = "";
+    //let players = [];
+    //let name = '';
+    //let balance = '';
 
     api.get(path, (err, res) => {
       if (err){

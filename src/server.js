@@ -6,7 +6,7 @@ import path from 'path';
 import React from 'react';
 import Router from 'react-router';
 import routes from './routes.jsx';
-import URL from 'url';
+//import URL from 'url';
 import http from 'http';
 import https from 'https';
 import fs from 'fs';
@@ -18,8 +18,8 @@ server.set('views', templateDir);
 
 server.use(express.static(path.join(__dirname, 'public')));
 
-server.get("*", (req, res, next) => {
-  if (req.protocol == 'http'){
+server.get('*', (req, res, next) => {
+  if (req.protocol === 'http'){
     // redirect all http to https
     res.redirect('https://app.trading.football' + req.url);
   }else {
@@ -27,7 +27,7 @@ server.get("*", (req, res, next) => {
   }
 });
 
-/*server.get("fantasy/players/:fnid/result/:week", (req, res, next) => {
+/*server.get('fantasy/players/:fnid/result/:week', (req, res, next) => {
 
 });*/
 
@@ -45,7 +45,7 @@ server.use((req, res) => {
   let css = [];
   let data = {description: ''};
 
-  let context={
+  let context = {
     onInsertCss: value => css.push(value),
     onSetTitle: value => data.title = value,
     onSetMeta: (key, value) => data[key] = value,
@@ -58,7 +58,7 @@ server.use((req, res) => {
         <Handler
           context={context}
           path={req.path}
-          query={"?" + req.url.split('?')[1]}
+          query={'?' + req.url.split('?')[1]}
           templatePath={templateDir + '/' + req.path}/>
       </div>
     );

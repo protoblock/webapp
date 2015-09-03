@@ -1,7 +1,7 @@
-import agent from "superagent";
+import agent from 'superagent';
 
-const apiURL = "http://192.96.159.216:4545";
-//const apiURL = "http://localhost:4545";
+const apiURL = 'http://192.96.159.216:4545';
+//const apiURL = 'http://localhost:4545';
 let queryUtils = {
 
     get(path, cb){
@@ -14,6 +14,6 @@ let queryUtils = {
       .query(queryString)
       .end(cb);
     }
-}
+};
 
 export default queryUtils;

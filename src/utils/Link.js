@@ -19,7 +19,7 @@ function handleClick(event) {
   invariant(el && el.nodeName === 'A', 'The target element must be a link.');
 
   // Rebuild path
-  var path = el.pathname + el.search + (el.hash || '');
+  //var path = el.pathname + el.search + (el.hash || '');
 
   event.preventDefault();
 }

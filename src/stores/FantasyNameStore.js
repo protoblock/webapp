@@ -4,8 +4,8 @@ import FantasyNameActions from '../actions/FantasyNameActions';
 class FantasyNameStore {
   constructor(){
     this.players = [];
-    this.name = "";
-    this.balance = "";
+    this.name = '';
+    this.balance = '';
     this.errorMessage = null;
 
     this.bindListeners({
@@ -24,8 +24,8 @@ class FantasyNameStore {
 
   handleGetPlayer() {
     this.players = [];
-    this.name = "";
-    this.balance = "";
+    this.name = '';
+    this.balance = '';
     this.errorMessage = null;
   }
 

@@ -1,9 +1,9 @@
 /*! React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import styles from './LeaderBoardFilterContainer.less';
 import withStyles from '../../decorators/withStyles';
-import {ButtonGroup, Button, DropdownButton, MenuItem} from 'react-bootstrap';
+import {ButtonGroup, DropdownButton, MenuItem} from 'react-bootstrap';
 @withStyles(styles)
 class LeaderBoardFilterContainer {
 

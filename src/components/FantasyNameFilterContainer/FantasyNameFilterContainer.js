@@ -3,10 +3,13 @@
 import React, { PropTypes } from 'react';
 import styles from './FantasyNameFilterContainer.less';
 import withStyles from '../../decorators/withStyles';
-import {FormControls, Input, Label} from 'react-bootstrap';
+import {FormControls, Input} from 'react-bootstrap';
 @withStyles(styles)
 class FantasyNameFilterContainer {
-
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    balance: PropTypes.number.isRequired
+  };
   render() {
     return (
       <div className="FantasyNameFilterContainer">

@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react';
 import styles from './LeaderBoardPage.less';
 import withStyles from '../../decorators/withStyles';
-import LeaderBoardFilterContainer from '../LeaderBoardFilterContainer';
+//import LeaderBoardFilterContainer from '../LeaderBoardFilterContainer';
 //import {leaders} from '../../../DummyData/fantasy-leaders-weekly.js';
 import LeaderBoardStore from '../../stores/LeaderBoardStore';
 import LeaderBoardActions from '../../actions/LeaderBoardActions';
@@ -11,11 +11,19 @@ import Spinner from '../Spinner';
 import Logo from '../Logo';
 
 import {Table, Grid, Col, Row} from 'react-bootstrap';
-import {NavItemLink} from 'react-router-bootstrap';
+//import {NavItemLink} from 'react-router-bootstrap';
 import Link from '../../utils/Link';
 
 @withStyles(styles)
 class LeaderBoardPage extends React.Component{
+
+  static propTypes = {
+    query: PropTypes.string.isRequired
+  }
+
+  static contextTypes = {
+    onSetTitle: PropTypes.func.isRequired
+  }
 
   constructor(props) {
     super(props);
@@ -25,16 +33,12 @@ class LeaderBoardPage extends React.Component{
     this.currentSeason = 'Pre-Season';
   }
 
-  static contextTypes = {
-    onSetTitle: PropTypes.func.isRequired
-  }
-
   componentDidMount() {
     LeaderBoardStore.listen(this.onChange);
     if (window) {
-      let socket = io.connect("https://api.trading.football:4545", {secure: true});
+      let socket = io.connect('https://api.trading.football:4545', {secure: true});
       socket.on('change', function() {
-        console.log("changing");
+        console.log('changing');
         LeaderBoardActions.getLeaders(window.location.search);
       });
     }
@@ -53,7 +57,7 @@ class LeaderBoardPage extends React.Component{
   getTeamRows() {
     if (this.state.leaders.length > 0){
       return this.state.leaders.map((fantasyName, index) => {
-        let destination = "/fantasy/players/" + fantasyName.name + "/awards";
+        let destination = '/fantasy/players/' + fantasyName.name + '/awards';
         return (
           <tr>
             <td>{++index}</td>
@@ -66,12 +70,12 @@ class LeaderBoardPage extends React.Component{
     } else {
       return (
         <tr>
-          <td colSpan="2">
+          <td colSpan='2'>
             {/*Error loading leaders: {this.state.errorMessage}*/}
             Coming Soon!
           </td>
         </tr>
-      )
+      );
     }
 
   }
@@ -107,15 +111,15 @@ class LeaderBoardPage extends React.Component{
     let table = this.buildTable();
 
     return (
-      <div className="LeaderBoardPage">
-        <div className="LeaderBoardPage-container">
+      <div className='LeaderBoardPage'>
+        <div className='LeaderBoardPage-container'>
           <Grid>
             <Row>
               <Col xs={12} md={6} mdPush={6}>
                 <Logo />
               </Col>
-              <Col className="text-center" xs={12} md={6} mdPull={6}>
-                <div className="LeaderBoardPage-container-heading">
+              <Col className='text-center' xs={12} md={6} mdPull={6}>
+                <div className='LeaderBoardPage-container-heading'>
                   <h1>Leaderboard</h1>
                   <h2>{this.currentSeason} | Week {this.currentWeek}</h2>
                   {/*<LeaderBoardFilterContainer/>*/}

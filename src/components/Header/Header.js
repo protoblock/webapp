@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './Header.less';
 import withStyles from '../../decorators/withStyles';
 import Navigation from '../Navigation';
-import CurrentPeriod from '../CurrentPeriod';
+//import CurrentPeriod from '../CurrentPeriod';
 @withStyles(styles)
 class Header {
 

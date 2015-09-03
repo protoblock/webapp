@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 import styles from './DownloadPage.less';
 import withStyles from '../../decorators/withStyles';
 import UAParser from 'ua-parser-js';
-import Link from '../../utils/Link';
+//import Link from '../../utils/Link';
 
 @withStyles(styles)
 class DownloadPage extends React.Component{
@@ -71,7 +71,7 @@ class DownloadPage extends React.Component{
     if(supported.length){
       supported = supported[0];
       header = (<div>
-        <h3>{supported.name}   <a href={supported.link}>{supported.fileName}</a></h3>
+        <h3>{supported.name + '   '}<a href={supported.link}>{supported.fileName}</a></h3>
         <p>Version: {ua.os.name + ' ' + ua.os.version} | Hard Disk: {supported.disk}</p>
 
         {supported.length > 1 ? <h5>Other Operating Systems:</h5> : ''}
@@ -87,8 +87,8 @@ class DownloadPage extends React.Component{
     requirements
       .filter((req) => req !== supported)
       .forEach((req) => body.push(<div>
-          <h4>{req.name}   <a href={req.link}>{req.fileName}</a></h4>
-          <p>Version: {req.name + ' '+ req.versions
+          <h4>{req.name + '  '}<a href={req.link}>{req.fileName}</a></h4>
+          <p>Version: {req.name + ' ' + req.versions
             .reduce((a, c) => (a.number || a) +
               ', ' +
               c.number)

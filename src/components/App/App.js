@@ -48,13 +48,12 @@ class App {
         component = <AboutPage />;
         break;
       case /\/faq/.test(this.props.path):
-        component = <FaqPage /> ;
+        component = <FaqPage />;
         break;
       case /\/rules/.test(this.props.path):
-        component = <RulesPage /> ;
+        component = <RulesPage />;
         break;
-
-  };
+    }
 
     return component ? (
       <div className="wrapper">

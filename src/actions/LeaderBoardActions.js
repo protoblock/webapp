@@ -17,7 +17,7 @@ class LeaderBoardActions {
       if (err){
         this.actions.updateLeadersFailed([err]);
       } else {
-        this.actions.updateLeaders(res.body)
+        this.actions.updateLeaders(res.body);
       }
     });
   }
