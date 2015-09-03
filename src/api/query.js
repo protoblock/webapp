@@ -1,6 +1,6 @@
 import agent from "superagent";
 
-const apiURL = "http://192.96.159.216:4545";
+const apiURL = "https://app.trading.football:4545";
 //const apiURL = "http://localhost:4545";
 let queryUtils = {
 
