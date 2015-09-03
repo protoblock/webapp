@@ -32,7 +32,7 @@ class LeaderBoardPage extends React.Component{
   componentDidMount() {
     LeaderBoardStore.listen(this.onChange);
     if (window) {
-      let socket = io.connect("https://api.trading.football:4545");
+      let socket = io.connect("https://api.trading.football:4545", {secure: true});
       socket.on('change', function() {
         console.log("changing");
         LeaderBoardActions.getLeaders(window.location.search);

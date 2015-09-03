@@ -5,7 +5,7 @@ import styles from './ProjectionTicker.less';
 import withStyles from '../../decorators/withStyles';
 import Link from '../../utils/Link';
 import Projection from '../Projection';
-import {players} from '../../../DummyData/players-score.js';
+//import {players} from '../../../DummyData/players-score.js';
 
 
 @withStyles(styles)
@@ -22,9 +22,9 @@ class ProjectionTicker {
   render() {
     let data = players,
         ret = [];
-    data.forEach((p) => {
-      ret.push(<Projection player={p}/>)
-    });
+    //data.forEach((p) => {
+    //  ret.push(<Projection player={p}/>)
+    //});
 
     return (
       <div className="ProjectionTicker">

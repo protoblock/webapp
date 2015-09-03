@@ -10,6 +10,7 @@ import URL from 'url';
 import http from 'http';
 import https from 'https';
 import fs from 'fs';
+import GoogleTagManager from './components/GoogleTagManager';
 let server = express();
 server.set('view engine', 'jade');
 let templateDir = path.join(__dirname, 'templates');
@@ -52,11 +53,14 @@ server.use((req, res) => {
   };
   Router.run(routes, req.url, (Handler) => {
     let content = React.renderToStaticMarkup(
-      <Handler
-        context={context}
-        path={req.path}
-        query={"?" + req.url.split('?')[1]}
-        templatePath={templateDir + '/' + req.path}/>
+      <div>
+        <GoogleTagManager />
+        <Handler
+          context={context}
+          path={req.path}
+          query={"?" + req.url.split('?')[1]}
+          templatePath={templateDir + '/' + req.path}/>
+      </div>
     );
 
     iso.add(content, alt.flush());
