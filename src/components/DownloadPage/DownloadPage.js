@@ -114,7 +114,8 @@ class DownloadPage extends React.Component{
       <div className="DownloadPage">
         <div className="DownloadPage-container">
           <PageHeading text={text} logoSize='sm' />
-          {this.getOSContent()}
+          {/*this.getOSContent()*/}
+          <h2>Coming Soon! Check back on Sept. 8th!</h2>
         </div>
       </div>
     );

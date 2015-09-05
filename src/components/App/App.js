@@ -13,6 +13,7 @@ import DownloadPage from '../DownloadPage';
 import FaqPage from '../FaqPage';
 import RulesPage from '../RulesPage';
 import AboutPage from '../AboutPage';
+import LandingPage from '../LandingPage';
 //import about from '../../content/about.jsx';
 
 //import NotFoundPage from '../NotFoundPage';
@@ -34,8 +35,11 @@ class App {
     // Controls the routing
     switch (true) {
       case /\/$/.test(this.props.path):
-        component = <LeaderBoardPage query={this.props.query}/>;
+        component = <LandingPage />;
         break;
+      /*case /\/$/.test(this.props.path):
+        component = <LeaderBoardPage query={this.props.query}/>;
+        break;*/
 
       case /\/downloads/.test(this.props.path):
         component = <DownloadPage />;
