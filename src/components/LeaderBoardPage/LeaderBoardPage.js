@@ -1,18 +1,17 @@
-/*! React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
 
 import React, { PropTypes } from 'react';
 import styles from './LeaderBoardPage.less';
 import withStyles from '../../decorators/withStyles';
-//import LeaderBoardFilterContainer from '../LeaderBoardFilterContainer';
-//import {leaders} from '../../../DummyData/fantasy-leaders-weekly.js';
+
+import LeaderBoardFilterContainer from '../LeaderBoardFilterContainer';
+
 import LeaderBoardStore from '../../stores/LeaderBoardStore';
 import LeaderBoardActions from '../../actions/LeaderBoardActions';
 import Spinner from '../Spinner';
-import Logo from '../Logo';
-
-import {Table, Grid, Col, Row} from 'react-bootstrap';
-//import {NavItemLink} from 'react-router-bootstrap';
+import {Table} from 'react-bootstrap';
+import {NavItemLink} from 'react-router-bootstrap';
 import Link from '../../utils/Link';
+import PageHeading from '../PageHeading';
 
 @withStyles(styles)
 class LeaderBoardPage extends React.Component{
@@ -54,6 +53,14 @@ class LeaderBoardPage extends React.Component{
     this.setState(state);
   }
 
+  getHeadingText(){
+    return (
+      <div>
+        <h1>Leaderboard</h1>
+        <h2>{`${this.currentSeason} | Week ${this.currentWeek}`}</h2>
+      </div>
+    );
+  }
 
   getTeamRows() {
     if (this.state.leaders.length > 0){
@@ -112,23 +119,11 @@ class LeaderBoardPage extends React.Component{
     let table = this.buildTable();
 
     return (
-      <div className='LeaderBoardPage'>
-        <div className='LeaderBoardPage-container'>
-          <Grid>
-            <Row>
-              <Col xs={12} md={6} mdPush={6}>
-                <Logo />
-              </Col>
-              <Col className='text-center' xs={12} md={6} mdPull={6}>
-                <div className='LeaderBoardPage-container-heading'>
-                  <h1>Leaderboard</h1>
-                  <h2>{this.currentSeason} | Week {this.currentWeek}</h2>
-                  {/*<LeaderBoardFilterContainer/>*/}
-                </div>
-              </Col>
-            </Row>
-          </Grid>
-                    {table}
+
+      <div className="LeaderBoardPage">
+        <div className="LeaderBoardPage-container">
+          <PageHeading text={this.getHeadingText()} logoSize='lg' />
+            {table}
         </div>
       </div>
     );

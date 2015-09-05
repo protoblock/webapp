@@ -45,15 +45,19 @@ body {
     margin: 0 auto -@footerHeight;
 }
 
-div[class$='Page-container']{
+div[class$='Page-container'] {
   background-color: white;
-  padding:10px 20px 40px;
+  padding:10px 20px 100px;
   margin-top:52px;
   &>div.container {
     width: 100%;
   }
 }
-
+div[class$='Heading-container'] {
+  &>div.container {
+    width: 100%;
+  }
+}
 /*
  * Remove text-shadow in selection highlight:
  * https://twitter.com/miketaylr/status/12228805301

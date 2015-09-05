@@ -3,14 +3,22 @@
 @import '../variables.less';
 
 .Logo {
+
+
   &-container {
     margin: 0 auto;
     padding: 5px;
-    min-width: 321px;
-    min-height: 323px;
     background-image: url('trading-football-logo.png');
     background-repeat: no-repeat;
     background-position: center;
-
+    background-size: contain;
+    &-lg {
+      min-width: 254px;
+      min-height: 256px;
+    }
+    &-sm {
+      min-width: 158px;
+      min-height: 160px;
+    }
   }
 }

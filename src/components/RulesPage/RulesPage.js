@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 import styles from './RulesPage.less';
 import withStyles from '../../decorators/withStyles';
 import {Table} from 'react-bootstrap';
+import PageHeading from '../PageHeading';
 
 @withStyles(styles)
 class RulesPage extends React.Component{
@@ -26,11 +27,16 @@ class RulesPage extends React.Component{
   render() {
     let title = 'Rules';
     this.context.onSetTitle(title);
+    let text = (
+      <div>
+        <h1>Rules</h1>
+        <h2>How to Play The Game</h2>
+      </div>
+    );
     return (
       <div className="RulesPage">
         <div className="RulesPage-container">
-          <h1>Rules</h1>
-          <h5>How to Play:</h5>
+          <PageHeading text={text} logoSize='sm' />
           <p>Make weekly offensive player projections in order to earn FantasyBits. The ability to make player projections will be locked at the time of their respective teams’ kickoff time.</p>
 
           <h5>How FantasyBits Are Created:</h5>
@@ -48,7 +54,7 @@ class RulesPage extends React.Component{
                 <td>4 points</td>
               </tr>
               <tr>
-                <td>Pass Interseption</td>
+                <td>Pass Interception</td>
                 <td>-1 point</td>
               </tr>
 
@@ -209,6 +215,7 @@ class RulesPage extends React.Component{
 A) Determine who the most skilled fantasy players are
 B) Provide a full range of weekly offensive player projections
 C) Award FantasyBits based on projection accuracy</p>
+
 
         </div>
       </div>

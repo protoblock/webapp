@@ -4,8 +4,8 @@ import React, { PropTypes } from 'react';
 import styles from './DownloadPage.less';
 import withStyles from '../../decorators/withStyles';
 import UAParser from 'ua-parser-js';
-//import Link from '../../utils/Link';
-
+import Link from '../../utils/Link';
+import PageHeading from '../PageHeading';
 @withStyles(styles)
 class DownloadPage extends React.Component{
 
@@ -103,10 +103,17 @@ class DownloadPage extends React.Component{
   render() {
     let title = 'Download Trading Football';
     this.context.onSetTitle(title);
+    let text = (
+      <div>
+        <h1>Download</h1>
+        <h2>The Official App</h2>
+      </div>
+    );
+
     return (
       <div className="DownloadPage">
         <div className="DownloadPage-container">
-          <h1>Download</h1>
+          <PageHeading text={text} logoSize='sm' />
           {this.getOSContent()}
         </div>
       </div>
