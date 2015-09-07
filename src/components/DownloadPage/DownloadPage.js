@@ -54,9 +54,9 @@ class DownloadPage extends React.Component{
           {number: '8', architecture: 'amd64'},
           {number: '10', architecture: 'amd64'}
         ],
-        'disk': '25.1 MB',
-        'link': 'https://www.dropbox.com/s/u36zrr8s2j8bxov/tradingfootball-beta-setup.exe?dl=1',
-        'fileName': 'trading-football-beta-setup.exe'
+        'disk': '15 MB',
+        'link': 'http://trading.football:8080/tradingfootball-setup.exe',
+        'fileName': 'Download'
       }
     ];
     let header = '', body = [];
