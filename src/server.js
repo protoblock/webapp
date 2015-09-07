@@ -78,7 +78,7 @@ server.use((req, res) => {
 });
 
 //let redirectServer = express.createServer();
-//redirectServer.get('*', (req, res)=>res.redirect('https://app.trading.football' + req.url))
+//redirectServer.get('*', (req, res)=>res.redirect('https://trading.football' + req.url))
 
 //http.createServer(redirectServer).listen(5080);
 let httpServer = http.createServer(server).listen(5000);

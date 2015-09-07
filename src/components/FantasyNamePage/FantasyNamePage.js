@@ -27,8 +27,8 @@ class FantasyNamePage extends React.Component{
     FantasyNameStore.listen(this.onChange);
     FantasyNameActions.getPlayer(this.props.path);
     if (window) {
-      let socket = io.connect('https://api.trading.football:4545', {secure: true});
-      //let socket = io.connect('https://localhost:4545', {secure: true});
+      let socket = io.connect("https://stagingapi.trading.football:4545", {secure: true});
+      //let socket = io.connect("https://localhost:4545", {secure: true});
       socket.on('change', function() {
         console.log('changing');
         this.getPlayer(this.props.path);
