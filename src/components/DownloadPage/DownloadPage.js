@@ -130,6 +130,11 @@ class DownloadPage extends React.Component{
         <div className="DownloadPage-container">
           <PageHeading text={text} logoSize='sm' />
           {this.getOSContent()}
+          <div>
+            <h3>Support</h3>
+            <p classname='backwards'>moc.ysatnafihsotas@ofni</p>
+            <p>Hotline: 650-822-2777<p>
+          </div>
         </div>
       </div>
     );
