@@ -66,9 +66,6 @@ class FaqPage extends React.Component{
           <h4>Why do I want Fantasy Bits?</h4>
           <p>Soon you will be able to use your Fantasy Bits in our game’s Level 2 to speculate on NFL players’ weekly and season fantasy point totals. You’ll be able to earn Fantasy Bits if you buy when a player is undervalued and sell when a player is overvalued. With Trading.Football, there will be no offseason; you’ll always be able to use your fantasy skills to earn Fantasy Bits and trade them for value.</p> 
 
-          <h4>Who can send my Fantasy Bits?</h4>
-          <p>Fantasy Bits can only be sent from your computer that contains your Fantasy Name secret file.</p>
-
           <h2>Gameplay Questions</h2>
 
           <h4>Can I play Trading Football with my Fantasy Name from a public or shared computer?</h4>
