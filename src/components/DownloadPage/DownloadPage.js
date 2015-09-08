@@ -87,6 +87,7 @@ class DownloadPage extends React.Component{
       header = (<div>
         <h3>{supported.name + '   '}<a href={supported.link}>{supported.fileName}</a></h3>
         <p>Version: {ua.os.name + ' ' + ua.os.version} | Hard Disk: {supported.disk}</p>
+        {supported.instructions}
 
         {supported.length > 1 ? <h5>Other Operating Systems:</h5> : ''}
       </div>);
