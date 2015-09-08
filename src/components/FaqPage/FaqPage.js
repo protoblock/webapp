@@ -37,7 +37,7 @@ class FaqPage extends React.Component{
         <div className="FaqPage-container">
           <PageHeading text={text} logoSize='sm' />
 
-          <h2>Trading Football Questions<h2>
+          <h2>Trading Football Questions</h2>
 
           <h4>What is Trading Football?</h4>
           <p>Trading Football is a game made for fantasy football players by fantasy football players.  Users are able to make projections for every offensive player (QB, RB, WR, TE, and kickers); you can submit as many or as few projections as you want. After every week in the regular season, Fantasy Bits are distributed to all players based on the accuracy of their projections. Those with the most Fantasy Bits, because they had the most accurate projections, are proudly recognized on the Fantasy Bits Leaderboard.</p>
