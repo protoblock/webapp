@@ -56,7 +56,21 @@ class DownloadPage extends React.Component{
         ],
         'disk': '15 MB',
         'link': 'http://trading.football:8080/tradingfootball-setup.exe',
-        'fileName': 'Download'
+        'fileName': 'Download',
+        'instructions' : (
+          <div>
+            <p>Note: 64-bit and administrative privileges required - Click ‘more’ and ‘run anyway’ on the Smartscreen Filter (for Windows 8+).</p>
+            <p>Read the <a href='/rules' >rules</a> and watch the Trading Football tutorial for information on how to play:</p>
+            <p>Video coming soon!</p>
+            <p>Getting started with Trading Football is as easy as 1, 2, 3.</p>
+            <h3>1. Download and Install:</h3>
+            <img src={'./download-image1.png'} className='DownloadPage-image' alt='setup 1' />
+            <h3>2. Claim your Fantasy Name</h3>
+            <img src={'./download-image2.png'} className='DownloadPage-image' alt='setup 2' />
+            <h3>3. Start Making Projections</h3>
+            <img src={'./download-image3.png'} className='DownloadPage-image' alt='setup 3' />
+          </div>
+        )
       }
     ];
     let header = '', body = [];
@@ -84,6 +98,7 @@ class DownloadPage extends React.Component{
         </div>
       );
     }
+    
     requirements
       .filter((req) => req !== supported)
       .forEach((req) => body.push(<div>
@@ -94,9 +109,9 @@ class DownloadPage extends React.Component{
               c.number)
               .trim(', ') +
               ' x64' } | Hard Disk: {req.disk} </p>
+                {req.instructions}
         </div>
       ));
-
     return <div>{header}{body}</div>;
   }
 
