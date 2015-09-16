@@ -61,7 +61,7 @@ class DownloadPage extends React.Component{
           <div>
             <p>Note: 64-bit and administrative privileges required - Click ‘more’ and ‘run anyway’ on the Smartscreen Filter (for Windows 8+).</p>
             <p>Read the <a href='/rules' >rules</a> and watch the Trading Football tutorial for information on how to play:</p>
-            <p>(Video coming soon!)</p>
+            <p><a href='https://www.youtube.com/watch?v=hNm4UGx9xGs' target='_blank'>Video Instructions</a></p>
             <p>Getting started with Trading Football is as easy as 1, 2, 3.</p>
             <h3>1. Download and Install:</h3>
             <img src={require('./download-image1.png')} className='DownloadPage-image' alt='setup 1' />
