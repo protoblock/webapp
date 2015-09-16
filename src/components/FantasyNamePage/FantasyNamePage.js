@@ -50,7 +50,8 @@ class FantasyNamePage extends React.Component{
         return (
           <tr>
             <td>{player.WEEK}</td>
-            <td>{player.FIRSTNAME + ' ' + player.LASTNAME}</td>
+            <td>{player.FIRSTNAME + " " + player.LASTNAME}</td>
+			<td>{player.TEAM}</td>
             <td>{player.RESULT || 0}</td>
             <td>{player.PROJECTION || 0}</td>
             <td>{player.AWARD || 0}</td>
@@ -83,6 +84,7 @@ class FantasyNamePage extends React.Component{
             <tr>
               <th>Week</th>
               <th>Name</th>
+			  <th>Team</th>
               <th>Result</th>
               <th>Projection</th>
               <th>Reward</th>
