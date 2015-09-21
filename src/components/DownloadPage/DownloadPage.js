@@ -99,7 +99,7 @@ class DownloadPage extends React.Component{
         </div>
       );
     }
-    
+
     requirements
       .filter((req) => req !== supported)
       .forEach((req) => body.push(<div>
