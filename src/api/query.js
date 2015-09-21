@@ -1,7 +1,10 @@
 import agent from 'superagent';
 
+// CONFIG ME
 const apiURL = "https://trading.football:4545";
 //const apiURL = "https://localhost:4545";
+// END CONFIG
+
 let queryUtils = {
 
     get(path, cb){

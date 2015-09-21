@@ -19,8 +19,10 @@ server.set('views', templateDir);
 server.use(express.static(path.join(__dirname, 'public')));
 
 server.get('*', (req, res, next) => {
+  // CONFIG ME
   if (req.hostname !== "trading.football"){
 	res.redirect("https://trading.football" + req.url)
+  // END CONFIG
   } else if (req.protocol === 'http'){
     // redirect all http to https
     res.redirect('https://' + req.hostname + req.url);
