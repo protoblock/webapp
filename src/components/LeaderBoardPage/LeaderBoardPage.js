@@ -28,8 +28,6 @@ class LeaderBoardPage extends React.Component{
     super(props);
     this.state = LeaderBoardStore.getState();
     this.onChange = this.onChange.bind(this);
-    this.currentWeek = 2;
-    this.currentSeason = 2015;
   }
 
   componentDidMount() {
@@ -40,9 +38,13 @@ class LeaderBoardPage extends React.Component{
       socket.on('change', function() {
         console.log('changing');
         LeaderBoardActions.getLeaders(window.location.search);
+        LeaderBoardActions.getWeek();
+        LeaderBoardActions.getSeason();
       });
     }
     LeaderBoardActions.getLeaders(this.props.query);
+    LeaderBoardActions.getWeek();
+    LeaderBoardActions.getSeason();
   }
 
   componentWillUnmount() {
@@ -57,7 +59,7 @@ class LeaderBoardPage extends React.Component{
     return (
       <div>
         <h1>Leaderboard</h1>
-        <h2>{`${this.currentSeason} | Week ${this.currentWeek}`}</h2>
+        <h2>{`${this.state.season} | Week ${this.state.week}`}</h2>
       </div>
     );
   }
