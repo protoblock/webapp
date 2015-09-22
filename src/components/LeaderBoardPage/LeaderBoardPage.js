@@ -9,7 +9,7 @@ import {Table} from 'react-bootstrap';
 import {NavItemLink} from 'react-router-bootstrap';
 import Link from '../../utils/Link';
 import PageHeading from '../PageHeading';
-import config from '../../utils/Config';
+import Config from '../../utils/Config';
 
 @withStyles(styles)
 class LeaderBoardPage extends React.Component{
