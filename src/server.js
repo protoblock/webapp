@@ -11,6 +11,8 @@ import http from 'http';
 import https from 'https';
 import fs from 'fs';
 import GoogleTagManager from './components/GoogleTagManager';
+import Config from './utils/config';
+
 let server = express();
 server.set('view engine', 'jade');
 let templateDir = path.join(__dirname, 'templates');
@@ -19,8 +21,8 @@ server.set('views', templateDir);
 server.use(express.static(path.join(__dirname, 'public')));
 
 server.get('*', (req, res, next) => {
-  if (req.hostname !== "trading.football"){
-	res.redirect("https://trading.football" + req.url)
+  if (req.hostname !== Config.hostname){
+    res.redirect('https://' + Config.hostname + req.url)
   } else if (req.protocol === 'http'){
     // redirect all http to https
     res.redirect('https://' + req.hostname + req.url);
@@ -83,11 +85,11 @@ server.use((req, res) => {
 //redirectServer.get('*', (req, res)=>res.redirect('https://trading.football' + req.url))
 
 //http.createServer(redirectServer).listen(5080);
-let httpServer = http.createServer(server).listen(5000);
+let httpServer = http.createServer(server).listen(Config.httpPort);
 
 // let httpsServer = https.createServer(devCredentials, server);
 let httpsServer = https.createServer(credentials, server);
-httpsServer.listen(5443, ()=>console.log('Listening on localhost:5443'));
+httpsServer.listen(Config.httpsPort, ()=>console.log('Listening on localhost:' + Config.httpsPort));
 /*server.listen(5000, function() {
   console.log('Listening on localhost:5000');
 });
