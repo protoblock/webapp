@@ -1,10 +1,7 @@
-
 import React, { PropTypes } from 'react';
 import styles from './LeaderBoardPage.less';
 import withStyles from '../../decorators/withStyles';
-
 import LeaderBoardFilterContainer from '../LeaderBoardFilterContainer';
-
 import LeaderBoardStore from '../../stores/LeaderBoardStore';
 import LeaderBoardActions from '../../actions/LeaderBoardActions';
 import Spinner from '../Spinner';
@@ -12,6 +9,7 @@ import {Table} from 'react-bootstrap';
 import {NavItemLink} from 'react-router-bootstrap';
 import Link from '../../utils/Link';
 import PageHeading from '../PageHeading';
+import config from '../../utils/Config';
 
 @withStyles(styles)
 class LeaderBoardPage extends React.Component{
@@ -33,10 +31,7 @@ class LeaderBoardPage extends React.Component{
   componentDidMount() {
     LeaderBoardStore.listen(this.onChange);
     if (window) {
-      // CONFIG ME
-      let socket = io.connect("trading.football:4545", {secure: true});
-      //let socket = io.connect("https://localhost:4545", {secure: true});
-      // END CONFIG
+      let socket = io.connect(Config.apiURL, {secure: true});
       socket.on('change', function() {
         console.log('changing');
         LeaderBoardActions.getLeaders(window.location.search);

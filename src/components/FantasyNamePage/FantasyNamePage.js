@@ -6,6 +6,7 @@ import FantasyNameActions from '../../actions/FantasyNameActions';
 import FantasyNameFilterContainer from '../FantasyNameFilterContainer';
 import Spinner from '../Spinner';
 import {Table} from 'react-bootstrap';
+import Config from '../../utils/config';
 
 @withStyles(style)
 class FantasyNamePage extends React.Component{
@@ -27,10 +28,7 @@ class FantasyNamePage extends React.Component{
     FantasyNameStore.listen(this.onChange);
     FantasyNameActions.getPlayer(this.props.path);
     if (window) {
-      // CONFIG ME
-      let socket = io.connect("https://stagingapi.trading.football:4545", {secure: true});
-      //let socket = io.connect("https://localhost:4545", {secure: true});
-      // END CONFIG
+      let socket = io.connect(Config.apiURL, {secure: true});
       socket.on('change', function() {
         console.log('changing');
         this.getPlayer(this.props.path);
