@@ -27,7 +27,7 @@ class PlayerFilterContainer {
             value={this.props.points}/>
           <FormControls.Static
             type='text'
-            className='PlayerFilter'
+            className='PlayerFilter-field'
             label='Team: '
             value={this.props.team}/>
           <FormControls.Static

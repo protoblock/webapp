@@ -50,6 +50,7 @@ class PlayerPage extends React.Component{
         return (
           <tr>
             <td>{projection.FANTASYNAME}</td>
+            <td>{projection.WEEK}</td>
             <td>{projection.PROJECTION || 0}</td>
             <td>{projection.RESULT || 0}</td>
             <td>{projection.AWARD || 0}</td>
@@ -81,6 +82,7 @@ class PlayerPage extends React.Component{
           <thead>
             <tr>
               <th>FantasyName</th>
+              <th>Week</th>
               <th>Projection</th>
               <th>Result</th>
               <th>Reward</th>
