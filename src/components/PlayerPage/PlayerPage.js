@@ -45,14 +45,14 @@ class PlayerPage extends React.Component{
   }
 
   getRows() {
-    if (this.state.players.length > 0 && typeof this.state.players[0].FANTASYNAME !== 'undefined'){
-      return this.state.players.map((player) => {
+    if (this.state.projections.length > 0 && typeof this.state.projections[0].FANTASYNAME !== 'undefined'){
+      return this.state.projections.map((projection) => {
         return (
           <tr>
-            <td>{player.FANTASYNAME}</td>
-            <td>{player.PROJECTION || 0}</td>
-            <td>{player.RESULT || 0}</td>
-            <td>{player.AWARD || 0}</td>
+            <td>{projection.FANTASYNAME}</td>
+            <td>{projection.PROJECTION || 0}</td>
+            <td>{projection.RESULT || 0}</td>
+            <td>{projection.AWARD || 0}</td>
           </tr>
         );
       });
@@ -71,7 +71,7 @@ class PlayerPage extends React.Component{
 
   buildTable() {
     let rows = this.getRows();
-    if (!this.state.players.length && !this.state.errorMessage){
+    if (!this.state.projections.length && !this.state.errorMessage){
       return (
         <Spinner />
       );
