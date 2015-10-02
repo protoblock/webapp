@@ -23,7 +23,7 @@ class PlayerFilterContainer {
           <FormControls.Static
             type='text'
             className='PlayerFilter-field'
-            label='Result for week {this.props.week}: '
+            label={'Result for week ' + this.props.week + ': '}
             value={this.props.points}/>
           <FormControls.Static
             type='text'
