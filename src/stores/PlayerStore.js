@@ -1,0 +1,43 @@
+import alt from '../alt';
+import PlayerActions from '../actions/PlayerActions';
+
+class PlayerStore {
+  constructor(){
+    this.projections = [];
+    this.name = '';
+    this.points = '';
+    this.team = '';
+    this.position = '';
+    this.errorMessage = null;
+
+    this.bindListeners({
+      handleUpdatePlayer: PlayerActions.updatePlayer,
+      handleGetPlayer: PlayerActions.getPlayer,
+      handlePlayerFailed: PlayerActions.updatePlayerFailed
+    });
+  }
+
+  handleUpdatePlayer(data) {
+    this.projections = data.projections;
+    this.name = data.name;
+    this.points = data.points;
+    this.team = data.team;;
+    this.position = data.position;
+    this.errorMessage = null;
+  }
+
+  handleGetPlayer() {
+    this.projections = [];
+    this.name = '';
+    this.points = '';
+    this.team = '';
+    this.position = '';
+    this.errorMessage = null;
+  }
+
+  handlePlayerFailed(errorMessage) {
+    this.errorMessage = errorMessage;
+  }
+}
+
+export default alt.createStore(PlayerStore, 'PlayerStore');

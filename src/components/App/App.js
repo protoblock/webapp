@@ -9,6 +9,7 @@ import Header from '../Header';
 import Footer from '../Footer';
 import LeaderBoardPage from '../LeaderBoardPage';
 import FantasyNamePage from '../FantasyNamePage';
+import PlayerPage from '../PlayerPage';
 import DownloadPage from '../DownloadPage';
 import FaqPage from '../FaqPage';
 import RulesPage from '../RulesPage';
@@ -36,11 +37,12 @@ class App {
       case /\/$/.test(this.props.path):
         component = <LeaderBoardPage query={this.props.query}/>;
         break;
-
       case /\/downloads/.test(this.props.path):
         component = <DownloadPage />;
         break;
-
+      case /\/fantasy\/NFL\/[0-9]+$/.test(this.props.path):
+        component = <PlayerPage />;
+        break;
       case /\/fantasy\/players\/.+\/awards$/.test(this.props.path):
         component = <FantasyNamePage path={this.props.path}/>;
         break;
@@ -53,6 +55,8 @@ class App {
       case /\/rules/.test(this.props.path):
         component = <RulesPage />;
         break;
+      default:
+        component = <LeaderBoardPage query={this.props.query}/>;
     }
 
     return component ? (

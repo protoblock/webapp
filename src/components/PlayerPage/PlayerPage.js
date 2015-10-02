@@ -1,16 +1,15 @@
 import React, { PropTypes } from 'react';
 import withStyles from '../../decorators/withStyles';
-import style from './FantasyNamePage.less';
-import FantasyNameStore from '../../stores/FantasyNameStore';
-import FantasyNameActions from '../../actions/FantasyNameActions';
-import FantasyNameFilterContainer from '../FantasyNameFilterContainer';
+import style from './PlayerPage.less';
+import PlayerStore from '../../stores/PlayerStore';
+import PlayerActions from '../../actions/PlayerActions';
+import PlayerFilterContainer from '../PlayerFilterContainer';
 import Spinner from '../Spinner';
 import {Table} from 'react-bootstrap';
 import Config from '../../utils/config';
-import Link from '../../utils/Link';
 
 @withStyles(style)
-class FantasyNamePage extends React.Component{
+class PlayerPage extends React.Component{
   static propTypes = {
     path: PropTypes.string.isRequired
   }
@@ -21,13 +20,13 @@ class FantasyNamePage extends React.Component{
 
   constructor(props) {
     super(props);
-    this.state = FantasyNameStore.getState();
+    this.state = PlayerStore.getState();
     this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
-    FantasyNameStore.listen(this.onChange);
-    FantasyNameActions.getPlayer(this.props.path);
+    PlayerStore.listen(this.onChange);
+    PlayerActions.getPlayer(this.props.path);
     if (window) {
       let socket = io.connect(Config.apiURL, {secure: true});
       socket.on('change', function() {
@@ -38,7 +37,7 @@ class FantasyNamePage extends React.Component{
   }
 
   componentWillUnmount() {
-    FantasyNameStore.unlisten(this.onChange);
+    PlayerStore.unlisten(this.onChange);
   }
 
   onChange(state) {
@@ -46,20 +45,13 @@ class FantasyNamePage extends React.Component{
   }
 
   getRows() {
-    if (this.state.players.length > 0 && typeof this.state.players[0].WEEK !== 'undefined'){
+    if (this.state.players.length > 0 && typeof this.state.players[0].FANTASYNAME !== 'undefined'){
       return this.state.players.map((player) => {
-        let destination = '/fantasy/NFL/' + player.PLAYERID + '/awards';
         return (
           <tr>
-            <td>{player.WEEK}</td>
-            <td>
-              <a href={encodeURI(destination)} onclick={Link.handleClick}>
-                {player.FIRSTNAME + ' ' + player.LASTNAME}
-              </a>
-            </td>
-            <td>{player.TEAM}</td>
-            <td>{player.RESULT || 0}</td>
+            <td>{player.FANTASYNAME}</td>
             <td>{player.PROJECTION || 0}</td>
+            <td>{player.RESULT || 0}</td>
             <td>{player.AWARD || 0}</td>
           </tr>
         );
@@ -88,11 +80,9 @@ class FantasyNamePage extends React.Component{
         <Table>
           <thead>
             <tr>
-              <th>Week</th>
-              <th>Name</th>
-			  <th>Team</th>
-              <th>Result</th>
+              <th>FantasyName</th>
               <th>Projection</th>
+              <th>Result</th>
               <th>Reward</th>
             </tr>
           </thead>
@@ -110,10 +100,10 @@ class FantasyNamePage extends React.Component{
     let table = this.buildTable();
 
     return (
-      <div className='FantasyNamePage'>
-        <div className='FantasyNamePage-container'>
+      <div className='PlayerPage'>
+        <div className='PlayerPage-container'>
           <h1>Leader Board</h1>
-          <FantasyNameFilterContainer name={this.state.name} balance={this.state.balance}/>
+          <PlayerFilterContainer name={this.state.name} points={this.state.points} team={this.state.team} position={this.state.position}/>
           {table}
         </div>
       </div>
@@ -122,4 +112,4 @@ class FantasyNamePage extends React.Component{
 
 }
 
-export default FantasyNamePage;
+export default PlayerPage;
