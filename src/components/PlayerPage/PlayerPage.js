@@ -50,9 +50,7 @@ class PlayerPage extends React.Component{
         return (
           <tr>
             <td>{projection.FANTASYNAME}</td>
-            <td>{projection.WEEK}</td>
             <td>{projection.PROJECTION || 0}</td>
-            <td>{projection.RESULT || 0}</td>
             <td>{projection.AWARD || 0}</td>
           </tr>
         );
@@ -61,7 +59,7 @@ class PlayerPage extends React.Component{
     } else {
       return (
         <tr>
-          <td colSpan='5'>
+          <td colSpan='3'>
             {/*Error loading balance info: {this.state.errorMessage}*/}
             No results yet, check back later!
           </td>
@@ -82,9 +80,7 @@ class PlayerPage extends React.Component{
           <thead>
             <tr>
               <th>FantasyName</th>
-              <th>Week</th>
               <th>Projection</th>
-              <th>Result</th>
               <th>Reward</th>
             </tr>
           </thead>
@@ -105,7 +101,7 @@ class PlayerPage extends React.Component{
       <div className='PlayerPage'>
         <div className='PlayerPage-container'>
           <h1>Leader Board</h1>
-          <PlayerFilterContainer name={this.state.name} points={this.state.points} team={this.state.team} position={this.state.position}/>
+          <PlayerFilterContainer week={this.state.week} name={this.state.name} points={this.state.points} team={this.state.team} position={this.state.position}/>
           {table}
         </div>
       </div>

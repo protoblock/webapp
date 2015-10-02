@@ -34,25 +34,25 @@ class App {
     let component;
     // Controls the routing
     switch (true) {
-      case /\/$/.test(this.props.path):
+      case /\/$/.test(this.props.path.toLowerCase()):
         component = <LeaderBoardPage query={this.props.query}/>;
         break;
-      case /\/downloads/.test(this.props.path):
+      case /\/downloads/.test(this.props.path.toLowerCase()):
         component = <DownloadPage />;
         break;
-      case /\/fantasy\/NFL\/[0-9]+$/.test(this.props.path):
+      case /\/fantasy\/nfl\/[0-9]+$/.test(this.props.path.toLowerCase()):
         component = <PlayerPage path={this.props.path}/>;
         break;
-      case /\/fantasy\/players\/.+\/awards$/.test(this.props.path):
+      case /\/fantasy\/players\/.+\/awards$/.test(this.props.path.toLowerCase()):
         component = <FantasyNamePage path={this.props.path}/>;
         break;
-      case /\/(about)/.test(this.props.path):
+      case /\/(about)/.test(this.props.path.toLowerCase()):
         component = <AboutPage />;
         break;
-      case /\/faq/.test(this.props.path):
+      case /\/faq/.test(this.props.path.toLowerCase()):
         component = <FaqPage />;
         break;
-      case /\/rules/.test(this.props.path):
+      case /\/rules/.test(this.props.path.toLowerCase()):
         component = <RulesPage />;
         break;
       default:

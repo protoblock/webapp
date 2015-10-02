@@ -8,6 +8,7 @@ class PlayerStore {
     this.points = '';
     this.team = '';
     this.position = '';
+    this.week = '';
     this.errorMessage = null;
 
     this.bindListeners({
@@ -21,8 +22,9 @@ class PlayerStore {
     this.projections = data.projections;
     this.name = data.name;
     this.points = data.points;
-    this.team = data.team;;
+    this.team = data.team;
     this.position = data.position;
+    this.week = data.week;
     this.errorMessage = null;
   }
 
@@ -32,6 +34,7 @@ class PlayerStore {
     this.points = '';
     this.team = '';
     this.position = '';
+    this.week = '';
     this.errorMessage = null;
   }
 

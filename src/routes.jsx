@@ -17,7 +17,7 @@ let routes = (
     <DefaultRoute handler={LeaderBoardPage} />
 
     <Route handler={FantasyNamePage} path='fantasy/players/:fantasyName/awards'/>
-    <Route handler={PlayerPage} path='fantasy/NFL/:playerID'/>
+    <Route handler={PlayerPage} path='fantasy/NFL/:playerID/:week'/>
     <Route handler={DownloadPage} path='downloads'/>
     <Route handler={AboutPage} path='about'/>
     <Route handler={FaqPage} path='faq' />

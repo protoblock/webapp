@@ -22,7 +22,8 @@ class PlayerActions {
           name: res.body.data[0].FIRST + ' ' + res.body.data[0].LAST,
           points: res.body.points || 0,
           team: res.body.data[0].TEAM,
-          position: res.body.data[0].POS
+          position: res.body.data[0].POS,
+          week: res.body.data[0].WEEK
         });
       }
     });
