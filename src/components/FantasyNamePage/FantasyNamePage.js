@@ -48,7 +48,7 @@ class FantasyNamePage extends React.Component{
   getRows() {
     if (this.state.players.length > 0 && typeof this.state.players[0].WEEK !== 'undefined'){
       return this.state.players.map((player) => {
-        let destination = '/fantasy/nfl/' + player.PLAYERID + '/' + player.WEEK;
+        let destination = '/fantasy/nfl/' + player.PLAYERID + '/week/' + player.WEEK;
         return (
           <tr>
             <td>{player.WEEK}</td>

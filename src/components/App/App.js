@@ -40,7 +40,7 @@ class App {
       case /\/downloads/.test(this.props.path.toLowerCase()):
         component = <DownloadPage />;
         break;
-      case /\/fantasy\/nfl\/[0-9]+$/.test(this.props.path.toLowerCase()):
+      case /\/fantasy\/nfl\/[0-9]+\/week$/.test(this.props.path.toLowerCase()):
         component = <PlayerPage path={this.props.path}/>;
         break;
       case /\/fantasy\/players\/.+\/awards$/.test(this.props.path.toLowerCase()):
