@@ -15,7 +15,7 @@ class LeaderBoardFilterContainer extends React.Component{
   getWeeks() {
     let rows = [];
 
-    for (let i = this.props.week; i > 0; i--) {
+    for (let i = this.props.currentWeek; i > 0; i--) {
       let eventKey = '\'' + i + '\'';
       rows.push(<MenuItem eventKey={eventKey}>Week {i}</MenuItem>);
     }
