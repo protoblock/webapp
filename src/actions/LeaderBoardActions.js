@@ -37,9 +37,9 @@ class LeaderBoardActions {
     this.dispatch();
     api.get('/week', (err, res) => {
       if (err) {
-        this.actions.updateWeek('');
+        this.actions.updateCurrentWeek('');
       } else {
-        this.actions.updateWeek(res.body.week);
+        this.actions.updateCurrentWeek(res.body.week);
       }
     });
   }

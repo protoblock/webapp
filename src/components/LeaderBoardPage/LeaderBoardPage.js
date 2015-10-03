@@ -34,13 +34,13 @@ class LeaderBoardPage extends React.Component{
       let socket = io.connect(Config.apiURL, {secure: true});
       socket.on('change', function() {
         console.log('changing');
-        LeaderBoardActions.getLeaders(window.location.search);
-        LeaderBoardActions.getCurrentWeek();
+		LeaderBoardActions.getLeaders(window.location.search);
+		LeaderBoardActions.getCurrentWeek();
         LeaderBoardActions.getSeason();
       });
     }
-    LeaderBoardActions.getLeaders(this.props.query);
-    LeaderBoardActions.getCurrentWeek();
+	LeaderBoardActions.getLeaders(this.props.query);
+	LeaderBoardActions.getCurrentWeek();
     LeaderBoardActions.getSeason();
   }
 
@@ -56,7 +56,7 @@ class LeaderBoardPage extends React.Component{
     return (
       <div>
         <h1>Leaderboard</h1>
-        <h2>{`${this.state.season} | Week ${this.state.week}`}</h2>
+        <h2>{`${this.state.season} | Week ${this.state.currentWeek}`}</h2>
       </div>
     );
   }
@@ -68,7 +68,7 @@ class LeaderBoardPage extends React.Component{
         return (
           <tr>
             <td>{++index}</td>
-            <td><a href={encodeURI(destination)} onclick={Link.handleClick}>{fantasyName.name}</a></td>
+            <td style={{width: 75 + '%'}}><a href={encodeURI(destination)} onclick={Link.handleClick}>{fantasyName.name}</a></td>
             <td>{fantasyName.score || 0}</td>
           </tr>
         );
@@ -116,7 +116,7 @@ class LeaderBoardPage extends React.Component{
     let title = 'Trading Football';
     this.context.onSetTitle(title);
     let table = this.buildTable();
-
+	console.log(this.state);
     return (
       <div className="LeaderBoardPage">
         <div className="LeaderBoardPage-container">

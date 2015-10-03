@@ -15,7 +15,7 @@ class LeaderBoardFilterContainer extends React.Component{
 
   updateBoard(eventKey) {
     LeaderBoardActions.updateSortWeek(eventKey);
-    LeaderBoardActions.updateLeaders('?week=' + eventKey);
+	LeaderBoardActions.getLeaders('?week=' + eventKey);
   }
 
   getWeeks() {
