@@ -4,8 +4,14 @@ import React from 'react';
 import styles from './LeaderBoardFilterContainer.less';
 import withStyles from '../../decorators/withStyles';
 import {ButtonGroup, DropdownButton, MenuItem} from 'react-bootstrap';
+
 @withStyles(styles)
-class LeaderBoardFilterContainer {
+class LeaderBoardFilterContainer extends React.Component{
+
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);
+  }
 
   getWeeks() {
     rows = [];
