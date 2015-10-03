@@ -6,14 +6,16 @@ class LeaderBoardStore {
     this.leaders = [];
     this.errorMessage = null;
     this.week = '';
+    this.currentWeek = '';
     this.season = '';
 
     this.bindListeners({
       handleUpdateLeaders: LeaderBoardActions.updateLeaders,
       handleGetLeaders: LeaderBoardActions.getLeaders,
       handleLeadersFailed: LeaderBoardActions.updateLeadersFailed,
-      handleGetWeek: LeaderBoardActions.getWeek,
-      handleUpdateWeek: LeaderBoardActions.updateWeek,
+      handleGetCurrentWeekWeek: LeaderBoardActions.getCurrentWeek,
+      handleUpdateCurrentWeek: LeaderBoardActions.updateCurrentWeek,
+      handleUpdateSortWeek: LeaderBoardActions.updatSortWeek,
       handleGetSeason: LeaderBoardActions.getSeason,
       handleUpdateSeason: LeaderBoardActions.updateSeason
     });
@@ -32,12 +34,19 @@ class LeaderBoardStore {
     this.errorMessage = errorMessage;
   }
 
-  handleGetWeek() {
+  handleGetCurrentWeek() {
     this.week = '';
   }
 
-  handleUpdateWeek(week) {
-    this.week = week;
+  handleUpdateSortWeek(week) {
+    this.sortWeek = week;
+  }
+
+  handleUpdateCurrentWeek(week) {
+    this.currentWeek = week;
+    if (this.sortWeek == ''){
+      this.sortWeek = week;
+    }
   }
 
   handleGetSeason() {

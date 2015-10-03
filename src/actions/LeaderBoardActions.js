@@ -10,7 +10,11 @@ class LeaderBoardActions {
     this.dispatch(error);
   }
 
-  updateWeek(week) {
+  updateCurrentWeek(week) {
+    this.dispatch(week);
+  }
+
+  updateSortWeek(week) {
     this.dispatch(week);
   }
 
@@ -29,7 +33,7 @@ class LeaderBoardActions {
     });
   }
 
-  getWeek() {
+  getCurrentWeek() {
     this.dispatch();
     api.get('/week', (err, res) => {
       if (err) {

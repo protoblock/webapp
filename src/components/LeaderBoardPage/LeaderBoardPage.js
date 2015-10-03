@@ -35,12 +35,12 @@ class LeaderBoardPage extends React.Component{
       socket.on('change', function() {
         console.log('changing');
         LeaderBoardActions.getLeaders(window.location.search);
-        LeaderBoardActions.getWeek();
+        LeaderBoardActions.getCurrentWeek();
         LeaderBoardActions.getSeason();
       });
     }
     LeaderBoardActions.getLeaders(this.props.query);
-    LeaderBoardActions.getWeek();
+    LeaderBoardActions.getCurrentWeek();
     LeaderBoardActions.getSeason();
   }
 
@@ -121,7 +121,7 @@ class LeaderBoardPage extends React.Component{
       <div className="LeaderBoardPage">
         <div className="LeaderBoardPage-container">
           <PageHeading text={this.getHeadingText()} logoSize='lg' />
-          <LeaderBoardFilterContainer currentWeek={this.state.week} />
+          <LeaderBoardFilterContainer currentWeek={this.state.currentWeek} sortWeek={this.state.sortWeek} />
             {table}
         </div>
       </div>
