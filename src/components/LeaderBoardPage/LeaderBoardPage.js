@@ -119,9 +119,9 @@ class LeaderBoardPage extends React.Component{
 
     return (
       <div className="LeaderBoardPage">
-        <LeaderBoardFilterContainer currentWeek={this.state.week} />
         <div className="LeaderBoardPage-container">
           <PageHeading text={this.getHeadingText()} logoSize='lg' />
+          <LeaderBoardFilterContainer currentWeek={this.state.week} />
             {table}
         </div>
       </div>

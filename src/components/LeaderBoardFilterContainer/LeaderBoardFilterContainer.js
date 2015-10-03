@@ -10,29 +10,27 @@ class LeaderBoardFilterContainer extends React.Component{
 
   constructor(props) {
     super(props);
-    this.onChange = this.onChange.bind(this);
   }
 
   getWeeks() {
-    rows = [];
+    let rows = [];
 
-    for (i = this.props.week; i > 0; i--) {
-      rows.push(<MenuItem eventKey={i}>{i}</MenuItem>);
+    for (let i = this.props.week; i > 0; i--) {
+      let eventKey = '\'' + i + '\'';
+      rows.push(<MenuItem eventKey={eventKey}>Week {i}</MenuItem>);
     }
-
     return rows;
   }
 
   render() {
     return (
       <div className="LeaderBoardFilterContainerPage">
-        <div className="LeaderBoardFilterContainerPage-container">
+      <h4>Sort By:</h4>
         <ButtonGroup>
             <DropdownButton title="Week">
-              {getWeeks()}
+              {this.getWeeks()}
             </DropdownButton>
         </ButtonGroup>
-        </div>
       </div>
     );
   }
