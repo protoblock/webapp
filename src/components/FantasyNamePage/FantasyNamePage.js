@@ -27,12 +27,14 @@ class FantasyNamePage extends React.Component{
 
   componentDidMount() {
     FantasyNameStore.listen(this.onChange);
-    FantasyNameActions.getPlayer(this.props.path);
+    FantasyNameActions.getCurrentWeek();
+    FantasyNameActions.getPlayer(this.props.path, this.props.query);
     if (window) {
       let socket = io.connect(Config.apiURL, {secure: true});
       socket.on('change', function() {
         console.log('changing');
-        this.getPlayer(this.props.path);
+        FantasyNameActions.getCurrentWeek();
+        FantasyNameActions.getPlayer(this.props.path, this.props.query);
       });
     }
   }
@@ -90,7 +92,7 @@ class FantasyNamePage extends React.Component{
             <tr>
               <th>Week</th>
               <th>Name</th>
-			  <th>Team</th>
+              <th>Team</th>
               <th>Result</th>
               <th>Projection</th>
               <th>Reward</th>
@@ -113,7 +115,10 @@ class FantasyNamePage extends React.Component{
       <div className='FantasyNamePage'>
         <div className='FantasyNamePage-container'>
           <h1>Leader Board</h1>
-          <FantasyNameFilterContainer name={this.state.name} balance={this.state.balance}/>
+          <FantasyNameFilterContainer name={this.state.name}
+            balance={this.state.balance} path={this.props.path}
+            currentWeek={this.state.currentWeek} sortWeek={this.state.sortWeek}
+            position={this.state.position}/>
           {table}
         </div>
       </div>

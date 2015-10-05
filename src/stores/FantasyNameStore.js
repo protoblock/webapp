@@ -7,11 +7,17 @@ class FantasyNameStore {
     this.name = '';
     this.balance = '';
     this.errorMessage = null;
+    this.currentWeek = '';
+    this.sortWeek = 'any week';
+    this.sortPosition = 'any position';
 
     this.bindListeners({
       handleUpdatePlayer: FantasyNameActions.updatePlayer,
       handleGetPlayer: FantasyNameActions.getPlayer,
-      handlePlayerFailed: FantasyNameActions.updatePlayerFailed
+      handlePlayerFailed: FantasyNameActions.updatePlayerFailed,
+      handleGetCurrentWeek: FantasyNameActions.updateCurrentWeek,
+      handleUpdateSortWeek: FantasyNameActions.updateSortWeek,
+      handleUpdateSortPosition: FantasyNameActions.handleUpdateSortPosition
     });
   }
 
@@ -31,6 +37,18 @@ class FantasyNameStore {
 
   handlePlayerFailed(errorMessage) {
     this.errorMessage = errorMessage;
+  }
+
+  handleGetCurrentWeek(week) {
+    this.currentWeek = week;
+  }
+
+  handleUpdateSortWeek(week) {
+    this.sortWeek = week;
+  }
+
+  handleUpdateSortPosition(position) {
+    this.sortPosition = position;
   }
 }
 

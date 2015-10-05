@@ -44,7 +44,7 @@ class App {
         component = <PlayerPage path={this.props.path}/>;
         break;
       case /\/fantasy\/players\/.+\/awards$/.test(this.props.path.toLowerCase()):
-        component = <FantasyNamePage path={this.props.path}/>;
+        component = <FantasyNamePage query={this.props.query} path={this.props.path}/>;
         break;
       case /\/(about)/.test(this.props.path.toLowerCase()):
         component = <AboutPage />;
