@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react';
 import styles from './FantasyNameFilterContainer.less';
 import withStyles from '../../decorators/withStyles';
-import {FormControls, Input} from 'react-bootstrap';
+import {FormControls, Input, ButtonGroup, DropdownButton, MenuItem} from 'react-bootstrap';
 @withStyles(styles)
 class FantasyNameFilterContainer {
   static propTypes = {
@@ -26,6 +26,15 @@ class FantasyNameFilterContainer {
             label='FantasyBits: '
             value={this.props.balance}/>
           </form>
+        </div>
+        <div>
+          <h4>Sort By:</h4>
+          <ButtonGroup>
+            <label for="position">Position</label>
+            <DropdownButton id="position" title="Any">
+              <MenuItem eventKey={1}>QB</MenuItem>
+            </DropdownButton>
+          </ButtonGroup>
         </div>
       </div>
     );
