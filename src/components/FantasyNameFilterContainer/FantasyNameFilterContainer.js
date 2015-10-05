@@ -3,7 +3,8 @@
 import React, { PropTypes } from 'react';
 import styles from './FantasyNameFilterContainer.less';
 import withStyles from '../../decorators/withStyles';
-import {FormControls, Input, ButtonGroup, DropdownButton, MenuItem} from 'react-bootstrap';
+import {FormControls, Input, ButtonGroup, DropdownButton,
+  MenuItem} from 'react-bootstrap';
 @withStyles(styles)
 class FantasyNameFilterContainer {
   static propTypes = {
@@ -11,6 +12,8 @@ class FantasyNameFilterContainer {
     balance: PropTypes.number.isRequired
   };
   render() {
+    let pTitle = 'Any Position';
+    let wTitle = 'Any Week';
     return (
       <div className="FantasyNameFilterContainer">
         <div className="FantasyNameFilterContainer-container">
@@ -30,9 +33,11 @@ class FantasyNameFilterContainer {
         <div>
           <h4>Sort By:</h4>
           <ButtonGroup>
-            <label for="position">Position</label>
-            <DropdownButton id="position" title="Any">
-              <MenuItem eventKey={1}>QB</MenuItem>
+            <DropdownButton title={pTitle}>
+              <MenuItem eventKey="QB">QB</MenuItem>
+            </DropdownButton>
+            <DropdownButton title={wTitle}>
+              <MenuItem eventKey={1}>Week 1</MenuItem>
             </DropdownButton>
           </ButtonGroup>
         </div>
