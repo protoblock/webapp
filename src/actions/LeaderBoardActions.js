@@ -22,6 +22,10 @@ class LeaderBoardActions {
     this.dispatch(season);
   }
 
+  updateSortPosition(position) {
+    this.dispatch(position);
+  }
+
   getLeaders(query) {
     this.dispatch();
     api.get('/fantasy/leaders' + query, (err, res) => {

@@ -61,10 +61,22 @@ class LeaderBoardPage extends React.Component{
     );
   }
 
+  getQuery(){
+    let query = '?';
+    if (this.state.sortWeek != 'all weeks'){
+      query += 'week=' + this.state.sortWeek + '&';
+    }
+    if (this.state.sortPosition != 'all positions'){
+      query += 'position=' + this.state.sortPosition;
+    }
+    return query;
+  }
+
   getTeamRows() {
     if (this.state.leaders.length > 0){
       return this.state.leaders.map((fantasyName, index) => {
-        let destination = '/fantasy/players/' + fantasyName.name + '/awards';
+        let query = this.getQuery();
+        let destination = '/fantasy/players/' + fantasyName.name + '/awards' + query;
         return (
           <tr>
             <td>{++index}</td>
