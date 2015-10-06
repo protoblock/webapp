@@ -118,7 +118,7 @@ class FantasyNamePage extends React.Component{
           <FantasyNameFilterContainer name={this.state.name}
             balance={this.state.balance} path={this.props.path}
             currentWeek={this.state.currentWeek} sortWeek={this.state.sortWeek}
-            position={this.state.position}/>
+            position={this.state.sortPosition}/>
           {table}
         </div>
       </div>

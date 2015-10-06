@@ -33,7 +33,7 @@ class FantasyNameFilterContainer extends React.Component {
   updateBoardPosition(eventKey) {
     FantasyNameActions.updateSortPosition(eventKey);
     let query = '?';
-    if (eventKey == '') {
+    if (eventKey != '') {
       query += 'position=' + eventKey + '&';
     }
     if (this.props.sortWeek != '') {
@@ -47,15 +47,9 @@ class FantasyNameFilterContainer extends React.Component {
     let rows = [];
     for (let i = 0; i < positions.length; ++i) {
       if (currentPosition != positions[i]) {
-        if (positions[i] == 'any position'){
-          rows.push(
-            <MenuItem eventKey='' onSelect='updateBoardPosition()'>{positions[i]}</MenuItem>
-          );
-        } else {
-          rows.push(
-            <MenuItem eventKey={positions[i]} onSelect='updateBoardPosition()'>{positions[i]}</MenuItem>
-          );
-        }
+        rows.push(
+          <MenuItem eventKey={positions[i]} onSelect={this.updateBoardPosition.bind(this)}>{positions[i]}</MenuItem>
+        );
       }
     }
     return rows;
@@ -65,13 +59,13 @@ class FantasyNameFilterContainer extends React.Component {
     let rows = [];
     if (sortWeek != 'any week'){
       rows.push(
-        <MenuItem eventKey='' onSelect='updateBoardWeek()'>Any Week</MenuItem>
+        <MenuItem eventKey='any week' onSelect={this.updateBoardWeek.bind(this)}>Any Week</MenuItem>
       );
     }
     for (let i = currentWeek; i > 0; --i) {
       if (i != sortWeek){
         rows.push(
-          <MenuItem eventKey={i} onSelect='updateBoardWeek()'>Week {i}</MenuItem>
+          <MenuItem eventKey={i} onSelect={this.updateBoardWeek.bind(this)}>Week {i}</MenuItem>
         );
       }
     }
@@ -80,7 +74,12 @@ class FantasyNameFilterContainer extends React.Component {
 
   render() {
     let pTitle = this.props.position;
-    let wTitle = this.props.sortWeek;
+	let wTitle;
+	if (this.props.sortWeek == 'any week') {
+      wTitle = this.props.sortWeek;
+	} else {
+	  wTitle = "Week " + this.props.sortWeek;
+	}
     return (
       <div className="FantasyNameFilterContainer">
         <div className="FantasyNameFilterContainer-container">

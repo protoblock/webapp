@@ -17,7 +17,7 @@ class FantasyNameStore {
       handlePlayerFailed: FantasyNameActions.updatePlayerFailed,
       handleGetCurrentWeek: FantasyNameActions.updateCurrentWeek,
       handleUpdateSortWeek: FantasyNameActions.updateSortWeek,
-      handleUpdateSortPosition: FantasyNameActions.handleUpdateSortPosition
+      handleUpdateSortPosition: FantasyNameActions.updateSortPosition
     });
   }
 
