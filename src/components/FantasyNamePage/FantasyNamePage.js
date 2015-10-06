@@ -25,10 +25,28 @@ class FantasyNamePage extends React.Component{
     this.onChange = this.onChange.bind(this);
   }
 
+  getQueryParams(query){
+    let params = {};
+	let paramsArray = query.split('?')[1].split('&');
+	for (let i = 0; i < paramsArray.length; i++){
+	  let param = paramsArray[i].split('=');
+	  if (param[0] == 'week' || param[0] == 'position'){
+		  params[param[0]] = param[1];
+	  }
+	}
+	if (typeof params.week !== 'undefined'){
+		FantasyNameActions.updateSortWeek(params.week);
+	}
+	if (typeof params.position !== 'undefined'){
+		FantasyNameActions.updateSortPosition(params.position);
+	}
+  }
+
   componentDidMount() {
     FantasyNameStore.listen(this.onChange);
     FantasyNameActions.getCurrentWeek();
     FantasyNameActions.getPlayer(this.props.path, this.props.query);
+	this.getQueryParams(this.props.query);
     if (window) {
       let socket = io.connect(Config.apiURL, {secure: true});
       socket.on('change', function() {

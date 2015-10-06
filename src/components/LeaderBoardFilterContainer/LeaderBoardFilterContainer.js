@@ -16,8 +16,8 @@ class LeaderBoardFilterContainer extends React.Component{
   updateBoardWeek(eventKey) {
     LeaderBoardActions.updateSortWeek(eventKey);
     let query = '?';
-    if (this.props.position != '') {
-      query += 'position=' + this.props.position + '&';
+    if (this.props.sortPosition != '') {
+      query += 'position=' + this.props.sortPosition + '&';
     }
     if (eventKey != '') {
       query += 'week=' + eventKey;
@@ -79,18 +79,23 @@ class LeaderBoardFilterContainer extends React.Component{
   }
 
   render() {
-    let wTitle = "Week " + this.props.sortWeek;
+    let wTitle;
+	if (this.props.sortWeek == 'all weeks'){
+	  wTitle = 'all weeks';
+	} else {
+	  wTitle = "Week " + this.props.sortWeek;
+	}
     let pTitle = this.props.sortPosition;
 
     return (
       <div className="LeaderBoardFilterContainerPage">
-      <h4>Sort:</h4>
+      <h4>Filter:</h4>
         <ButtonGroup>
             <DropdownButton title={wTitle}>
-              {this.getWeekItems()}
+              {this.getWeekItems(this.props.currentWeek, this.props.sortWeek)}
             </DropdownButton>
             <DropdownButton title={pTitle}>
-              {this.getPositionItems()}
+              {this.getPositionItems(this.props.sortPosition)}
             </DropdownButton>
         </ButtonGroup>
       </div>

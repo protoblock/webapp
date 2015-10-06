@@ -52,11 +52,32 @@ class LeaderBoardPage extends React.Component{
     this.setState(state);
   }
 
+  getFilterText(){
+    let filterText = [];
+	if (this.state.sortWeek == 'all weeks' &&
+	  this.state.sortPosition == 'all positions'){
+      return filterText;
+    }
+	filterText.push(<h3>Showing results for:</h3>)
+    if (this.state.sortWeek != 'all weeks'){
+	  filterText.push(
+	    <h3>Week {this.state.sortWeek}</h3>
+	  );
+    }
+    if (this.state.sortPosition != 'all positions'){
+	  filterText.push(
+	    <h3>Position: {this.state.sortPosition}</h3>
+	  );
+    }
+	return filterText;
+  }
+
   getHeadingText(){
     return (
       <div>
+	    <h2>{`${this.state.season} | Week ${this.state.currentWeek}`}</h2>
         <h1>Leaderboard</h1>
-        <h2>{`${this.state.season} | Week ${this.state.currentWeek}`}</h2>
+        {this.getFilterText()}
       </div>
     );
   }
@@ -128,12 +149,12 @@ class LeaderBoardPage extends React.Component{
     let title = 'Trading Football';
     this.context.onSetTitle(title);
     let table = this.buildTable();
-	console.log(this.state);
     return (
       <div className="LeaderBoardPage">
         <div className="LeaderBoardPage-container">
           <PageHeading text={this.getHeadingText()} logoSize='lg' />
-          <LeaderBoardFilterContainer currentWeek={this.state.currentWeek} sortWeek={this.state.sortWeek} />
+          <LeaderBoardFilterContainer currentWeek={this.state.currentWeek} sortWeek={this.state.sortWeek} 
+		    sortPosition={this.state.sortPosition}/>
             {table}
         </div>
       </div>

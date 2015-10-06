@@ -73,7 +73,12 @@ class FantasyNameFilterContainer extends React.Component {
   }
 
   render() {
-    let pTitle = this.props.position;
+    let pTitle;
+	if (this.props.position == 'any position'){
+	  pTitle = this.props.position;
+	} else {
+	  pTitle = "Position: " + this.props.position;
+	}
 	let wTitle;
 	if (this.props.sortWeek == 'any week') {
       wTitle = this.props.sortWeek;
@@ -97,7 +102,7 @@ class FantasyNameFilterContainer extends React.Component {
           </form>
         </div>
         <div>
-          <h4>Sort By:</h4>
+          <h4>Filter:</h4>
           <ButtonGroup>
             <DropdownButton title={pTitle}>
               {this.getPositionItems(this.props.position)}
