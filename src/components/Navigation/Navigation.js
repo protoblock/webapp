@@ -25,7 +25,8 @@ class Navigation {
             <NavItem eventKey={3} href='/rules'>Rules</NavItem>
             <NavItem eventKey={4} href='/faq'>FAQ</NavItem>
             <NavItem eventKey={5} href='http://forum.trading.football'>Forum</NavItem>
-            <NavItem eventKey={6} href='/about' onClick={Link.handleClick}>About</NavItem>
+			<NavItem eventKey={6} href='http://satoshifantasy.com'>Blog</NavItem>
+			<NavItem eventKey={7} href='/about' onClick={Link.handleClick}>About</NavItem>
           </Nav>
         </Navbar>
       </div>
