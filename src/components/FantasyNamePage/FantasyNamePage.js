@@ -7,6 +7,7 @@ import FantasyNameFilterContainer from '../FantasyNameFilterContainer';
 import Spinner from '../Spinner';
 import {Table} from 'react-bootstrap';
 import Config from '../../utils/config';
+import Link from '../../utils/Link';
 
 @withStyles(style)
 class FantasyNamePage extends React.Component{
@@ -24,14 +25,34 @@ class FantasyNamePage extends React.Component{
     this.onChange = this.onChange.bind(this);
   }
 
+  getQueryParams(query){
+    let params = {};
+	let paramsArray = query.split('?')[1].split('&');
+	for (let i = 0; i < paramsArray.length; i++){
+	  let param = paramsArray[i].split('=');
+	  if (param[0] == 'week' || param[0] == 'position'){
+		  params[param[0]] = param[1];
+	  }
+	}
+	if (typeof params.week !== 'undefined'){
+		FantasyNameActions.updateSortWeek(params.week);
+	}
+	if (typeof params.position !== 'undefined'){
+		FantasyNameActions.updateSortPosition(params.position);
+	}
+  }
+
   componentDidMount() {
     FantasyNameStore.listen(this.onChange);
-    FantasyNameActions.getPlayer(this.props.path);
+    FantasyNameActions.getCurrentWeek();
+    FantasyNameActions.getPlayer(this.props.path, this.props.query);
+	this.getQueryParams(this.props.query);
     if (window) {
       let socket = io.connect(Config.apiURL, {secure: true});
       socket.on('change', function() {
         console.log('changing');
-        this.getPlayer(this.props.path);
+        FantasyNameActions.getCurrentWeek();
+        FantasyNameActions.getPlayer(this.props.path, this.props.query);
       });
     }
   }
@@ -47,11 +68,16 @@ class FantasyNamePage extends React.Component{
   getRows() {
     if (this.state.players.length > 0 && typeof this.state.players[0].WEEK !== 'undefined'){
       return this.state.players.map((player) => {
+        let destination = '/fantasy/nfl/' + player.PLAYERID + '/week/' + player.WEEK;
         return (
           <tr>
             <td>{player.WEEK}</td>
-            <td>{player.FIRSTNAME + " " + player.LASTNAME}</td>
-			<td>{player.TEAM}</td>
+            <td>
+              <a href={encodeURI(destination)} onclick={Link.handleClick}>
+                {player.FIRSTNAME + ' ' + player.LASTNAME}
+              </a>
+            </td>
+            <td>{player.TEAM}</td>
             <td>{player.RESULT || 0}</td>
             <td>{player.PROJECTION || 0}</td>
             <td>{player.AWARD || 0}</td>
@@ -84,7 +110,7 @@ class FantasyNamePage extends React.Component{
             <tr>
               <th>Week</th>
               <th>Name</th>
-			  <th>Team</th>
+              <th>Team</th>
               <th>Result</th>
               <th>Projection</th>
               <th>Reward</th>
@@ -107,7 +133,10 @@ class FantasyNamePage extends React.Component{
       <div className='FantasyNamePage'>
         <div className='FantasyNamePage-container'>
           <h1>Leader Board</h1>
-          <FantasyNameFilterContainer name={this.state.name} balance={this.state.balance}/>
+          <FantasyNameFilterContainer name={this.state.name}
+            balance={this.state.balance} path={this.props.path}
+            currentWeek={this.state.currentWeek} sortWeek={this.state.sortWeek}
+            position={this.state.sortPosition}/>
           {table}
         </div>
       </div>

@@ -10,13 +10,22 @@ class FantasyNameActions {
     this.dispatch(error);
   }
 
-  getPlayer(path/*, id, week*/) {
-    this.dispatch();
-    //let players = [];
-    //let name = '';
-    //let balance = '';
+  updateSortWeek(week) {
+    this.dispatch(week);
+  }
 
-    api.get(path, (err, res) => {
+  updateSortPosition(week){
+    this.dispatch(week);
+  }
+
+  updateCurrentWeek(week){
+    this.dispatch(week);
+  }
+
+  getPlayer(path, query) {
+    this.dispatch();
+
+    api.get(path + query, (err, res) => {
       if (err){
         this.actions.updatePlayerFailed([err]);
       } else {
@@ -25,6 +34,17 @@ class FantasyNameActions {
           fantasyName: res.body.data[0].FANTASYNAME,
           balance: res.body.balance || 0
         });
+      }
+    });
+  }
+
+  getCurrentWeek() {
+    this.dispatch();
+    api.get('/week', (err, res) => {
+      if (err) {
+        this.actions.updateCurrentWeek('');
+      } else {
+        this.actions.updateCurrentWeek(res.body.week);
       }
     });
   }

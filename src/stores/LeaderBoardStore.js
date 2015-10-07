@@ -5,17 +5,21 @@ class LeaderBoardStore {
   constructor() {
     this.leaders = [];
     this.errorMessage = null;
-    this.week = '';
+    this.sortWeek = 'all weeks';
+    this.currentWeek = '';
     this.season = '';
+    this.sortPosition = 'all positions'
 
     this.bindListeners({
       handleUpdateLeaders: LeaderBoardActions.updateLeaders,
       handleGetLeaders: LeaderBoardActions.getLeaders,
       handleLeadersFailed: LeaderBoardActions.updateLeadersFailed,
-      handleGetWeek: LeaderBoardActions.getWeek,
-      handleUpdateWeek: LeaderBoardActions.updateWeek,
+      handleGetCurrentWeek: LeaderBoardActions.getCurrentWeek,
+      handleUpdateCurrentWeek: LeaderBoardActions.updateCurrentWeek,
+      handleUpdateSortWeek: LeaderBoardActions.updateSortWeek,
       handleGetSeason: LeaderBoardActions.getSeason,
-      handleUpdateSeason: LeaderBoardActions.updateSeason
+      handleUpdateSeason: LeaderBoardActions.updateSeason,
+      handleUpdateSortPosition: LeaderBoardActions.updateSortPosition
     });
   }
 
@@ -32,12 +36,19 @@ class LeaderBoardStore {
     this.errorMessage = errorMessage;
   }
 
-  handleGetWeek() {
+  handleGetCurrentWeek() {
     this.week = '';
   }
 
-  handleUpdateWeek(week) {
-    this.week = week;
+  handleUpdateSortWeek(week) {
+    this.sortWeek = week;
+  }
+
+  handleUpdateCurrentWeek(week) {
+    this.currentWeek = week;
+    if (this.sortWeek === ''){
+      this.sortWeek = week;
+    }
   }
 
   handleGetSeason() {
@@ -46,6 +57,10 @@ class LeaderBoardStore {
 
   handleUpdateSeason(season) {
     this.season = season;
+  }
+
+  handleUpdateSortPosition(position) {
+    this.sortPosition = position;
   }
 }
 

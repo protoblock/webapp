@@ -10,12 +10,20 @@ class LeaderBoardActions {
     this.dispatch(error);
   }
 
-  updateWeek(week) {
+  updateCurrentWeek(week) {
+    this.dispatch(week);
+  }
+
+  updateSortWeek(week) {
     this.dispatch(week);
   }
 
   updateSeason(season) {
     this.dispatch(season);
+  }
+
+  updateSortPosition(position) {
+    this.dispatch(position);
   }
 
   getLeaders(query) {
@@ -29,13 +37,13 @@ class LeaderBoardActions {
     });
   }
 
-  getWeek() {
+  getCurrentWeek() {
     this.dispatch();
     api.get('/week', (err, res) => {
       if (err) {
-        this.actions.updateWeek('');
+        this.actions.updateCurrentWeek('');
       } else {
-        this.actions.updateWeek(res.body.week);
+        this.actions.updateCurrentWeek(res.body.week);
       }
     });
   }
