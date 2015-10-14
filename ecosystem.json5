@@ -1,0 +1,47 @@
+{
+  /**
+   * This is a sample configuration file for PM2
+   */
+
+  /**
+   * Here we declare the apps that must be managed by PM2
+   * All options are listed here:
+   * https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#json-app-declaration
+   *
+   */
+  apps : [
+
+    // First application
+    {
+      name      : "privateApi",
+      script    : "/www/webapp/build/server.js",
+      exec_mode : "cluster_mode",
+      instances : "2"
+    },
+  ],
+
+
+  /**
+   * PM2 help you to deploy apps over your servers
+   * For more help go to :
+   * https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#deployment-pm2--090
+   */
+  deploy : {
+    production : {
+      user : "nodeuser" ,
+      host : "trading.football",
+      ref  : "origin/production",
+      repo : "git@github.com:SatoshiFantasy/webapp.git",
+      path : "/cygdrive/c/www/webapp",
+      "post-deploy" : "npm install && gulp build && pm2 startOrRestart ecosystem.json5 --env production"
+    },
+    dev : {
+      user : "nodeuser",
+      host : "stagingapp.trading.football",
+      ref  : "origin/master",
+      repo : "git@github.com:SatoshiFantasy/webapp.git",
+      path : "/cygdrive/c/www/webapp",
+      "post-deploy" : "npm install && gulp build && pm2 startOrRestart ecosystem.json5 --env dev"
+    }
+  }
+}
