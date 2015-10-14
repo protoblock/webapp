@@ -86,7 +86,6 @@ gulp.task('bundle', cb => {
     }));
 
     if (++bundlerRunCount === (watch ? config.length : 1)) {
-      console.log('should exit now');
       return cb();
     }
   }
@@ -100,7 +99,7 @@ gulp.task('bundle', cb => {
 
 // Build the app from source code
 gulp.task('build', ['clean'], cb => {
-  runSequence(['assets', 'resources'], ['bundle']);
+  runSequence(['assets', 'resources'], ['bundle'], cb);
 });
 
 // Build and start watching for modifications
