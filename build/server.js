@@ -129,9 +129,9 @@ module.exports =
   });*/
   
   var credentials = {
-    pfx: _fs2['default'].readFileSync('../../../ssl/satoshi_pfx.pfx'),
+    pfx: _fs2['default'].readFileSync('../../ssl/satoshi_pfx.pfx'),
     passphrase: '5tgb^YHN7ujm',
-    ca: [_fs2['default'].readFileSync('../../../ssl/intermediate.crt')]
+    ca: [_fs2['default'].readFileSync('../../ssl/intermediate.crt')]
   };
   
   // let devCredentials = {
