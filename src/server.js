@@ -36,9 +36,9 @@ server.get('*', (req, res, next) => {
 });*/
 
 let credentials = {
-  pfx: fs.readFileSync('../ssl/satoshi_pfx.pfx'),
+  pfx: fs.readFileSync('../../ssl/satoshi_pfx.pfx'),
   passphrase: '5tgb^YHN7ujm',
-  ca: [fs.readFileSync('../ssl/intermediate.crt')]
+  ca: [fs.readFileSync('../../ssl/intermediate.crt')]
 };
 
 // let devCredentials = {
