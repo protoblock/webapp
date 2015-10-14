@@ -86,7 +86,7 @@ gulp.task('bundle', cb => {
     }));
 
     if (++bundlerRunCount === (watch ? config.length : 1)) {
-      return cb();
+      return cb('error');
     }
   }
 
