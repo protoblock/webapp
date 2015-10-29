@@ -36,17 +36,31 @@ class DownloadPage extends React.Component{
   getOSContent(){
     let ua = this.getUserAgent() || {name: false};
     var requirements = [ // put in config file
-    /*  {
+      {
         'name': 'Mac OS',
         'versions': [
-          { number: '10.8' },
+          { number: '10.7' },
+		  { number: '10.8' },
           { number: '10.9' },
           { number: '10.10' }
         ],
         'disk': '25mb',
-        'link': 'https://cdn.trading.football/downloads/Trading-Football.dmg',
-        'fileName': 'Trading-Football.dmg'
-      },*/
+        'link': 'http://trading.football:8080/tradingfootball.dmg',
+        'fileName': 'Mac-Download',
+		'instructions' : (
+		  <div>
+            <p>Note: 64-bit and administrative privileges required - Click ‘more’ and ‘run anyway’ on the Smartscreen Filter (for Windows 8+).</p>
+            <p>Read the <a href='/rules' >rules</a> and watch the Trading Football tutorial for information on how to play:</p>
+            <p><a href='https://www.youtube.com/watch?v=hNm4UGx9xGs' target='_blank'>Video Instructions</a></p>
+            <p>Getting started with Trading Football is as easy as 1, 2, 3.</p>
+            <h3>1. Copy tradingfootball to Applications folder and run.</h3>
+            <h3>2. Claim your Fantasy Name</h3>
+            <img src={require('./download-image2.png')} className='DownloadPage-image' alt='setup 2' />
+            <h3>3. Start Making Projections</h3>
+            <img src={require('./download-image3.png')} className='DownloadPage-image' alt='setup 3' />
+          </div>
+		)
+      },
       {
         'name': 'Windows',
         'versions': [
@@ -56,10 +70,10 @@ class DownloadPage extends React.Component{
         ],
         'disk': '15 MB',
         'link': 'http://trading.football:8080/tradingfootball-setup.exe',
-        'fileName': 'Download',
+        'fileName': 'Windows-Download',
         'instructions' : (
           <div>
-            <p>Note: 64-bit and administrative privileges required - Click ‘more’ and ‘run anyway’ on the Smartscreen Filter (for Windows 8+).</p>
+            <p>Notes: 64-bit and administrative privileges required - Click ‘more’ and ‘run anyway’ on the Smartscreen Filter (for Windows 8+).</p>
             <p>Read the <a href='/rules' >rules</a> and watch the Trading Football tutorial for information on how to play:</p>
             <p><a href='https://www.youtube.com/watch?v=hNm4UGx9xGs' target='_blank'>Video Instructions</a></p>
             <p>Getting started with Trading Football is as easy as 1, 2, 3.</p>
