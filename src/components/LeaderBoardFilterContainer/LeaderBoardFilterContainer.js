@@ -11,6 +11,7 @@ class LeaderBoardFilterContainer extends React.Component{
 
   constructor(props) {
     super(props);
+	//this.updateBoardWeek(this.props.currentWeek);
   }
 
   updateBoardWeek(eventKey) {

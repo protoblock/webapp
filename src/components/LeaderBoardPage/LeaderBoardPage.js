@@ -22,8 +22,9 @@ class LeaderBoardPage extends React.Component{
     onSetTitle: PropTypes.func.isRequired
   }
 
+
   constructor(props) {
-    super(props);
+    super(props);	
     this.state = LeaderBoardStore.getState();
     this.onChange = this.onChange.bind(this);
   }
@@ -39,9 +40,29 @@ class LeaderBoardPage extends React.Component{
         LeaderBoardActions.getSeason();
       });
     }
-	LeaderBoardActions.getLeaders(this.props.query);
+	
 	LeaderBoardActions.getCurrentWeek();
     LeaderBoardActions.getSeason();
+	LeaderBoardActions.updateSortWeek(this.state.currentWeek);	
+	
+	let query = '?';
+    //query += 'week=12&';	
+	LeaderBoardActions.getLeaders(query);
+  }
+  
+  startWeek() {
+	//LeaderBoardActions.getCurrentWeek();
+    //LeaderBoardActions.getSeason();
+	// Ryan added this
+    //LeaderBoardActions.updateSortWeek(this.state.currentWeek);	
+	
+    let query = '?';
+    query += 'week=' + LeaderBoardActions.getCurrentWeek() + '&';
+	LeaderBoardActions.getLeaders(query);
+
+	//this.state.currentWeek + '&';
+	//console.log("jjj" + query);
+	//LeaderBoardActions.getLeaders(query);
   }
 
   componentWillUnmount() {
@@ -49,6 +70,7 @@ class LeaderBoardPage extends React.Component{
   }
 
   onChange(state) {
+	console.log('LeaderBoardPage - onChange');
     this.setState(state);
   }
 
@@ -90,12 +112,13 @@ class LeaderBoardPage extends React.Component{
     if (this.state.sortPosition != 'all positions'){
       query += 'position=' + this.state.sortPosition;
     }
+	
     return query;
   }
 
   getTeamRows() {
     if (this.state.leaders.length > 0){
-      return this.state.leaders.map((fantasyName, index) => {
+		return this.state.leaders.map((fantasyName, index) => {
         let query = this.getQuery();
         let destination = '/fantasy/players/' + fantasyName.name + '/awards' + query;
         return (
@@ -146,6 +169,12 @@ class LeaderBoardPage extends React.Component{
   }
 
   render() {
+	// Ryan  
+	//console.log('render() - sortWeek:' + this.state.sortWeek);  
+	console.log('render() - this.getQuery():' + this.getQuery()); 
+	
+	// End Ryan
+	  
     let title = 'Trading Football';
     this.context.onSetTitle(title);
     let table = this.buildTable();
@@ -155,8 +184,8 @@ class LeaderBoardPage extends React.Component{
           <PageHeading text={this.getHeadingText()} logoSize='lg' />
           <LeaderBoardFilterContainer currentWeek={this.state.currentWeek} sortWeek={this.state.sortWeek} 
 		    sortPosition={this.state.sortPosition}/>
-            {table}
-        </div>
+          {table}
+		</div>
       </div>
     );
   }

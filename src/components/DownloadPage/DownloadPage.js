@@ -42,14 +42,16 @@ class DownloadPage extends React.Component{
           { number: '10.7' },
 		  { number: '10.8' },
           { number: '10.9' },
-          { number: '10.10' }
+          { number: '10.10' },
+		  { number: '10.11' },
         ],
         'disk': '25mb',
         'link': 'http://trading.football:8080/tradingfootball.dmg',
+		//'link': 'https://www.dropbox.com/s/9x6fi97drenj3li/tradingfootball.dmg?dl=1',
         'fileName': 'Mac-Download',
-		'instructions' : (
+		'instructions': (
 		  <div>
-            <p>Note: 64-bit and administrative privileges required - Click ‘more’ and ‘run anyway’ on the Smartscreen Filter (for Windows 8+).</p>
+            <p>Note: 64-bit and administrative privileges required </p>
             <p>Read the <a href='/rules' >rules</a> and watch the Trading Football tutorial for information on how to play:</p>
             <p><a href='https://www.youtube.com/watch?v=hNm4UGx9xGs' target='_blank'>Video Instructions</a></p>
             <p>Getting started with Trading Football is as easy as 1, 2, 3.</p>
@@ -66,14 +68,15 @@ class DownloadPage extends React.Component{
         'versions': [
           {number: '7', architecture: 'amd64'},
           {number: '8', architecture: 'amd64'},
-          {number: '10', architecture: 'amd64'}
+          {number: '10', architecture: 'amd64'},
         ],
         'disk': '15 MB',
+		//'link': 'https://www.dropbox.com/s/uar6w79jjq9siez/tradingfootball-setup.exe?dl=1',		
         'link': 'http://trading.football:8080/tradingfootball-setup.exe',
-        'fileName': 'Windows-Download',
+        'fileName': 'Download',
         'instructions' : (
           <div>
-            <p>Notes: 64-bit and administrative privileges required - Click ‘more’ and ‘run anyway’ on the Smartscreen Filter (for Windows 8+).</p>
+            <p>Note: 64-bit and administrative privileges required - Click ‘more’ and ‘run anyway’ on the Smartscreen Filter (for Windows 8+).</p>
             <p>Read the <a href='/rules' >rules</a> and watch the Trading Football tutorial for information on how to play:</p>
             <p><a href='https://www.youtube.com/watch?v=hNm4UGx9xGs' target='_blank'>Video Instructions</a></p>
             <p>Getting started with Trading Football is as easy as 1, 2, 3.</p>

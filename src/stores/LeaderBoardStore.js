@@ -8,7 +8,7 @@ class LeaderBoardStore {
     this.sortWeek = 'all weeks';
     this.currentWeek = '';
     this.season = '';
-    this.sortPosition = 'all positions'
+    this.sortPosition = 'all positions';
 
     this.bindListeners({
       handleUpdateLeaders: LeaderBoardActions.updateLeaders,
@@ -24,7 +24,10 @@ class LeaderBoardStore {
   }
 
   handleUpdateLeaders(leaders) {
-    this.leaders = leaders;
+	//console.log('LeaderBoardStore updateLeaders:' + JSON.stringify(leaders));
+    console.log('LeaderBoardStore updateLeaders()');
+    
+	this.leaders = leaders;
     this.errorMessage = null;
   }
 
@@ -41,6 +44,7 @@ class LeaderBoardStore {
   }
 
   handleUpdateSortWeek(week) {
+	console.log('LeaderBoardStore updateSortWeek');
     this.sortWeek = week;
   }
 
