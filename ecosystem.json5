@@ -14,7 +14,9 @@
     // First application
     {
       name      : "webapp",
-      script    : "build/server.js"
+      script    : "/www/webapp/build/server.js",
+      exec_mode : "cluster_mode",
+      instances : "2"
     },
   ],
 
@@ -28,7 +30,6 @@
     production : {
       user : "nodeuser" ,
       host : "trading.football",
-      port : "9865",
       ref  : "origin/production",
       repo : "git@github.com:SatoshiFantasy/webapp.git",
       path : "/cygdrive/c/www/webapp",
@@ -37,7 +38,6 @@
     dev : {
       user : "nodeuser",
       host : "stagingapp.trading.football",
-      port : "9865",
       ref  : "origin/master",
       repo : "git@github.com:SatoshiFantasy/webapp.git",
       path : "/cygdrive/c/www/webapp",
