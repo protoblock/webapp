@@ -27,8 +27,6 @@ class PlayersPage extends Component {
     agent.get('https://stagingapp.trading.football:4545/playerquotes')
     .set('Accept', 'application/json')
     .end((err, res) => {
-      console.log(JSON.stringify(res.body));
-
       let players = res.body.map((datum) => {
         return {
           'playerId': datum.playerid,
