@@ -1,0 +1,15 @@
+/* React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
+
+@import '../variables.scss';
+
+.PlayerPage-container {
+  margin: 0 auto;
+  padding: 0 0 40px;
+  max-width: $max-content-width;
+}
+
+.left-container {
+	float: left;
+	width: 200px;
+	padding: 0 0 40px 40px;
+}

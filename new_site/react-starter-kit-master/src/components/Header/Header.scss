@@ -1,0 +1,67 @@
+/* React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
+
+@import '../variables.scss';
+
+$brand-color: #61dafb;
+
+.Header {
+  /*
+  background: #373277;
+  */
+  color: #fff;
+  
+   background-image: linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+    background-image: -o-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+    background-image: -moz-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+    background-image: -webkit-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+    background-image: -ms-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+    background-image: -webkit-gradient( linear, right bottom, right top, color-stop(0, #011c47), color-stop(0.66, rgb(27, 54, 97)) );
+    border: #011c47 solid 1px;
+}
+
+.Header-container {
+  margin: 0 auto;
+  padding: 20px 0;
+  max-width: $max-content-width;
+}
+
+.Header-brand {
+  color: color($brand-color lightness(+10%));
+  text-decoration: none;
+  font-size: 1.75em; /* ~28px */
+}
+
+.Header-brandTxt {
+  margin-left: 10px;
+  color: rgba(255, 255, 255, .5);
+}
+
+.Header-link {
+  margin-left: 10px;
+  color: rgba(255, 255, 255, .5);
+  text-decoration: none;
+}
+
+.Header-nav {
+  float: right;
+  margin-top: 6px;
+}
+
+.Header-banner {
+  text-align: center;
+}
+
+.Header-bannerTitle {
+  margin: 0;
+  padding: 10px;
+  font-weight: normal;
+  font-size: 4em;
+  line-height: 1em;
+}
+
+.Header-bannerDesc {
+  padding: 0;
+  color: rgba(255, 255, 255, .5);
+  font-size: 1.25em;
+  margin: 0;
+}

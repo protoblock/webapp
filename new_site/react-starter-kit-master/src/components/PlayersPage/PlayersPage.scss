@@ -1,0 +1,52 @@
+/* React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
+
+@import '../variables.scss';
+
+.PlayersPage-container {
+  margin: auto;
+  padding: 0 0 40px;
+  max-width: $max-content-width;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.upDownIndicator {
+	width: 15px;
+	height: 20px;
+}
+
+.tableRow {
+  border: 1px solid #C8C8C8;
+}
+
+.tableRowUp {
+  border: 1px solid #C8C8C8;
+  color: green;
+  font-weight: bold;
+}
+
+.tableRowDown {
+  border: 1px solid #C8C8C8;
+  color: red;
+  font-weight: bold;
+}
+
+.tableHeading {
+	border: 1px solid #C8C8C8;
+}
+
+.tableCell {
+  border: 1px solid #C8C8C8;
+  padding: 5px;
+}
+
+.playerTable {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heading {
+  text-align: center;
+}

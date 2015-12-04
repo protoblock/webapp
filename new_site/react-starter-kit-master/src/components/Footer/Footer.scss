@@ -1,0 +1,62 @@
+/* React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
+
+@import '../variables.scss';
+
+.Footer {
+  /*background: #333;*/
+  /*color: #fff;*/
+
+  background-image: linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+  background-image: -o-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+  background-image: -moz-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+  background-image: -webkit-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+  background-image: -ms-linear-gradient(bottom, #011c47, rgb(27, 54, 97) );
+  background-image: -webkit-gradient( linear, right bottom, right top,   color-stop(0, #011c47), color-stop(0.66, rgb(27, 54, 97)) );
+  border: #011c47 solid 1px;
+  color: #fff;
+  position:fixed;
+  bottom: 0px;
+  width: 100%;
+}
+
+.Footer-container {
+/*
+  margin: 0 auto;
+  padding: 20px 15px;
+  max-width: $max-content-width;
+  text-align: center;
+*/
+    margin: 0 auto;
+    padding: 14px 15px;
+    max-width: @max-content-width;
+    text-align: center;
+}
+
+.Footer-text {
+  color: rgba(255, 255, 255, .5);
+}
+
+.Footer-text--muted {
+  color: rgba(255, 255, 255, .3);
+}
+
+.Footer-spacer {
+  color: rgba(255, 255, 255, .3);
+}
+
+.Footer-text,
+.Footer-link {
+  padding: 2px 5px;
+  font-size: 1em;
+}
+
+.Footer-link,
+.Footer-link:active,
+.Footer-link:visited {
+  color: rgba(255, 255, 255, .6);
+  text-decoration: none;
+}
+
+.Footer-link:hover {
+  color: rgba(255, 255, 255, 1);
+}
