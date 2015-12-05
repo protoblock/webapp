@@ -30,16 +30,10 @@ class PlayersPage extends Component {
       let players = res.body.map((datum) => {
         return {
           'playerId': datum.playerid,
-          'playerName': datum.firstname + ' ' + datum.lastname,
-          'team': datum.team,
-          'position': datum.pos,
-          'bidSize': datum.bidsize,
-          'bid': datum.bid,
-          'ask': datum.ask,
-          'askSize': datum.asksize,
-          'lastSize': datum.lastsize,
-          'lastTrade': datum.last,
-          'upDown': datum.updownind
+          'playerName': datum.firstname + ' ' + datum.lastname + ' (' + datum.team + ', ' + datum.pos + ')',
+          'price': datum.last,
+          'volume': datum.volume,
+          'change': datum.change
         };
       });
 
@@ -53,35 +47,27 @@ class PlayersPage extends Component {
     let url = 'http://localhost:3000/player?playerId=';
     let data = this.state.players.map((datum) => {
       let dest = url + datum.playerId;
-      let indicator = '';
       let trClass = '';
 
-      if (datum.upDown === 'U') {
-        indicator = (<img className='upDownIndicator' src='UpIndicator.png' />);
+      if (datum.volume > 0) {
         trClass = 'tableRowUp';
       }
-      else if (datum.upDown === 'D') {
-        indicator = (<img className='upDownIndicator' src='DownIndicator.png' />)
+      else if (datum.volume < 0) {
         trClass = 'tableRowDown';
       }
       else {
         trClass = 'tableRow';
       }
 
+
       return (
         <tr className={trClass}>
           <td className='tableCell'>
             <a className='link' href={dest}>{datum.playerName}</a>
           </td>
-          <td className='tableCell'>{datum.team}</td>
-          <td className='tableCell'>{datum.position}</td>
-          <td className='tableCell'>{datum.bidSize}</td>
-          <td className='tableCell'>{datum.bid}</td>
-          <td className='tableCell'>{datum.ask}</td>
-          <td className='tableCell'>{datum.askSize}</td>
-          <td className='tableCell'>{datum.lastSize}</td>
-          <td className='tableCell'>{datum.lastTrade}</td>
-          <td className='tableCell'>{indicator}</td>
+          <td className='tableCell'>{datum.price}</td>
+          <td className='tableCell'>{datum.volume}</td>
+          <td className='tableCell'>{datum.change}</td>
         </tr>
       );
     });
@@ -97,15 +83,9 @@ class PlayersPage extends Component {
         <thead>
           <tr className='tableHeading'>
             <th className='tableCell'>Player Name</th>
-            <th className='tableCell'>Team</th>
-            <th className='tableCell'>Position</th>
-            <th className='tableCell'>Bid Size</th>
-            <th className='tableCell'>Bid</th>
-            <th className='tableCell'>Ask</th>
-            <th className='tableCell'>Ask size</th>
-            <th className='tableCell'>Last size</th>
-            <th className='tableCell'>Last trade</th>
-            <th className='tableCell'>&nbsp;&nbsp;&nbsp;</th>
+            <th className='tableCell'>Price</th>
+            <th className='tableCell'>Volume</th>
+            <th className='tableCell'>Change</th>
           </tr>
         </thead>
         <tbody>
@@ -123,6 +103,7 @@ class PlayersPage extends Component {
         <div className="PlayersPage-container">
           <h1 className='heading'>Player Quotes</h1>
           {tbl}
+          <br />
         </div>
       </div>
     );
