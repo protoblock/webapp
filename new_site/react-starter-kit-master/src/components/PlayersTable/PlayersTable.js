@@ -30,20 +30,19 @@ class PlayersTable extends Component {
     let data = this.props.players.map((datum) => {
       let trClass = '';
 
-      if (datum.volume > 0) {
+      if (datum.change > 0) {
         trClass = 'tableRowUp';
       }
-      else if (datum.volume < 0) {
+      else if (datum.change < 0) {
         trClass = 'tableRowDown';
       }
       else {
         trClass = 'tableRow';
       }
 
-
       return (
         <tr className={trClass}>
-          <td className='tableCell'><span onClick={this.handleClick.bind(this, datum.playerId)}>{datum.playerName}</span></td>
+          <td className='tableCell'><span className='link' onClick={this.handleClick.bind(this, datum.playerId)}>{datum.playerName}</span></td>
           <td className='tableCell'>{datum.price}</td>
           <td className='tableCell'>{datum.volume}</td>
           <td className='tableCell'>{datum.change}</td>

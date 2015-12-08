@@ -25,7 +25,6 @@ class PlayerDetail extends Component {
       'team':'n/a',
       'position':'n/a',
       'chartData': chartData,
-      'price': 'n/a',
       'week': 'n/a'
     };
 
@@ -36,16 +35,8 @@ class PlayerDetail extends Component {
     this.setState(state);
   }
 
-  componentDidMount() {
-    console.log('PlayerDetail - componentDidMount()');
-  }
-
   componentDidUpdate(prevProps, prevState) {
-    //console.log('PlayerDetail componentDidUpdate()');
-
     if (this.props.playerId !== prevProps.playerId) {
-      console.log('new playerId Selected');
-
       let playerId = this.props.playerId;
 
       agent.get('https://stagingapp.trading.football:4545/week')
@@ -73,29 +64,57 @@ class PlayerDetail extends Component {
           });
         });
 
-        let chartData = {
-            labels: ["12/15", "", "", "12/16", "", "", "12/17"],
-            datasets: [
-                {
-                    label: "My First dataset",
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: [9, 9, 8, 9, 10, 9, 10]
-                }
-            ]
-        };
-
-        this.setState({
-          'chartData': chartData
-        });
-        
+        this.getChartData();
       });
 
     }
+  }
+
+  getChartData() {
+    let url = 'https://stagingapp.trading.football:4545/ticks/' + this.props.playerId + '/week/' + this.state.week;
+
+    agent.get(url)
+    .set('Accept', 'application/json')
+    .end((err, res) => {
+      let labels = [];
+      let data = [];
+
+      for (let i = 0; i < res.body.length; ++i) {
+        let datum = res.body[i];
+        let price = datum.price;
+        let qty = datum.qty;
+        let tictime = datum.tictime;
+
+
+        let d = new Date(tictime);
+        let day = d.getDate();
+        let month = d.getMonth() + 1;
+        let time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+
+        labels.push(month + '/' + day + " " + time);
+        data.push(price);
+      }
+
+      this.setState({
+        'chartData': {
+          'labels': labels,
+          'datasets': [{
+              //'label': 'player data',
+              'fillColor': "rgba(220,220,220,0.2)",
+              'strokeColor': "rgba(220,220,220,1)",
+              'pointColor': "rgba(220,220,220,1)",
+              'pointStrokeColor': "#fff",
+              'pointHighlightFill': "#fff",
+              'pointHighlightStroke': "rgba(220,220,220,1)",
+              'data': data
+
+          }]
+        }
+      });
+
+
+    });
+
   }
 
   render() {
@@ -151,14 +170,20 @@ class PlayerDetail extends Component {
       <div className="PlayerDetail">
         <div className="PlayerDetail-container">
 
-          <h1>Bio</h1>
-          <div>Name: {this.state.playerName}</div>
+          <h1>
+            {this.state.playerName} Expected Results<br />
+            Week {this.state.week}
+          </h1>
+
+
           <div>Team: {this.state.team}</div>
           <div>Position: {this.state.position}</div>
+          <br />
 
-          <h1>Week {this.state.week}</h1>
           <LineChart data={this.state.chartData} options={chartOptions} redraw />
-
+          <br />
+          <br />
+          <button type="button" onClick={this.getChartData.bind(this)}>Refresh Chart</button>
 
         </div>
       </div>

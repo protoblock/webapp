@@ -37,9 +37,14 @@ class TickerPage extends Component {
     .set('Accept', 'application/json')
     .end((err, res) => {
       let players = res.body.map((datum) => {
+        let team = datum.team === null ? 'N/A' : datum.team;
+        let pos = datum.pos === null ? 'N/A' : datum.pos;
+
+        let playerName = datum.firstname + ' ' + datum.lastname + ' (' + team + ', ' + pos + ')'
+
         return {
           'playerId': datum.playerid,
-          'playerName': datum.firstname + ' ' + datum.lastname + ' (' + datum.team + ', ' + datum.pos + ')',
+          'playerName': playerName,
           'price': datum.last,
           'volume': datum.volume,
           'change': datum.change
@@ -60,6 +65,8 @@ class TickerPage extends Component {
   }
 
   handleChangePlayer(playerId) {
+    window.history.pushState("", "", "/ticker?playerId=" + playerId);
+
     this.setState({
       'playerId': playerId
     });
@@ -78,7 +85,7 @@ class TickerPage extends Component {
           </div>
 
           <div className='bottomTicker'>
-            <Ticker />
+            <Ticker players={this.state.players} />
           </div>
         </div>
       </div>

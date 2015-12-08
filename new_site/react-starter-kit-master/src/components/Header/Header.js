@@ -14,12 +14,11 @@ class Header extends Component {
       <div className="Header">
         <div className="Header-container">
           <span className="Header-brandTxt">Trading Football</span>
-          <span><a className='Header-link' href='http://localhost:3000/players'>Player Quotes</a></span>
+          <span><a className='Header-link' href='http://localhost:3000/ticker'>Player Quotes</a></span>
         </div>
       </div>
     );
   }
-
 }
 
 export default Header;

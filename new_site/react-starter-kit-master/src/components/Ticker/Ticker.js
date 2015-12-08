@@ -6,18 +6,34 @@ import withStyles from '../../decorators/withStyles';
 
 @withStyles(styles)
 class TickerPage extends Component {
+  getTicks() {
+    let players = this.props.players;
+    let playerString = '';
+
+    for (let i = 0; i < players.length; ++i) {
+      let player = players[i];
+
+      playerString += player.playerName + ' : ' + player.price;
+
+      if (i + 1 !== players.length) {
+        playerString += ' - ';
+      }
+    }
+
+    return (
+      <span>{playerString}</span>
+    );
+  }
+
   render() {
+    let ticks = this.getTicks();
+
     return (
       <div className="Ticker">
         <div className="Ticker-container">
         	<div className='marquee'>
-        		<span>
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
-				</span>
-			</div>
+            {ticks}
+    	    </div>
         </div>
       </div>
     );
