@@ -1,21 +1,13 @@
 /*! React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
 
 import React, { PropTypes, Component } from 'react';
-import styles from './PlayerPage.scss';
+import styles from './PlayerDetail.scss';
 import withStyles from '../../decorators/withStyles';
 import agent from 'superagent';
 var LineChart = require('react-chartjs').Line;
 
-function getParameterByName(name) {
-  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-      results = regex.exec(location.search);
-  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
-
-
 @withStyles(styles)
-class PlayerPage extends Component {
+class PlayerDetail extends Component {
   constructor(props) {
     super(props);
 
@@ -45,54 +37,65 @@ class PlayerPage extends Component {
   }
 
   componentDidMount() {
-    let playerId = getParameterByName('playerId');
+    console.log('PlayerDetail - componentDidMount()');
+  }
 
-    agent.get('https://stagingapp.trading.football:4545/week')
-    .set('Accept', 'application/json')
-    .end((err, res) => {
-      let week = res.body.week;
+  componentDidUpdate(prevProps, prevState) {
+    //console.log('PlayerDetail componentDidUpdate()');
 
-      this.setState({
-        'week': week
-      });
+    if (this.props.playerId !== prevProps.playerId) {
+      console.log('new playerId Selected');
 
-      let getPlayerDataURL = 'https://stagingapp.trading.football:4545/fantasy/nfl/' + playerId + '/week/' + week;
+      let playerId = this.props.playerId;
 
-      agent.get(getPlayerDataURL)
+      agent.get('https://stagingapp.trading.football:4545/week')
       .set('Accept', 'application/json')
       .end((err, res) => {
-        let name = res.body.data[0].FIRST + ' ' + res.body.data[0].LAST;
-        let team = res.body.data[0].TEAM;
-        let pos = res.body.data[0].POS;
+        let week = res.body.week;
 
         this.setState({
-          'playerName': name,
-          'team': team,
-          'position': pos
+          'week': week
         });
+
+        let getPlayerDataURL = 'https://stagingapp.trading.football:4545/fantasy/nfl/' + playerId + '/week/' + week;
+
+        agent.get(getPlayerDataURL)
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          let name = res.body.data[0].FIRST + ' ' + res.body.data[0].LAST;
+          let team = res.body.data[0].TEAM;
+          let pos = res.body.data[0].POS;
+
+          this.setState({
+            'playerName': name,
+            'team': team,
+            'position': pos
+          });
+        });
+
+        let chartData = {
+            labels: ["12/15", "", "", "12/16", "", "", "12/17"],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(220,220,220,0.2)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: [9, 9, 8, 9, 10, 9, 10]
+                }
+            ]
+        };
+
+        this.setState({
+          'chartData': chartData
+        });
+        
       });
 
-      let chartData = {
-          labels: ["12/15", "", "", "12/16", "", "", "12/17"],
-          datasets: [
-              {
-                  label: "My First dataset",
-                  fillColor: "rgba(220,220,220,0.2)",
-                  strokeColor: "rgba(220,220,220,1)",
-                  pointColor: "rgba(220,220,220,1)",
-                  pointStrokeColor: "#fff",
-                  pointHighlightFill: "#fff",
-                  pointHighlightStroke: "rgba(220,220,220,1)",
-                  data: [9, 9, 8, 9, 10, 9, 10]
-              }
-          ]
-      };
-
-      this.setState({
-        'chartData': chartData
-      });
-      
-    });
+    }
   }
 
   render() {
@@ -145,26 +148,22 @@ class PlayerPage extends Component {
     };
 
     return (
-      <div className="PlayerPage">
-        <div className="PlayerPage-container">
-          <div className='left-container'>
-            <h1>Bio</h1>
-            <div>Name: {this.state.playerName}</div>
-            <div>Team: {this.state.team}</div>
-            <div>Position: {this.state.position}</div>
-          </div>
-          <div className='right-container'>
-            <h1>Fantasy Ticker Price</h1>
-            <div>
-              <p>Price: {this.state.price}</p>
-              <p>Week: {this.state.week}</p>
-            </div>
-            <LineChart data={this.state.chartData} options={chartOptions} redraw />
-          </div>
+      <div className="PlayerDetail">
+        <div className="PlayerDetail-container">
+
+          <h1>Bio</h1>
+          <div>Name: {this.state.playerName}</div>
+          <div>Team: {this.state.team}</div>
+          <div>Position: {this.state.position}</div>
+
+          <h1>Week {this.state.week}</h1>
+          <LineChart data={this.state.chartData} options={chartOptions} redraw />
+
+
         </div>
       </div>
     );
   }
 }
 
-export default PlayerPage;
+export default PlayerDetail;

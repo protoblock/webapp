@@ -7,3 +7,26 @@
   padding: 0 0 40px;
   max-width: $max-content-width;
 }
+
+.leftContainer {
+  overflow: scroll;
+  position: fixed;
+  left: 10px;
+  width: 400px;
+  height: 75%;
+}
+
+.rightContainer {
+  position: fixed;
+  left: 450px;
+}
+
+.bottomTicker {
+  border: 1px solid black;
+  height: 50px;
+  position: fixed;
+  bottom: 30px;
+  width: $max-content-width;
+  background-color: yellow;
+  text-color: black;
+}

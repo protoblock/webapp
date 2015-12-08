@@ -10,8 +10,8 @@ import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
-import PlayerPage from './components/PlayerPage';
-import PlayersPage from './components/PlayersPage';
+import TickerPage from './components/TickerPage';
+
 
 const router = new Router(on => {
   on('*', async (state, next) => {
@@ -28,8 +28,8 @@ const router = new Router(on => {
 
   on('/ticker', async () => <TickerPage />);
 */
-  on('/player', async () => <PlayerPage />);
-  on('/players', async () => <PlayersPage />);
+
+  on('/ticker', async () => <TickerPage />);
 
 /*
   on('*', async (state) => {

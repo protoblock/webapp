@@ -1,20 +1,16 @@
 /*! React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
 
 import React, { PropTypes, Component } from 'react';
-import styles from './PlayersPage.scss';
+import styles from './PlayersTable.scss';
 import withStyles from '../../decorators/withStyles';
 import agent from 'superagent';
 import {Table} from 'react-bootstrap';
 
 
 @withStyles(styles)
-class PlayersPage extends Component {
+class PlayersTable extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      'players': []
-    };
 
     this.onChange = this.onChange.bind(this);
   }
@@ -24,29 +20,14 @@ class PlayersPage extends Component {
   }
 
   componentDidMount() {
-    agent.get('https://stagingapp.trading.football:4545/playerquotes')
-    .set('Accept', 'application/json')
-    .end((err, res) => {
-      let players = res.body.map((datum) => {
-        return {
-          'playerId': datum.playerid,
-          'playerName': datum.firstname + ' ' + datum.lastname + ' (' + datum.team + ', ' + datum.pos + ')',
-          'price': datum.last,
-          'volume': datum.volume,
-          'change': datum.change
-        };
-      });
+  }
 
-      this.setState({
-        'players': players
-      });
-    });
+  handleClick(playerId) {
+    this.props.changePlayer(playerId);
   }
 
   getRows() {
-    let url = 'http://localhost:3000/player?playerId=';
-    let data = this.state.players.map((datum) => {
-      let dest = url + datum.playerId;
+    let data = this.props.players.map((datum) => {
       let trClass = '';
 
       if (datum.volume > 0) {
@@ -62,9 +43,7 @@ class PlayersPage extends Component {
 
       return (
         <tr className={trClass}>
-          <td className='tableCell'>
-            <a className='link' href={dest}>{datum.playerName}</a>
-          </td>
+          <td className='tableCell'><span onClick={this.handleClick.bind(this, datum.playerId)}>{datum.playerName}</span></td>
           <td className='tableCell'>{datum.price}</td>
           <td className='tableCell'>{datum.volume}</td>
           <td className='tableCell'>{datum.change}</td>
@@ -99,15 +78,14 @@ class PlayersPage extends Component {
     let tbl = this.buildTable();
 
     return (
-      <div className="PlayersPage">
-        <div className="PlayersPage-container">
-          <h1 className='heading'>Player Quotes</h1>
+      <div className="PlayersTable">
+        <div className="PlayersTable-container">
+          <h1 className='heading'>Players</h1>
           {tbl}
-          <br />
         </div>
       </div>
     );
   }
 }
 
-export default PlayersPage;
+export default PlayersTable;
