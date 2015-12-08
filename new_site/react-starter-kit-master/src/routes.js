@@ -11,6 +11,7 @@ import RegisterPage from './components/RegisterPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import TickerPage from './components/TickerPage';
+import PlayerDetailPage from './components/PlayerDetailPage';
 
 
 const router = new Router(on => {
@@ -30,6 +31,8 @@ const router = new Router(on => {
 */
 
   on('/ticker', async () => <TickerPage />);
+  
+  on('/player', async () => <PlayerDetailPage />);
 
 /*
   on('*', async (state) => {
