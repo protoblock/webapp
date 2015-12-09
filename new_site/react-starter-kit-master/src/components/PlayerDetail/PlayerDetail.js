@@ -101,8 +101,6 @@ class PlayerDetail extends Component {
           }
         });
       });
-
-
     }
   }
 
@@ -209,6 +207,8 @@ class PlayerDetail extends Component {
       indicator = (<img className='upDownIndicator' src='/DownIndicator.png' />);
     }
 
+    let moveFromOpenIndicator = this.state.l1snap.change > 0 ? '+' : '';
+
     return (
       <div className="PlayerDetail">
         <div className="PlayerDetail-container">
@@ -220,27 +220,23 @@ class PlayerDetail extends Component {
           <table className='stockTable'>
             <thead>
               <tr className='tableHeading'>
-                <th className='tableCell'>Bid</th>
                 <th className='tableCell'>Bid Size</th>
+                <th className='tableCell'>Bid</th>
                 <th className='tableCell'>Ask</th>
                 <th className='tableCell'>Ask Size</th>
                 <th className='tableCell'>Last</th>
                 <th className='tableCell'>Last Size</th>
-                <th className='tableCell'>Volume</th>
-                <th className='tableCell'>Change</th>
                 <th className='tableCell'></th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className='tableCell'>{this.state.l1snap.bid}</td>
                 <td className='tableCell'>{this.state.l1snap.bidsize}</td>
+                <td className='tableCell'>{this.state.l1snap.bid}</td>
                 <td className='tableCell'>{this.state.l1snap.ask}</td>
                 <td className='tableCell'>{this.state.l1snap.asksize}</td>
                 <td className='tableCell'>{this.state.l1snap.last}</td>
                 <td className='tableCell'>{this.state.l1snap.lastsize}</td>
-                <td className='tableCell'>{this.state.l1snap.volume}</td>
-                <td className='tableCell'>{this.state.l1snap.change}</td>
                 <td className='tableCell'>{indicator}</td>
               </tr>
             </tbody>
@@ -248,10 +244,13 @@ class PlayerDetail extends Component {
 
           <br />
 
-          <LineChart className='chart' data={this.state.chartData} options={chartOptions} redraw />
-          <br />
-          <button type="button" onClick={this.getChartData.bind(this)}>Refresh Chart</button>
 
+          <div>
+            Volume: {this.state.l1snap.volume}<br />
+            Move from open: {moveFromOpenIndicator}{this.state.l1snap.change}
+          </div>
+
+          <LineChart className='chart' data={this.state.chartData} options={chartOptions} redraw />
         </div>
       </div>
     );
