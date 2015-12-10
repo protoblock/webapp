@@ -8,20 +8,26 @@ import DownloadPage from './components/DownloadPage';
 import AboutPage from './components/AboutPage';
 import FaqPage from './components/FaqPage';
 import RulesPage from './components/RulesPage';
+import TickerPage from './components/TickerPage';
+import PlayerDetailPage from './components/PlayerDetailPage';
 
 let Route = Router.Route;
 let DefaultRoute = Router.DefaultRoute;
+
 
 let routes = (
   <Route handler={App} path='/'>
     <DefaultRoute handler={LeaderBoardPage} />
 
+	<Route handler={TickerPage} path='ticker' />
+    <Route handler={PlayerDetailPage} path='player' />	
     <Route handler={FantasyNamePage} path='fantasy/players/:fantasyName/awards'/>
     <Route handler={PlayerPage} path='fantasy/nfl/:playerID/week/:week'/>
     <Route handler={DownloadPage} path='downloads'/>
     <Route handler={AboutPage} path='about'/>
     <Route handler={FaqPage} path='faq' />
     <Route handler={RulesPage} path='rules' />
+
   </Route>
 );
 
