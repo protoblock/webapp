@@ -14,6 +14,10 @@ import DownloadPage from '../DownloadPage';
 import FaqPage from '../FaqPage';
 import RulesPage from '../RulesPage';
 import AboutPage from '../AboutPage';
+
+import TickerPage from '../TickerPage';
+import PlayerDetailPage from '../PlayerDetailPage';
+
 //import about from '../../content/about.jsx';
 
 //import NotFoundPage from '../NotFoundPage';
@@ -55,6 +59,13 @@ class App {
       case /\/rules/.test(this.props.path.toLowerCase()):
         component = <RulesPage />;
         break;
+      case /\/ticker/.test(this.props.path.toLowerCase()):
+        component = <TickerPage />;
+        break;
+      case /\/player/.test(this.props.path.toLowerCase()):
+        component = <PlayerDetailPage />;
+        break;
+		
       default:
         component = <LeaderBoardPage query={this.props.query}/>;
     }
