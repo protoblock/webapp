@@ -22,6 +22,7 @@ class PlayerDetail extends Component {
     };
 
     this.state = {
+	  'playerId': 0,
       'playerName':'n/a',
       'team':'n/a',
       'position':'n/a',
@@ -48,12 +49,29 @@ class PlayerDetail extends Component {
   onChange(state) {
     this.setState(state);
   }
-
+  
+  componentDidMount() {
+	this.getData();  
+	setInterval(this.getData.bind(this), 60000);
+  }
+  
   componentDidUpdate(prevProps, prevState) {
     if (this.props.playerId !== prevProps.playerId) {
       let playerId = this.props.playerId;
-
-      agent.get(Config.apiURL + '/week')
+	  
+	  this.setState({
+		  'playerId': playerId
+	  },
+	  () => {
+	    this.getData();
+	  });
+	}
+  }
+  
+  getData() {
+	  let playerId = this.state.playerId;
+	  
+	  agent.get(Config.apiURL + '/week')
       .set('Accept', 'application/json')
       .end((err, res) => {
         let week = res.body.week;
@@ -77,14 +95,16 @@ class PlayerDetail extends Component {
             'position': pos
           });
         });
-
-        this.getChartData();
       });
 
       agent.get(Config.apiURL + '/l1snap/' + playerId)
       .set('Accept', 'application/json')
       .end((err, res) => {
         let d = res.body[0];
+		
+		if (d.last !== this.state.l1snap.last) {
+			this.getChartData();
+		}
 
         this.setState({
           'l1snap': {
@@ -102,11 +122,11 @@ class PlayerDetail extends Component {
           }
         });
       });
-    }
+    
   }
 
   getChartData() {
-    let url = Config.apiURL + '/ticks/' + this.props.playerId + '/week/' + this.state.week;
+    let url = Config.apiURL + '/ticks/' + this.state.playerId + '/week/' + this.state.week;
 
     agent.get(url)
     .set('Accept', 'application/json')
