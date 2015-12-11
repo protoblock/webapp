@@ -7,6 +7,7 @@ import PlayersTable from '../PlayersTable/PlayersTable';
 import PlayerDetail from '../PlayerDetail/PlayerDetail';
 import Ticker from '../Ticker/Ticker';
 import agent from 'superagent';
+import Config from '../../utils/Config';
 
 function getParameterByName(name) {
   name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -33,7 +34,7 @@ class TickerPage extends Component {
   }
 
   componentDidMount() {
-    agent.get('https://stagingapp.trading.football:4545/playerquotes')
+    agent.get(Config.apiURL + '/playerquotes')
     .set('Accept', 'application/json')
     .end((err, res) => {
       let players = res.body.map((datum) => {
@@ -85,10 +86,11 @@ class TickerPage extends Component {
           <div className='rightContainer'>
             <PlayerDetail playerId={this.state.playerId} />
           </div>
-
+	  
           <div className='bottomTicker'>
-            <Ticker players={this.state.players} />
+            <Ticker />
           </div>
+
         </div>
       </div>
     );

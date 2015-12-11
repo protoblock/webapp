@@ -5,6 +5,7 @@ import styles from './PlayersTable.less';
 import withStyles from '../../decorators/withStyles';
 import agent from 'superagent';
 import {ButtonGroup, DropdownButton, MenuItem} from 'react-bootstrap';
+import Config from '../../utils/Config';
 
 Array.prototype.unique = function() {
     var unique = [];

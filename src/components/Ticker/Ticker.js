@@ -3,11 +3,59 @@
 import React, { PropTypes, Component } from 'react';
 import styles from './Ticker.less';
 import withStyles from '../../decorators/withStyles';
+import Config from '../../utils/Config';
+import agent from 'superagent';
 
 @withStyles(styles)
-class TickerPage extends Component {
+class Ticker extends Component {
+  constructor(props) {
+	  super(props);
+	  
+	  this.state = {
+		  'players': []
+	  };
+	  
+      this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(state) {
+    this.setState(state);
+  }
+  
+  componentDidMount() {
+	this.updateTicks();
+    setInterval(this.updateTicks.bind(this), 480000);
+  }
+  
+  updateTicks() {
+	agent.get(Config.apiURL + '/playerquotes')
+    .set('Accept', 'application/json')
+    .end((err, res) => {
+      let players = res.body.map((datum) => {
+        let team = datum.team === null ? 'N/A' : datum.team;
+        let pos = datum.pos === null ? 'N/A' : datum.pos;
+
+        let playerName = datum.firstname + ' ' + datum.lastname;
+
+        return {
+          'playerId': datum.playerid,
+          'playerName': playerName,
+		  'team': datum.team,
+		  'pos': datum.pos,
+          'price': datum.last,
+          'volume': datum.volume,
+          'change': datum.change
+        };
+      });
+	  
+	  this.setState({
+		 'players': players 
+	  });
+	});
+  }
+	
   getTicks() {
-    let players = this.props.players;
+    let players = this.state.players;
     let playerString = '';
 
     for (let i = 0; i < players.length; ++i) {
@@ -27,12 +75,12 @@ class TickerPage extends Component {
 
   render() {
     let ticks = this.getTicks();
-
+	
     return (
       <div className="Ticker">
         <div className="Ticker-container">
         	<div className='marquee'>
-            {ticks}
+              {ticks}
     	    </div>
         </div>
       </div>
@@ -41,4 +89,4 @@ class TickerPage extends Component {
 
 }
 
-export default TickerPage;
+export default Ticker;

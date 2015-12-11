@@ -5,6 +5,7 @@ import styles from './PlayerDetail.less';
 import withStyles from '../../decorators/withStyles';
 import agent from 'superagent';
 var LineChart = require('react-chartjs').Line;
+import Config from '../../utils/Config';
 
 @withStyles(styles)
 class PlayerDetail extends Component {
@@ -52,7 +53,7 @@ class PlayerDetail extends Component {
     if (this.props.playerId !== prevProps.playerId) {
       let playerId = this.props.playerId;
 
-      agent.get('https://stagingapp.trading.football:4545/week')
+      agent.get(Config.apiURL + '/week')
       .set('Accept', 'application/json')
       .end((err, res) => {
         let week = res.body.week;
@@ -61,7 +62,7 @@ class PlayerDetail extends Component {
           'week': week
         });
 
-        let getPlayerDataURL = 'https://stagingapp.trading.football:4545/player/' + playerId;
+        let getPlayerDataURL = Config.apiURL + '/player/' + playerId;
 
         agent.get(getPlayerDataURL)
         .set('Accept', 'application/json')
@@ -80,7 +81,7 @@ class PlayerDetail extends Component {
         this.getChartData();
       });
 
-      agent.get('https://stagingapp.trading.football:4545/l1snap/' + playerId)
+      agent.get(Config.apiURL + '/l1snap/' + playerId)
       .set('Accept', 'application/json')
       .end((err, res) => {
         let d = res.body[0];
@@ -105,7 +106,7 @@ class PlayerDetail extends Component {
   }
 
   getChartData() {
-    let url = 'https://stagingapp.trading.football:4545/ticks/' + this.props.playerId + '/week/' + this.state.week;
+    let url = Config.apiURL + '/ticks/' + this.props.playerId + '/week/' + this.state.week;
 
     agent.get(url)
     .set('Accept', 'application/json')
