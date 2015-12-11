@@ -159,28 +159,71 @@ class PlayersTable extends Component {
   }
   
   updateTeam(eventKey) {
-	let players = this.props.players.slice(0);
+	let players = [];
 	  
 	if (eventKey !== 'ALL') {
+		players = this.state.players;
 		players = players.filter((datum) => {
 			return datum.team === eventKey;
 		});
 	}
-	
-	//updateSort(this.state.sortBy);
-	
-	console.log('updateTeam - players:' + JSON.stringify(players));
+	else {
+		players = this.props.players;
+	}
 	
 	this.setState({
 		'players': players,
 		'team': eventKey
+	},
+	() => {
+		this.updateSort(this.state.sortBy);
 	});
   }
   
   
+  getPositions() {
+	let positions = this.props.players.map((datum) => {
+		return datum.pos;
+	}).unique().sort();
+	
+	let rows = [];
+	
+	rows.push(<MenuItem eventKey='ALL' onSelect={this.updatePosition.bind(this)}>ALL POSITIONS</MenuItem>);
+	
+	for (let i = 0; i < positions.length; ++i) {
+		rows.push(
+          <MenuItem eventKey={positions[i]} onSelect={this.updatePosition.bind(this)}>{positions[i]}</MenuItem>
+		);
+	}
+	
+	return rows;
+  }
+  
+  updatePosition(eventKey) {
+	let players = [];
+	  
+	if (eventKey !== 'ALL') {
+		players = this.state.players;
+		players = players.filter((datum) => {
+			return datum.pos === eventKey;
+		});
+	}
+	else {
+		players = this.props.players;
+	}
+	
+	this.setState({
+		'players': players,
+		'team': eventKey
+	},
+	() => {
+		this.updateSort(this.state.sortBy);
+	});
+  }
+  
   render() {
     let tbl = this.buildTable();
-
+	
     return (
       <div className="PlayersTable">
         <div className="PlayersTable-container">
@@ -191,6 +234,7 @@ class PlayersTable extends Component {
 			  {this.getTeams()}
 		    </DropdownButton>
 		    <DropdownButton title='Position'>
+			  {this.getPositions()}
 		    </DropdownButton>
 		    <DropdownButton title='Sort By'>
 			  {this.getSortOptions()}
