@@ -241,7 +241,7 @@ class PlayersTable extends Component {
 		    <DropdownButton title={this.state.position}>
 			  {this.getPositions()}
 		    </DropdownButton>
-		    <DropdownButton title={this.state.sortBy}>
+		    <DropdownButton title='SORT BY'>
 			  {this.getSortOptions()}
 		    </DropdownButton>
 		  </ButtonGroup>

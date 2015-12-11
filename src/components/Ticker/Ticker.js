@@ -62,7 +62,7 @@ class Ticker extends Component {
       let player = players[i];
 
       playerString += player.playerName + ' (' + player.team + ', ' + player.pos + ') : ' + player.price;
-
+	  
       if (i + 1 !== players.length) {
         playerString += ' - ';
       }
