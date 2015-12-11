@@ -23,9 +23,9 @@ class PlayersTable extends Component {
 	
 	this.state = {
 		'players': [],
-		'sortBy': 'Price',
-		'team': 'ALL',
-		'position': 'ALL'
+		'sortBy': 'PRICE',
+		'team': 'ALL TEAMS',
+		'position': 'ALL POSITIONS'
 		
 	};
 	
@@ -96,7 +96,7 @@ class PlayersTable extends Component {
   }
   
   getSortOptions() {
-	let options = ['Price', 'Volume', 'Change'];
+	let options = ['PRICE', 'VOLUME', 'CHANGE'];
 	let rows = [];
 	
 	for (let i = 0; i < options.length; ++i) {
@@ -109,35 +109,11 @@ class PlayersTable extends Component {
   }
   
   updateSort(eventKey) {
-	let players = this.state.players;
-	  
-	switch (eventKey) {
-		case 'Price':
-			players.sort((a, b) => {
-				return b.price - a.price;
-			});
-			
-			break;
-		case 'Volume':
-			players.sort((a, b) => {
-				return b.volume - a.volume;
-			});
-			
-			break;
-		case 'Change':
-			players.sort((a, b) => {
-				return b.change - a.change;
-			});
-			
-			break;
-		default:
-			alert('Invalid Sort Option');
-	}
-	
 	this.setState({
-		'players': players,
 		'sortBy': eventKey
-	});
+	},
+	() => { this.filter() }
+	);
   }
   
   getTeams() {
@@ -147,9 +123,14 @@ class PlayersTable extends Component {
 	
 	let rows = [];
 	
-	rows.push(<MenuItem eventKey='ALL' onSelect={this.updateTeam.bind(this)}>ALL TEAMS</MenuItem>);
-	
+	if (this.state.team !== 'ALL TEAMS') {
+		rows.push(<MenuItem eventKey='ALL TEAMS' onSelect={this.updateTeam.bind(this)}>ALL TEAMS</MenuItem>);
+    }
+  
 	for (let i = 0; i < teams.length; ++i) {
+		if (teams[i] === this.state.team)
+			continue;
+		
 		rows.push(
           <MenuItem eventKey={teams[i]} onSelect={this.updateTeam.bind(this)}>{teams[i]}</MenuItem>
 		);
@@ -159,25 +140,11 @@ class PlayersTable extends Component {
   }
   
   updateTeam(eventKey) {
-	let players = [];
-	  
-	if (eventKey !== 'ALL') {
-		players = this.state.players;
-		players = players.filter((datum) => {
-			return datum.team === eventKey;
-		});
-	}
-	else {
-		players = this.props.players;
-	}
-	
 	this.setState({
-		'players': players,
 		'team': eventKey
 	},
-	() => {
-		this.updateSort(this.state.sortBy);
-	});
+	() => { this.filter() }
+	);
   }
   
   
@@ -188,9 +155,14 @@ class PlayersTable extends Component {
 	
 	let rows = [];
 	
-	rows.push(<MenuItem eventKey='ALL' onSelect={this.updatePosition.bind(this)}>ALL POSITIONS</MenuItem>);
+	if (this.state.position !== 'ALL POSITIONS') {
+		rows.push(<MenuItem eventKey='ALL POSITIONS' onSelect={this.updatePosition.bind(this)}>ALL POSITIONS</MenuItem>);
+	}
 	
 	for (let i = 0; i < positions.length; ++i) {
+		if (positions[i] === this.state.position)
+			continue;
+		
 		rows.push(
           <MenuItem eventKey={positions[i]} onSelect={this.updatePosition.bind(this)}>{positions[i]}</MenuItem>
 		);
@@ -200,24 +172,56 @@ class PlayersTable extends Component {
   }
   
   updatePosition(eventKey) {
-	let players = [];
-	  
-	if (eventKey !== 'ALL') {
-		players = this.state.players;
+	this.setState({
+		'position': eventKey
+	},
+	() => { this.filter() }
+	);
+  }
+  
+  filter() {
+	let players = this.props.players.slice(0);
+	
+	// Filter Team
+	if (this.state.team !== 'ALL TEAMS') {
 		players = players.filter((datum) => {
-			return datum.pos === eventKey;
+			return datum.team === this.state.team;
 		});
 	}
-	else {
-		players = this.props.players;
+	
+	// Filter Position
+	if (this.state.position !== 'ALL POSITIONS') {
+		players = players.filter((datum) => {
+			return datum.pos === this.state.position;
+		});
+	}
+	
+	// Apply Sort
+	switch (this.state.sortBy) {
+		case 'PRICE':
+			players.sort((a, b) => {
+				return b.price - a.price;
+			});
+			
+			break;
+		case 'VOLUME':
+			players.sort((a, b) => {
+				return b.volume - a.volume;
+			});
+			
+			break;
+		case 'CHANGE':
+			players.sort((a, b) => {
+				return b.change - a.change;
+			});
+			
+			break;
+		default:
+			alert('Invalid Sort Option');
 	}
 	
 	this.setState({
-		'players': players,
-		'team': eventKey
-	},
-	() => {
-		this.updateSort(this.state.sortBy);
+		'players': players
 	});
   }
   
@@ -230,13 +234,13 @@ class PlayersTable extends Component {
           <h1 className='heading'>Players</h1>
           
 		  <ButtonGroup>
-		    <DropdownButton title='Team'>
+		    <DropdownButton title={this.state.team}>
 			  {this.getTeams()}
 		    </DropdownButton>
-		    <DropdownButton title='Position'>
+		    <DropdownButton title={this.state.position}>
 			  {this.getPositions()}
 		    </DropdownButton>
-		    <DropdownButton title='Sort By'>
+		    <DropdownButton title={this.state.sortBy}>
 			  {this.getSortOptions()}
 		    </DropdownButton>
 		  </ButtonGroup>
