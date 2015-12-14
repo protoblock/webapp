@@ -17,39 +17,66 @@ Array.prototype.unique = function() {
     return unique;
 };
 
+Array.prototype.equals = function (array) {
+    // if the other array is a falsy value, return
+    if (!array)
+        return false;
+
+    // compare lengths - can save a lot of time 
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0, l=this.length; i < l; i++) {
+        // Check if we have nested arrays
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!this[i].equals(array[i]))
+                return false;       
+        }           
+        else if (this[i] != array[i]) { 
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;   
+        }           
+    }       
+    return true;
+}
+
 @withStyles(styles)
 class PlayersTable extends Component {
   constructor(props) {
     super(props);
 	
 	this.state = {
-		'players': [],
-		'sortBy': 'PRICE',
-		'team': 'ALL TEAMS',
-		'position': 'ALL POSITIONS'
-		
+		'players': []
 	};
 	
     this.onChange = this.onChange.bind(this);
+  }
+ 
+  componentDidUpdate(prevProps, prevState) {
+	  if (!prevProps.players.equals(this.props.players)) {
+		this.filter();
+	  }
+	  
+	  if (prevProps.sortBy !== this.props.sortBy || 
+			prevProps.team !== this.props.team || 
+			prevProps.position !== this.props.position) {
+		this.filter();
+      }
   }
 
   onChange(state) {
     this.setState(state);
   }
-  
-  componentDidUpdate(prevProps, prevState) {
-	  if (prevProps.players !== this.props.players) {
-		  this.setState({
-			'players': this.props.players.slice(0)
-		  });
-	  }
-  }
 
-  handleClick(playerId) {
+  handleChangePlayer(playerId) {
     this.props.changePlayer(playerId);
   }
-
+  
   getRows() {
+	if (this.state.players.equals([]))
+		return;
+	  
     let data = this.state.players.map((datum) => {
       let trClass = '';
 
@@ -65,7 +92,7 @@ class PlayersTable extends Component {
 
       return (
         <tr className={trClass}>
-          <td className='tableCell'><span className='link' onClick={this.handleClick.bind(this, datum.playerId)}>{datum.playerName + ' (' + datum.team + ', ' + datum.pos + ')'}</span></td>
+          <td className='tableCell'><span className='link' onClick={this.handleChangePlayer.bind(this, datum.playerId)}>{datum.playerName + ' (' + datum.team + ', ' + datum.pos + ')'}</span></td>
           <td className='tableCell'>{datum.price}</td>
           <td className='tableCell'>{datum.volume}</td>
           <td className='tableCell'>{datum.change}</td>
@@ -95,6 +122,10 @@ class PlayersTable extends Component {
       </table>
     );
   }
+
+  handleFilterChange(sortBy, team, position) {
+    this.props.changeFilter(sortBy, team, position);
+  }
   
   getSortOptions() {
 	let options = ['PRICE', 'VOLUME', 'CHANGE'];
@@ -102,103 +133,94 @@ class PlayersTable extends Component {
 	
 	for (let i = 0; i < options.length; ++i) {
 		rows.push(
-          <MenuItem eventKey={options[i]} onSelect={this.updateSort.bind(this)}>{options[i]}</MenuItem>
+          <MenuItem eventKey={options[i]} 
+			onSelect={this.handleFilterChange.bind(this, options[i], this.props.team, this.props.position)}>
+			{options[i]}</MenuItem>
 		);
 	}
 	
 	return rows;
   }
   
-  updateSort(eventKey) {
-	this.setState({
-		'sortBy': eventKey
-	},
-	() => { this.filter() }
-	);
-  }
-  
   getTeams() {
+	if (this.props.players.equals([]))
+		return;
+	  
 	let teams = this.props.players.map((datum) => {
 		return datum.team;
 	}).unique().sort();
 	
 	let rows = [];
 	
-	if (this.state.team !== 'ALL TEAMS') {
-		rows.push(<MenuItem eventKey='ALL TEAMS' onSelect={this.updateTeam.bind(this)}>ALL TEAMS</MenuItem>);
+	if (this.props.team !== 'ALL TEAMS') {
+		rows.push(<MenuItem eventKey='ALL TEAMS' 
+			onSelect={this.handleFilterChange.bind(this, this.props.sortBy, 'ALL TEAMS', this.props.position)}>
+			ALL TEAMS</MenuItem>);
     }
   
 	for (let i = 0; i < teams.length; ++i) {
-		if (teams[i] === this.state.team)
+		if (teams[i] === this.props.team)
 			continue;
 		
 		rows.push(
-          <MenuItem eventKey={teams[i]} onSelect={this.updateTeam.bind(this)}>{teams[i]}</MenuItem>
+          <MenuItem eventKey={teams[i]} 
+			onSelect={this.handleFilterChange.bind(this, this.props.sortBy, teams[i], this.props.position)}>
+			{teams[i]}</MenuItem>
 		);
 	}
 	
 	return rows;
   }
   
-  updateTeam(eventKey) {
-	this.setState({
-		'team': eventKey
-	},
-	() => { this.filter() }
-	);
-  }
-  
-  
   getPositions() {
+	if (this.props.players.equals([]))
+		return;
+	  
 	let positions = this.props.players.map((datum) => {
 		return datum.pos;
 	}).unique().sort();
 	
 	let rows = [];
 	
-	if (this.state.position !== 'ALL POSITIONS') {
-		rows.push(<MenuItem eventKey='ALL POSITIONS' onSelect={this.updatePosition.bind(this)}>ALL POSITIONS</MenuItem>);
+	if (this.props.position !== 'ALL POSITIONS') {
+		rows.push(<MenuItem eventKey='ALL POSITIONS' 
+			onSelect={this.handleFilterChange.bind(this, this.props.sortBy, this.props.team, 'ALL POSITIONS')}>
+			ALL POSITIONS</MenuItem>);
 	}
 	
 	for (let i = 0; i < positions.length; ++i) {
-		if (positions[i] === this.state.position)
+		if (positions[i] === this.props.position)
 			continue;
 		
 		rows.push(
-          <MenuItem eventKey={positions[i]} onSelect={this.updatePosition.bind(this)}>{positions[i]}</MenuItem>
+          <MenuItem eventKey={positions[i]} 
+			onSelect={this.handleFilterChange.bind(this, this.props.sortBy, this.props.team, positions[i])}>
+				{positions[i]}</MenuItem>
 		);
 	}
 	
 	return rows;
   }
   
-  updatePosition(eventKey) {
-	this.setState({
-		'position': eventKey
-	},
-	() => { this.filter() }
-	);
-  }
-  
   filter() {
 	let players = this.props.players.slice(0);
 	
 	// Filter Team
-	if (this.state.team !== 'ALL TEAMS') {
+	if (this.props.team !== 'ALL TEAMS') {
 		players = players.filter((datum) => {
-			return datum.team === this.state.team;
+			return datum.team === this.props.team;
 		});
 	}
 	
 	// Filter Position
-	if (this.state.position !== 'ALL POSITIONS') {
+	if (this.props.position !== 'ALL POSITIONS') {
 		players = players.filter((datum) => {
-			return datum.pos === this.state.position;
+			return datum.pos === this.props.position;
 		});
 	}
 	
 	// Apply Sort
-	switch (this.state.sortBy) {
+	switch (this.props.sortBy) {
 		case 'PRICE':
 			players.sort((a, b) => {
 				return b.price - a.price;
@@ -213,7 +235,7 @@ class PlayersTable extends Component {
 			break;
 		case 'CHANGE':
 			players.sort((a, b) => {
-				return b.change - a.change;
+				return Math.abs(b.change) - Math.abs(a.change);
 			});
 			
 			break;
@@ -235,10 +257,10 @@ class PlayersTable extends Component {
           <h1 className='heading'>Players</h1>
           
 		  <ButtonGroup>
-		    <DropdownButton title={this.state.team}>
+		    <DropdownButton title={this.props.team}>
 			  {this.getTeams()}
 		    </DropdownButton>
-		    <DropdownButton title={this.state.position}>
+		    <DropdownButton title={this.props.position}>
 			  {this.getPositions()}
 		    </DropdownButton>
 		    <DropdownButton title='SORT BY'>

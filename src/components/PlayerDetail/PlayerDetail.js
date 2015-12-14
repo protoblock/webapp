@@ -77,7 +77,7 @@ class PlayerDetail extends Component {
         let week = res.body.week;
 
         this.setState({
-          'week': week
+          'week': 15 //week
         });
 
         let getPlayerDataURL = Config.apiURL + '/player/' + playerId;
@@ -126,7 +126,7 @@ class PlayerDetail extends Component {
   }
 
   getChartData() {
-    let url = Config.apiURL + '/ticks/' + this.state.playerId + '/week/' + this.state.week;
+    let url = Config.apiURL + '/ticks/' + this.state.playerId + '/week/0'; // + this.state.week;
 
     agent.get(url)
     .set('Accept', 'application/json')

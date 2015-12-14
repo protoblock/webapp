@@ -23,7 +23,10 @@ class TickerPage extends Component {
 
     this.state = {
       'players': [],
-      'playerId': 0
+      'playerId': 0,
+	  'sortBy': 'PRICE',
+	  'team': 'ALL TEAMS',
+	  'position': 'ALL POSITIONS'
     };
 
     this.onChange = this.onChange.bind(this);
@@ -34,7 +37,12 @@ class TickerPage extends Component {
   }
 
   componentDidMount() {
-    agent.get(Config.apiURL + '/playerquotes')
+	this.getPlayers();
+	setInterval(this.getPlayers.bind(this), 600000);
+  }
+  
+  getPlayers() {
+	agent.get(Config.apiURL + '/playerquotes')
     .set('Accept', 'application/json')
     .end((err, res) => {
       let players = res.body.map((datum) => {
@@ -55,23 +63,48 @@ class TickerPage extends Component {
       });
 
       let playerId = players[0].playerId;
+	  let sortBy = this.state.sortBy, team = this.state.team, position = this.state.position;
 
       if (getParameterByName('playerId') !== '') {
         playerId = getParameterByName('playerId');
       }
+      if (getParameterByName('sortBy') !== '') {
+        sortBy = getParameterByName('sortBy');
+      }
+      if (getParameterByName('team') !== '') {
+        team = getParameterByName('team');
+      }
+      if (getParameterByName('position') !== '') {
+        position = getParameterByName('position');
+      }
 
       this.setState({
         'players': players,
-        'playerId': playerId
+        'playerId': playerId,
+		'sortBy': sortBy,
+		'team': team,
+		'position': position
       });
     });
   }
 
   handleChangePlayer(playerId) {
-    window.history.pushState("", "", "/ticker?playerId=" + playerId);
+    window.history.pushState("", "", "/ticker?playerId=" + playerId + '&sortBy=' +
+		this.state.sortBy + '&team=' + this.state.team + '&position=' + this.state.position);
 
     this.setState({
       'playerId': playerId
+    });
+  }
+  
+  handleChangeFilter(sortBy, team, position) {
+	window.history.pushState("", "", "/ticker?playerId=" + this.state.playerId + '&sortBy=' +
+		sortBy + '&team=' + team + '&position=' + position);
+
+    this.setState({
+		'sortBy': sortBy,
+		'team': team,
+		'position': position
     });
   }
 
@@ -80,7 +113,12 @@ class TickerPage extends Component {
       <div className="TickerPage">
         <div className="TickerPage-container">
           <div className='leftContainer'>
-            <PlayersTable players={this.state.players} changePlayer={this.handleChangePlayer.bind(this)} />
+            <PlayersTable players={this.state.players}
+					sortBy={this.state.sortBy}
+					team={this.state.team}
+					position={this.state.position}
+					changePlayer={this.handleChangePlayer.bind(this)}
+					changeFilter={this.handleChangeFilter.bind(this)} />
           </div>
 
           <div className='rightContainer'>

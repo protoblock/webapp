@@ -24,7 +24,7 @@ class Ticker extends Component {
   
   componentDidMount() {
 	this.updateTicks();
-    setInterval(this.updateTicks.bind(this), 480000);
+    setInterval(this.updateTicks.bind(this), 720000);
   }
   
   updateTicks() {
