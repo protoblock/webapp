@@ -34,6 +34,7 @@ class PlayerDetail extends Component {
         'ask': 'n/a',
         'asksize': 'n/a',
         'last': 'n/a',
+		'price': 'n/a',
         'lastsize': 'n/a',
         'updownind': 'n/a',
         'lasttime': 'n/a',
@@ -113,6 +114,7 @@ class PlayerDetail extends Component {
             'ask': d.ask,
             'asksize': d.asksize,
             'last': d.last,
+			'price': d.price,
             'lastsize': d.lastsize,
             'updownind': d.updownind,
             'lasttime': d.lasttime,
@@ -235,7 +237,7 @@ class PlayerDetail extends Component {
         <div className="PlayerDetail-container">
 
           <h1 className='title'>{this.state.playerName} {this.state.team} {this.state.position}</h1>
-          <div className='subtitle'>Week {this.state.week} Expected Results: <span className='price'>{this.state.l1snap.last}</span></div>
+          <div className='subtitle'>Week {this.state.week} Expected Results: <span className='price'>{this.state.l1snap.price}</span></div>
           <br />
           
           <table className='stockTable'>

@@ -89,7 +89,7 @@ class TickerPage extends Component {
   }
 
   handleChangePlayer(playerId) {
-    window.history.pushState("", "", "/ticker?playerId=" + playerId + '&sortBy=' +
+    window.history.pushState("", "", "/?playerId=" + playerId + '&sortBy=' +
 		this.state.sortBy + '&team=' + this.state.team + '&position=' + this.state.position);
 
     this.setState({
@@ -98,7 +98,7 @@ class TickerPage extends Component {
   }
   
   handleChangeFilter(sortBy, team, position) {
-	window.history.pushState("", "", "/ticker?playerId=" + this.state.playerId + '&sortBy=' +
+	window.history.pushState("", "", "/?playerId=" + this.state.playerId + '&sortBy=' +
 		sortBy + '&team=' + team + '&position=' + position);
 
     this.setState({

@@ -38,6 +38,53 @@ class App {
     let component;
     // Controls the routing
     switch (true) {
+      case /\/leaderboard/.test(this.props.path.toLowerCase()):
+        component = <LeaderBoardPage query={this.props.query}/>;
+        break;
+      case /\/downloads/.test(this.props.path.toLowerCase()):
+        component = <DownloadPage />;
+        break;
+      case /\/fantasy\/nfl\/[0-9]+\/week\/[0-9]+$/.test(this.props.path.toLowerCase()):
+        component = <PlayerPage path={this.props.path}/>;
+        break;
+      case /\/fantasy\/players\/.+\/awards$/.test(this.props.path.toLowerCase()):
+        component = <FantasyNamePage query={this.props.query} path={this.props.path}/>;
+        break;
+      case /\/(about)/.test(this.props.path.toLowerCase()):
+        component = <AboutPage />;
+        break;
+      case /\/faq/.test(this.props.path.toLowerCase()):
+        component = <FaqPage />;
+        break;
+      case /\/rules/.test(this.props.path.toLowerCase()):
+        component = <RulesPage />;
+        break;
+      case /\/$/.test(this.props.path.toLowerCase()):
+        component = <TickerPage />;
+        break;
+      case /\/player/.test(this.props.path.toLowerCase()):
+        component = <PlayerDetailPage />;
+        break;
+		
+      default:
+        component = <TickerPage />;
+    }
+
+    return component ? (
+      <div className="wrapper">
+        <Header />
+        {component}
+        <Footer />
+      </div>
+    ) : <LeaderBoardPage />;
+  }
+
+  /*
+  
+  render() {
+    let component;
+    // Controls the routing
+    switch (true) {
       case /\/$/.test(this.props.path.toLowerCase()):
         component = <LeaderBoardPage query={this.props.query}/>;
         break;
@@ -78,7 +125,8 @@ class App {
       </div>
     ) : <LeaderBoardPage />;
   }
-
+*/
+  
 }
 
 export default App;

@@ -15,6 +15,27 @@ let Route = Router.Route;
 let DefaultRoute = Router.DefaultRoute;
 
 
+//Home/Player Ticker, Leaderboard*, Rules, Become a Trader, Forum, Blog, FAQ, About
+
+let routes = (
+  <Route handler={App} path='/'>
+    <DefaultRoute handler={TickerPage} />
+
+	<Route handler={LeaderBoardPage} path='leaderboard' />
+    <Route handler={RulesPage} path='rules' />
+	<Route handler={DownloadPage} path='downloads'/>
+    <Route handler={FaqPage} path='faq' />
+    <Route handler={AboutPage} path='about'/>
+
+	
+    <Route handler={PlayerDetailPage} path='player' />	
+    <Route handler={FantasyNamePage} path='fantasy/players/:fantasyName/awards'/>
+    <Route handler={PlayerPage} path='fantasy/nfl/:playerID/week/:week'/>
+  </Route>
+);
+
+// Old Routes
+/*
 let routes = (
   <Route handler={App} path='/'>
     <DefaultRoute handler={LeaderBoardPage} />
@@ -30,5 +51,7 @@ let routes = (
 
   </Route>
 );
+*/
+
 
 export default routes;
