@@ -10,12 +10,10 @@ import FaqPage from './components/FaqPage';
 import RulesPage from './components/RulesPage';
 import TickerPage from './components/TickerPage';
 import PlayerDetailPage from './components/PlayerDetailPage';
+import TradePage from './components/TradePage';
 
 let Route = Router.Route;
 let DefaultRoute = Router.DefaultRoute;
-
-
-//Home/Player Ticker, Leaderboard*, Rules, Become a Trader, Forum, Blog, FAQ, About
 
 let routes = (
   <Route handler={App} path='/'>
@@ -26,6 +24,7 @@ let routes = (
 	<Route handler={DownloadPage} path='downloads'/>
     <Route handler={FaqPage} path='faq' />
     <Route handler={AboutPage} path='about'/>
+    <Route handler={TradePage} path='trade'/>
 
 	
     <Route handler={PlayerDetailPage} path='player' />	

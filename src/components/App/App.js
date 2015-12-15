@@ -14,6 +14,7 @@ import DownloadPage from '../DownloadPage';
 import FaqPage from '../FaqPage';
 import RulesPage from '../RulesPage';
 import AboutPage from '../AboutPage';
+import TradePage from '../TradePage';
 
 import TickerPage from '../TickerPage';
 import PlayerDetailPage from '../PlayerDetailPage';
@@ -58,6 +59,9 @@ class App {
         break;
       case /\/rules/.test(this.props.path.toLowerCase()):
         component = <RulesPage />;
+        break;      
+	  case /\/trade/.test(this.props.path.toLowerCase()):
+        component = <TradePage />;
         break;
       case /\/$/.test(this.props.path.toLowerCase()):
         component = <TickerPage />;

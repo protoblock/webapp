@@ -31,7 +31,17 @@ class Footer {
           <span className="Footer-text">© Satoshi Fantasy, LLC</span>
           <span className="Footer-spacer">·</span>
           <a className="Footer-link" href="mailto:info@satoshifantasy.com" target="_blank" >info@satoshifantasy.com</a>
-        {/*    <span className="Footer-spacer">·</span>
+          <span className="Footer-spacer">·</span>
+		  <a className='Footer-link' href="https://twitter.com/TF_Ticker" class="twitter-follow-button" data-show-count="false" data-size="medium">Follow @TF_Ticker</a>
+          <span className="Footer-spacer">·</span>
+		  <a className='Footer-link' href="https://twitter.com/SatoshiFantasy" class="twitter-follow-button" data-show-count="false" data-size="medium">Follow @SatoshiFantasy</a>
+          <span className="Footer-spacer">·</span>
+		  <a className='Footer-link' href="https://satoshifantasy.activehosted.com/form/83">Subscribe</a>
+
+		  
+		  
+
+		  {/*    <span className="Footer-spacer">·</span>
         <a className="Footer-link" href="/privacy" onClick={Link.handleClick}>Privacy</a>
           <span className="Footer-spacer">·</span>
           <a className="Footer-link" href="/not-found" onClick={Link.handleClick}>Not Found</a>
