@@ -24,7 +24,7 @@ class TickerPage extends Component {
     this.state = {
       'players': [],
       'playerId': 0,
-	  'sortBy': 'PRICE',
+	  'sortBy': 'CHANGE',
 	  'team': 'ALL TEAMS',
 	  'position': 'ALL POSITIONS'
     };
