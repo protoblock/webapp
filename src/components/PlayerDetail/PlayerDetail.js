@@ -53,7 +53,7 @@ class PlayerDetail extends Component {
   
   componentDidMount() {
 	this.getData();  
-	setInterval(this.getData.bind(this), 60000);
+	//setInterval(this.getData.bind(this), 60000);
   }
   
   componentDidUpdate(prevProps, prevState) {
@@ -103,9 +103,9 @@ class PlayerDetail extends Component {
       .end((err, res) => {
         let d = res.body[0];
 		
-		if (d.last !== this.state.l1snap.last) {
+		//if (d.last !== this.state.l1snap.last) {
 			this.getChartData();
-		}
+		//}
 
         this.setState({
           'l1snap': {
