@@ -3,6 +3,7 @@ import api from '../api/query';
 
 class LeaderBoardActions {
   updateLeaders(leaders) {
+	console.log('LeaderBoardActions - updateLeaders()');
     this.dispatch(leaders);
   }
 
@@ -27,15 +28,18 @@ class LeaderBoardActions {
   }
 
   getLeaders(query) {
-    this.dispatch();
-    api.get('/fantasy/leaders' + query, (err, res) => {
+    this.dispatch(); 
+	console.log('LeaderBoardActions - getLeaders()');
+	
+	api.get('/fantasy/leaders' + query, (err, res) => {
       if (err) {
         this.actions.updateLeadersFailed([err]);
       } else {
-        this.actions.updateLeaders(res.body);
+		this.actions.updateLeaders(res.body);
       }
     });
   }
+  
 
   getCurrentWeek() {
     this.dispatch();

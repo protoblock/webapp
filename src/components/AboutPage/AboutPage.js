@@ -35,13 +35,28 @@ class AboutPage extends React.Component{
     return (
       <div className="AboutPage">
         <div className="AboutPage-container">
-          <PageHeading text={text} logoSize='sm' />
-          <p>Trading Football is a p2p game played by making weekly projections on how many fantasy points each NFL player will score. Users are able to make projections for every offensive player (QB, RB, WR, TE), Kickers, and Defense/Special Teams; you can submit as many or as few projections as you want. After each game, the Trading Football protocol awards Fantasy Bits to those Fantasy Names who submitted the most accurate projections.  The Fantasy Names with the highest Fantasy Bit balances are prominently displayed on our Leaderboard.</p>
-          <p>The Trading Football Leaderboard will showcase those Fantasy players that have mastered the art of Fantasy Football.  Want to know who has made the best projections for the last month? Or who is the best at making QB projections? Trading.Football’s Leaderboard can be sorted based on time period, position, team, NFL player, or even Fantasy Name. Using our program gives hard core Fantasy players a significant edge in lineup decisions.</p>
-          <h5> Level 2 - Coming Soon</h5>
-          <p>That’s not all, soon you will be able to use your Fantasy Bits in our game’s Level 2 to speculate on NFL players’ weekly and season fantasy point totals. You’ll be able to earn Fantasy Bits if you buy when a player is undervalued and sell when a player is overvalued. With Trading.Football, there will be no offseason; you’ll always be able to use your fantasy skills to earn Fantasy Bits and trade them for value.</p>
-          <p>Even though Fantasy Football has been legally recognized as a game of skill, in classic Fantasy Football, only the top player wins and collects money. Trading Football removes some of the risk and luck and replaces it with opportunity. Every time you hear an expert saying “I want to buy this player,” or “I want to sell this player.” - You haven’t been able to do it until now. If you want to buy, sell, and trade players in March or April... You’re going to need FantasyBits!</p>
-          <p></p>
+			<PageHeading text={text} logoSize='sm' />
+		  
+			<p>Trading.Football is disrupting the fantasy football industry!  All too often success is determined by luck but now all fantasy football players, from expert to casual players, can finally feel confident in making lineup decisions because Trading.Football is all they need to earn the ultimate in bragging rights!  No more painstakingly gathering information from multiple sources, following stale ranking lists, or going with your gut.  As the world’s first prediction market for fantasy football, Trading.Football’s groundbreaking platform is the most accurate source for fantasy football player valuations available today.</p>
+
+			<p>Trading.Football’s revolutionary market intelligence is powered by a Trader community that make projections on players’ fantasy results, and based on the accuracy of their projections are rewarded tokens in the form of FantasyBits. Traders risk their hard-earned FantasyBits in an attempt to profit by buying when a player is undervalued and selling when a player is overvalued. The act of buying and selling with profit and loss, even on a gamified exchange, creates an efficient market, which generates a football player’s price that reflects all relevant information. Player prices, stats and charts generated from Trading.Football are displayed in a streaming FantasyTicker that users can follow to receive the most accurate, market-driven intel in the fantasy football industry.</p>
+
+			<p>Whether actively involved as a Trader or simply looking for the most up-to-date stats and values for football players, follow Trading.Football’s FantasyTicker at <a href='https://trading.football/'>https://trading.football</a> and receive automated tweets on market moves of players by following <a href='https://twitter.com/TF_Ticker'>@TF_Ticker</a> and <a href='https://twitter.com/SatoshiFantasy'>@SatoshiFantasy</a>.</p>
+
+			<p>Trading.Football is the flagship fantasy football product from Satoshi Fantasy, LLC, a leading technology company and pioneer in distributed fantasy football.  Satoshi Fantasy is the first company to introduce blockchain technology to fantasy sports, utilizing proven protocol to fuel the decentralized predictive market.</p>
+
+			<h3>About the Team</h3>
+
+			<h4>Jay Berg, Founder & CEO</h4>
+			<p>Jay Berg founded Satoshi Fantasy in 2013 based on a cross section of four key passions: fantasy football, coding, high-frequency trading and cryptocurrency. Jay serves as CEO of Satoshi Fantasy and oversees development for Trading.Football, the world’s first blockchain-based prediction market for fantasy football results.</p>
+			<p>Jay has spent the last 15+ years developing, designing and delivering complex software solutions with a focus on electronic exchanges, high-frequency trading, alpha-modeling, bitcoin exchanges and proprietary trading groups. Prior to founding Satoshi Fantasy, Jay was a lead programmer for Bloomberg LP in New York City, coding trading screens for the Bloomberg Terminal. Jay has also served as an advisor for Bitcoin start-ups, having most recently worked on the Bitcoin Matching Engine. Jay holds a Masters of Financial Engineering from Baruch College of the City University of New York.</p>
+
+			<h4>Ryan Ragle, Core Developer</h4>
+			<p>Ryan Ragle serves as Core Developer for Satoshi Fantasy, leading development for Trading.Football. Prior to joining Satoshi Fantasy, Ryan held software development roles at Chevron, Paramount Farms and FunVaultGames. Ryan graduated from UC Berkeley with a degree in Computer Science.</p>
+
+			<h4>Sam Trenchi, Head of Sales</h4>
+			<p>Sam Trenchi is Head of Sales for Satoshi Fantasy, leading growth and user acquisition for the Trading.Football platform. Sam specializes in creating and executing engagement programs for the Trader community on Trading.Football and growing the influencer network of fantasy football experts on the Trading.Football platform. Sam is a fourth-generation attorney, the third generation to practice in Tennessee. Sam holds a JD from the University of Arkansas and a BA in Philosophy from Belmont University. Originally from Hot Springs, Arkansas, Sam is a huge Razorbacks fan.</p>
+		  
         </div>
       </div>
     );

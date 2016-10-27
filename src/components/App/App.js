@@ -19,6 +19,10 @@ import AboutPage from '../AboutPage';
 //import NotFoundPage from '../NotFoundPage';
 
 
+import TradePage from '../TradePage';
+
+import TickerPage from '../TickerPage';
+import PlayerDetailPage from '../PlayerDetailPage';
 
 @withContext
 @withStyles(styles)
@@ -34,7 +38,7 @@ class App {
     let component;
     // Controls the routing
     switch (true) {
-      case /\/$/.test(this.props.path.toLowerCase()):
+      case /\/leaderboard/.test(this.props.path.toLowerCase()):
         component = <LeaderBoardPage query={this.props.query}/>;
         break;
       case /\/downloads/.test(this.props.path.toLowerCase()):
@@ -54,9 +58,19 @@ class App {
         break;
       case /\/rules/.test(this.props.path.toLowerCase()):
         component = <RulesPage />;
+        break;      
+	  case /\/trade/.test(this.props.path.toLowerCase()):
+        component = <TradePage />;
         break;
+      case /\/$/.test(this.props.path.toLowerCase()):
+        component = <TickerPage />;
+        break;
+      case /\/player/.test(this.props.path.toLowerCase()):
+        component = <PlayerDetailPage />;
+        break;
+		
       default:
-        component = <LeaderBoardPage query={this.props.query}/>;
+        component = <TickerPage />;
     }
 
     return component ? (

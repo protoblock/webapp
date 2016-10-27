@@ -7,12 +7,15 @@ import Navigation from '../Navigation';
 //import CurrentPeriod from '../CurrentPeriod';
 @withStyles(styles)
 class Header {
-
   render() {
     return (
       <div>
-        <Navigation />
-        {/*}<CurrentPeriod season={"2015"} game={"Week 6"}/>*/}
+		<div>
+			<Navigation />
+		</div>
+		<div className='status'>
+			<span>Satoshi Fantasy Season Ends After Week 16, 2015 - Data as of 12/28/15 20:28:42.916</span>
+		</div>
       </div>
     );
 
